@@ -2,6 +2,7 @@
 {
   imports = [
     ./modules/tmux.nix
+    ./modules/gh.nix
   ];
 
   home.homeDirectory = "/Users/fedorsulaev";
