@@ -12,10 +12,10 @@
       MacBook-Pro-Fedor = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = import inputs.nixpkgs {
           system = "aarch64-darwin";
-	};
-	modules = [
-	  ./nixpkgs/home-manager/mac-os-personal.nix
-	];
+	      };
+	      modules = [
+	        ./nixpkgs/home-manager/mac-os-personal.nix
+	      ];
       };
     };
   };
