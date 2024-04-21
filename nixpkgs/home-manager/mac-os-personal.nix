@@ -1,9 +1,9 @@
 { config, pkgs, libs, ... }:
 {
   imports = [
-    ./modules/tmux.nix
+    ./modules/tmux-module/tmux.nix
     ./modules/gh.nix
-    ./modules/zsh.nix
+    ./modules/zsh-module/zsh.nix
   ];
 
   home.homeDirectory = "/Users/fedorsulaev";

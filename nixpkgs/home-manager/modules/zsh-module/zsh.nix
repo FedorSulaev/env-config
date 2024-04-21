@@ -6,6 +6,7 @@
     syntaxHighlighting.enable = true;
     enableAutosuggestions = true;
     oh-my-zsh = {
+      enable = true;
       plugins = [ "git" ];
     };
     plugins = with pkgs; [
@@ -20,8 +21,5 @@
         file = "p10k.zsh";
       }
     ];
-    oh-my-zsh = {
-      enable = true;
-    };
   };
 }
