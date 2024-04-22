@@ -4,6 +4,7 @@
     ./modules/tmux-module/tmux.nix
     ./modules/gh.nix
     ./modules/zsh-module/zsh.nix
+    ./modules/nvim-module/neovim.nix
   ];
 
   home.homeDirectory = "/Users/fedorsulaev";
@@ -12,7 +13,6 @@
 
   home.packages = with pkgs; [
     bottom
-    neovim
     tree-sitter
     lazygit
   ];
