@@ -34,6 +34,11 @@
         plugin = nvim-autopairs;
         config = toLuaFile ./plugins/autopairs.lua;
       }
+      # Formatters
+      {
+        plugin = conform-nvim;
+        config = toLuaFile ./plugins/conform.lua;
+      }
       # Theme
       {
         plugin = tokyonight-nvim;
