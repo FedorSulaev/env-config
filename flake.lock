@@ -21,6 +21,18 @@
         "type": "github"
       }
     },
+    "mason-nvim-dap": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-OAfrZ32yT+LO5/5lbxEF6M3ipY7aPqQMSh7v8sSXACQ=",
+        "type": "file",
+        "url": "https://github.com/jay-babu/mason-nvim-dap.nvim"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/jay-babu/mason-nvim-dap.nvim"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1713088269,
@@ -40,6 +52,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "mason-nvim-dap": "mason-nvim-dap",
         "nixpkgs": "nixpkgs"
       }
     }
