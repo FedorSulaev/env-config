@@ -1,5 +1,17 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
+  nixpkgs = {
+    overlays = [
+      (final: prev: {
+        vimPlugins = prev.vimPlugins // {
+          mason-nvim-dap = prev.vimUtils.buildVimPlugin {
+            name = "mason-nvim-dap";
+            src = inputs.mason-nvim-dap;
+          };
+        };
+      })
+    ];
+  };
   programs.neovim =
   let
     toLua = str: "lua << EOF\n${str}\nEOF\n";
@@ -39,6 +51,15 @@
         plugin = conform-nvim;
         config = toLuaFile ./plugins/conform.lua;
       }
+      # Debug
+      nvim-dap
+      # Creates a beautiful debugger UI
+      nvim-dap-ui
+      # Installs the debug adapters for you
+      mason-nvim
+      mason-nvim-dap
+      # Add your own debuggers here
+      nvim-dap-go
       # Theme
       {
         plugin = tokyonight-nvim;

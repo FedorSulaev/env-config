@@ -7,7 +7,7 @@
     };
 
     # Nvim plugins from GitHub
-    mason-nvim-dap.url = https://github.com/jay-babu/mason-nvim-dap.nvim;
+    mason-nvim-dap.url = "github:jay-babu/mason-nvim-dap.nvim";
     mason-nvim-dap.flake = false;
   };
 
