@@ -52,7 +52,6 @@
         config = toLuaFile ./plugins/conform.lua;
       }
       # Debug
-      nvim-dap
       # Creates a beautiful debugger UI
       nvim-dap-ui
       # Installs the debug adapters for you
@@ -60,6 +59,10 @@
       mason-nvim-dap
       # Add your own debuggers here
       nvim-dap-go
+      {
+        plugin = nvim-dap;
+        config = toLuaFile ./plugins/dap.lua;
+      }
       # Theme
       {
         plugin = tokyonight-nvim;
