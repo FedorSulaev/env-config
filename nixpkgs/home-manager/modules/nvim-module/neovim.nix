@@ -63,10 +63,14 @@
         plugin = nvim-dap;
         config = toLuaFile ./plugins/dap.lua;
       }
-      # Git
+      # Editor
       {
         plugin = gitsigns-nvim;
         config = toLuaFile ./plugins/gitsigns.lua;
+      }
+      {
+        plugin = indent-blankline-nvim;
+        config = toLuaFile ./plugins/ibl.lua;
       }
       # Theme
       {
