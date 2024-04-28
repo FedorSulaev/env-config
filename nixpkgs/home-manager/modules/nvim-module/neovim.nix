@@ -72,6 +72,11 @@
         plugin = indent-blankline-nvim;
         config = toLuaFile ./plugins/ibl.lua;
       }
+      # Lint
+      {
+        plugin = nvim-lint;
+        config = toLuaFile ./plugins/lint.lua;
+      }
       # Theme
       {
         plugin = tokyonight-nvim;
