@@ -63,6 +63,11 @@
         plugin = nvim-dap;
         config = toLuaFile ./plugins/dap.lua;
       }
+      # Git
+      {
+        plugin = gitsigns-nvim;
+        config = toLuaFile ./plugins/gitsigns.lua;
+      }
       # Theme
       {
         plugin = tokyonight-nvim;
