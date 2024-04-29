@@ -72,6 +72,10 @@
         plugin = indent-blankline-nvim;
         config = toLuaFile ./plugins/ibl.lua;
       }
+      {
+        plugin = mini-nvim;
+	config = toLuaFile ./plugins/mini.lua;
+      }
       # Lint
       {
         plugin = nvim-lint;
