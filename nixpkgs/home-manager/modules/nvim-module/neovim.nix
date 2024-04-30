@@ -76,6 +76,11 @@
         plugin = mini-nvim;
 	config = toLuaFile ./plugins/mini.lua;
       }
+      plenary-nvim
+      {
+        plugin = todo-comments-nvim;
+	config = toLuaFile ./plugins/todo-comments.lua;
+      }
       # Lint
       {
         plugin = nvim-lint;
