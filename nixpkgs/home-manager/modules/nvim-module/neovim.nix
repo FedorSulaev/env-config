@@ -86,6 +86,21 @@
         plugin = nvim-lint;
         config = toLuaFile ./plugins/lint.lua;
       }
+      # LSP
+      mason-lspconfig-nvim
+      mason-tool-installer-nvim
+      {
+        plugin = fidget-nvim;
+        config = toLuaFile ./plugins/fidget.lua;
+      }
+      {
+        plugin = neodev-nvim;
+	config = toLuaFile ./plugins/neodev.lua;
+      }
+      {
+        plugin = nvim-lspconfig;
+	config = toLuaFile ./plugins/lspconfig.lua;
+      }
       # Theme
       {
         plugin = tokyonight-nvim;
