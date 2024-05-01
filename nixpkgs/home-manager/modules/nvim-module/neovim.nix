@@ -81,6 +81,10 @@
         plugin = todo-comments-nvim;
 	config = toLuaFile ./plugins/todo-comments.lua;
       }
+      {
+        plugin = which-key-nvim;
+	config = toLuaFile ./plugins/which-key.lua;
+      }
       # Lint
       {
         plugin = nvim-lint;
