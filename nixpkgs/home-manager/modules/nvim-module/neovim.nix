@@ -12,6 +12,9 @@
       })
     ];
   };
+  home.packages = with pkgs; [
+    ripgrep
+  ];
   programs.neovim =
   let
     toLua = str: "lua << EOF\n${str}\nEOF\n";
@@ -89,6 +92,31 @@
       {
         plugin = nvim-lint;
         config = toLuaFile ./plugins/lint.lua;
+      }
+      {
+        plugin = (nvim-treesitter.withPlugins (
+        # https://github.com/NixOS/nixpkgs/tree/nixos-unstable/pkgs/development/tools/parsing/tree-sitter/grammars
+        plugins:
+          with plugins; [
+            tree-sitter-lua
+            tree-sitter-vim
+            tree-sitter-html
+            tree-sitter-yaml
+            tree-sitter-json
+            tree-sitter-markdown
+            tree-sitter-comment
+            tree-sitter-bash
+            tree-sitter-javascript
+            tree-sitter-nix
+            tree-sitter-typescript
+            tree-sitter-java
+            tree-sitter-query # for the tree-sitter itself
+            tree-sitter-python
+            tree-sitter-go
+            tree-sitter-dockerfile
+          ]
+      ));
+	config = toLuaFile ./plugins/treesitter.lua;
       }
       # Search
       telescope-fzf-native-nvim
