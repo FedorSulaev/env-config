@@ -86,6 +86,14 @@
         plugin = nvim-lint;
         config = toLuaFile ./plugins/lint.lua;
       }
+      # Search
+      telescope-fzf-native-nvim
+      telescope-ui-select-nvim
+      nvim-web-devicons
+      {
+        plugin = telescope-nvim;
+	config = toLuaFile ./plugins/telescope.lua;
+      }
       # LSP
       mason-lspconfig-nvim
       mason-tool-installer-nvim
