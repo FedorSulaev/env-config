@@ -15,6 +15,8 @@
     bottom
     tree-sitter
     lazygit
+    wget
+    cargo
   ];
 
   # Let Home Manager install and manage itself
