@@ -12,9 +12,6 @@
       })
     ];
   };
-  home.packages = with pkgs; [
-    ripgrep
-  ];
   programs.neovim =
   let
     toLua = str: "lua << EOF\n${str}\nEOF\n";
@@ -30,6 +27,10 @@
       ${builtins.readFile ./options.lua}
       ${builtins.readFile ./keymaps.lua}
     '';
+    extraPackages = with pkgs; [
+      ripgrep
+      fd
+    ];
     plugins = with pkgs.vimPlugins; [
       # File tree
       {
@@ -124,7 +125,7 @@
       nvim-web-devicons
       {
         plugin = telescope-nvim;
-	config = toLuaFile ./plugins/telescope.lua;
+        config = toLuaFile ./plugins/telescope.lua;
       }
       # LSP
       mason-lspconfig-nvim
