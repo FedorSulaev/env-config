@@ -152,6 +152,7 @@ local servers = {
         },
     },
     nil_ls = {},
+    bashls = {},
 }
 
 -- Ensure the servers and tools above are installed
@@ -167,6 +168,8 @@ require("mason").setup()
 local ensure_installed = vim.tbl_keys(servers or {})
 vim.list_extend(ensure_installed, {
     "stylua", -- Used to format Lua code
+    "beautysh",
+    "shellcheck",
 })
 require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

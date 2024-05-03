@@ -17,6 +17,7 @@
         lazygit
         wget
         cargo
+        nodejs_20
     ];
 
     # Let Home Manager install and manage itself
