@@ -54,7 +54,7 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
-vim.opt.tabstop = 4 -- A TAB character looks like 4 spaces
+vim.opt.tabstop = 4      -- A TAB character looks like 4 spaces
 vim.opt.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
-vim.opt.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
-vim.opt.shiftwidth = 4 -- Number of spaces inserted when indenting
+vim.opt.softtabstop = 4  -- Number of spaces inserted instead of a TAB character
+vim.opt.shiftwidth = 4   -- Number of spaces inserted when indenting

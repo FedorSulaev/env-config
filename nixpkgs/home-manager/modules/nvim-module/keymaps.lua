@@ -38,11 +38,11 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
+    desc = "Highlight when yanking (copying) text",
+    group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+    callback = function()
+        vim.highlight.on_yank()
+    end,
 })
 
 -- See `:help telescope.builtin`
@@ -60,25 +60,25 @@ vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find exis
 
 -- Slightly advanced example of overriding default behavior and theme
 vim.keymap.set("n", "<leader>/", function()
-	-- You can pass additional configuration to Telescope to change the theme, layout, etc.
-	builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-		winblend = 10,
-		previewer = false,
-	}))
+    -- You can pass additional configuration to Telescope to change the theme, layout, etc.
+    builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+        winblend = 10,
+        previewer = false,
+    }))
 end, { desc = "[/] Fuzzily search in current buffer" })
 
 -- It's also possible to pass additional configuration options.
 --  See `:help telescope.builtin.live_grep()` for information about particular keys
 vim.keymap.set("n", "<leader>s/", function()
-	builtin.live_grep({
-		grep_open_files = true,
-		prompt_title = "Live Grep in Open Files",
-	})
+    builtin.live_grep({
+        grep_open_files = true,
+        prompt_title = "Live Grep in Open Files",
+    })
 end, { desc = "[S]earch [/] in Open Files" })
 
 -- Shortcut for searching your Neovim configuration files
 vim.keymap.set("n", "<leader>sn", function()
-	builtin.find_files({ cwd = vim.fn.stdpath("config") })
+    builtin.find_files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "[S]earch [N]eovim files" })
 
 local dap = require("dap")
@@ -90,7 +90,7 @@ vim.keymap.set("n", "<F2>", dap.step_over, { desc = "Debug: Step Over" })
 vim.keymap.set("n", "<F3>", dap.step_out, { desc = "Debug: Step Out" })
 vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
 vim.keymap.set("n", "<leader>B", function()
-	dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+    dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
 end, { desc = "Debug: Set Breakpoint" })
 
 local dapui = require("dapui")
