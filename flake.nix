@@ -17,11 +17,12 @@
       pkgs = import nixpkgs {
         inherit system;
       };
-    in {
+    in
+    {
       homeConfigurations.MacBook-Pro-Fedor = inputs.home-manager.lib.homeManagerConfiguration {
-	inherit pkgs;
-	modules = [ ./nixpkgs/home-manager/mac-os-personal.nix ];
-	extraSpecialArgs = { inherit inputs; };
+        inherit pkgs;
+        modules = [ ./nixpkgs/home-manager/mac-os-personal.nix ];
+        extraSpecialArgs = { inherit inputs; };
       };
     };
 }
