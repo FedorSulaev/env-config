@@ -149,6 +149,7 @@ local servers = {
 	},
 	nil_ls = {},
 	bashls = {},
+	dockerls = {},
 }
 
 -- Ensure the servers and tools above are installed
@@ -169,6 +170,7 @@ vim.list_extend(ensure_installed, {
 	"nixpkgs-fmt",
 	"markdownlint",
 	"luacheck",
+	"hadolint",
 })
 require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

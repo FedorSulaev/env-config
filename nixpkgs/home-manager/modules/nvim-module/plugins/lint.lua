@@ -3,6 +3,7 @@ lint.linters_by_ft = {
 	markdown = { "markdownlint" },
 	sh = { "shellcheck" },
 	lua = { "luacheck" },
+	dockerfile = { "hadolint" },
 }
 
 -- To allow other plugins to add linters to require('lint').linters_by_ft,
