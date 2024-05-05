@@ -31,6 +31,7 @@
         ripgrep
         fd
         lua54Packages.luarocks
+        maven
       ];
       plugins = with pkgs.vimPlugins; [
         # File tree

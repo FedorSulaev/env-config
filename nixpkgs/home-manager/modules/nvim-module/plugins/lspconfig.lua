@@ -150,6 +150,8 @@ local servers = {
 	nil_ls = {},
 	bashls = {},
 	dockerls = {},
+	rust_analyzer = {},
+	java_language_server = {},
 }
 
 -- Ensure the servers and tools above are installed
