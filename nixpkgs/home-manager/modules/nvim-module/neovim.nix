@@ -91,6 +91,7 @@
           plugin = which-key-nvim;
           config = toLuaFile ./plugins/which-key.lua;
         }
+        vim-tmux-navigator
         # Lint
         {
           plugin = nvim-lint;
