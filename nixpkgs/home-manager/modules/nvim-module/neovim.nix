@@ -70,6 +70,11 @@
           plugin = nvim-dap;
           config = toLuaFile ./plugins/dap.lua;
         }
+        # Testing
+        {
+          plugin = vim-test;
+          config = toLua "vim.cmd(\"let test#strategy = 'vimux'\")";
+        }
         # Editor
         {
           plugin = gitsigns-nvim;
@@ -93,6 +98,7 @@
           config = toLuaFile ./plugins/which-key.lua;
         }
         vim-tmux-navigator
+        vimux
         # Lint
         {
           plugin = nvim-lint;

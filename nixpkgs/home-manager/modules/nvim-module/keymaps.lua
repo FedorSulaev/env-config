@@ -113,3 +113,10 @@ local dapui = require("dapui")
 
 -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
 vim.keymap.set("n", "<F7>", dapui.toggle, { desc = "Debug: See last session result." })
+
+-- Vim-test
+vim.keymap.set("n", "<leader>t", ":TestNearest<CR>")
+vim.keymap.set("n", "<leader>T", ":TestFile<CR>")
+vim.keymap.set("n", "<leader>a", ":TestSuite<CR>")
+vim.keymap.set("n", "<leader>l", ":TestLast<CR>")
+vim.keymap.set("n", "<leader>g", ":TestVisit<CR>")
