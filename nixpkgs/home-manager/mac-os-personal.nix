@@ -17,6 +17,7 @@
     lazygit
     wget
     cargo
+    rustc
     nodejs_20
   ];
 

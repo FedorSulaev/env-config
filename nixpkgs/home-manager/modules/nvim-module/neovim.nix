@@ -32,6 +32,7 @@
         fd
         lua54Packages.luarocks
         maven
+        rust-analyzer
       ];
       plugins = with pkgs.vimPlugins; [
         # File tree
@@ -144,6 +145,8 @@
           plugin = nvim-lspconfig;
           config = toLuaFile ./plugins/lspconfig.lua;
         }
+        # Rust
+        rustaceanvim
         # Theme
         {
           plugin = tokyonight-nvim;

@@ -150,7 +150,6 @@ local servers = {
 	nil_ls = {},
 	bashls = {},
 	dockerls = {},
-	rust_analyzer = {},
 	java_language_server = {},
 }
 
