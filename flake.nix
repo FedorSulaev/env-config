@@ -13,14 +13,21 @@
 
   outputs = { self, nixpkgs, ... }@inputs:
     let
-      system = "aarch64-darwin";
-      pkgs = import nixpkgs {
-        inherit system;
+      pkgs-mac-arm = import nixpkgs {
+        system = "aarch64-darwin";
+      };
+      pkgs-linux-arm = import nixpkgs {
+        system = "aarch64-linux";
       };
     in
     {
       homeConfigurations.MacBook-Pro-Fedor = inputs.home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+        pkgs = pkgs-mac-arm;
+        modules = [ ./nixpkgs/home-manager/mac-os-personal.nix ];
+        extraSpecialArgs = { inherit inputs; };
+      };
+      homeConfiguration.Docker-Nix-Test = inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = pkgs-linux-arm;
         modules = [ ./nixpkgs/home-manager/mac-os-personal.nix ];
         extraSpecialArgs = { inherit inputs; };
       };
