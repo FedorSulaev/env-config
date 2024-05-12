@@ -53,13 +53,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 local conform = require("conform")
-vim.keymap.set({ "n", "v" }, "<leader>mp", function()
+vim.keymap.set({ "n", "v" }, "<leader>f", function()
 	conform.format({
 		lsp_fallback = true,
 		async = false,
 		timeout_ms = 500,
 	})
-end, { desc = "Format file or range (in visual mode)" })
+end, { desc = "[F]ormat buffer" })
 
 -- See `:help telescope.builtin`
 local builtin = require("telescope.builtin")
