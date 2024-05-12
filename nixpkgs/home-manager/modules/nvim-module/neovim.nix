@@ -109,13 +109,16 @@
             # https://github.com/NixOS/nixpkgs/tree/nixos-unstable/pkgs/development/tools/parsing/tree-sitter/grammars
             plugins: with plugins; [
               tree-sitter-lua
+              tree-sitter-luadoc
               tree-sitter-vim
+              tree-sitter-vimdoc
               tree-sitter-html
               tree-sitter-yaml
               tree-sitter-json
               tree-sitter-markdown
               tree-sitter-comment
               tree-sitter-bash
+              tree-sitter-c
               tree-sitter-javascript
               tree-sitter-nix
               tree-sitter-typescript
