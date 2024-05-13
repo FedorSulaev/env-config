@@ -22,11 +22,6 @@
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
-      extraLuaConfig = ''
-        ${builtins.readFile ./globals.lua}
-        ${builtins.readFile ./options.lua}
-        ${builtins.readFile ./keymaps.lua}
-      '';
       extraPackages = with pkgs; [
         ripgrep
         fd
@@ -162,5 +157,10 @@
           config = toLuaFile ./plugins/tokyonight.lua;
         }
       ];
+      extraLuaConfig = ''
+        ${builtins.readFile ./globals.lua}
+        ${builtins.readFile ./options.lua}
+        ${builtins.readFile ./keymaps.lua}
+      '';
     };
 }
