@@ -1,4 +1,8 @@
-require("conform").setup({
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+local conform = require("conform")
+conform.setup({
 	notify_on_error = false,
 	format_on_save = function(bufnr)
 		-- Disable "format_on_save lsp_fallback" for languages that don't
@@ -22,3 +26,10 @@ require("conform").setup({
 		-- javascript = { { "prettierd", "prettier" } },
 	},
 })
+vim.keymap.set({ "n", "v" }, "<leader>f", function()
+	conform.format({
+		lsp_fallback = true,
+		async = false,
+		timeout_ms = 500,
+	})
+end, { desc = "[F]ormat buffer" })
