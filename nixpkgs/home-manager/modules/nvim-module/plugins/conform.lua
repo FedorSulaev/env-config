@@ -18,6 +18,7 @@ conform.setup({
 		lua = { "stylua" },
 		nix = { "nixpkgs_fmt" },
 		sh = { "beautysh" },
+		rs = { "rustfmt" },
 		-- Conform can also run multiple formatters sequentially
 		-- python = { "isort", "black" },
 		--

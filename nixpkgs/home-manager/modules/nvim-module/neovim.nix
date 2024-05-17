@@ -33,6 +33,7 @@
         lua54Packages.luarocks
         maven
         rust-analyzer
+        rustfmt
       ];
       plugins = with pkgs.vimPlugins; [
         # File tree
