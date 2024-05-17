@@ -127,6 +127,7 @@
               tree-sitter-python
               tree-sitter-go
               tree-sitter-dockerfile
+              tree-sitter-diff
             ]
           ));
           config = toLuaFile ./plugins/treesitter.lua;
