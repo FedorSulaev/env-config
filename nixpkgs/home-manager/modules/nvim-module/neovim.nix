@@ -41,6 +41,10 @@
           plugin = neo-tree-nvim;
           config = toLuaFile ./plugins/neo-tree.lua;
         }
+        {
+          plugin = oil-nvim;
+          config = toLuaFile ./plugins/oil.lua;
+        }
         # Completion
         luasnip
         cmp_luasnip
