@@ -158,6 +158,10 @@
         }
         # Rust
         rustaceanvim
+        # DB
+        vim-dadbod
+        vim-dadbod-completion
+        vim-dadbod-ui
         # Theme
         {
           plugin = tokyonight-nvim;
