@@ -50,6 +50,7 @@
         cmp_luasnip
         cmp-nvim-lsp
         cmp-path
+        cmp-buffer
         {
           plugin = nvim-cmp;
           config = toLuaFile ./plugins/cmp.lua;
@@ -160,6 +161,7 @@
           plugin = nvim-lspconfig;
           config = toLuaFile ./plugins/lspconfig.lua;
         }
+        lspkind-nvim
         # Rust
         rustaceanvim
         # DB
