@@ -1,0 +1,26 @@
+{ config, pkgs, ... }:
+{
+  imports = [
+    ./modules/tmux-module/tmux.nix
+    ./modules/gh.nix
+    ./modules/zsh-module/zsh.nix
+    ./modules/nvim-module/neovim.nix
+  ];
+
+  home.homeDirectory = "/Users/fssulaev";
+  home.username = "fssulaev";
+  home.stateVersion = "23.11";
+
+  home.packages = with pkgs; [
+    bottom
+    tree-sitter
+    lazygit
+    wget
+    cargo
+    rustc
+    nodejs_20
+  ];
+
+  # Let Home Manager install and manage itself
+  programs.home-manager.enable = true;
+}
