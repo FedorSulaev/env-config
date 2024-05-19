@@ -29,12 +29,12 @@
         modules = [ ./nixpkgs/home-manager/mac-os-personal.nix ];
         extraSpecialArgs = { inherit inputs; };
       };
-      homeConfiguration.Docker-Nix-Test = inputs.home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.Docker-Nix-Test = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = pkgs-linux-arm;
         modules = [ ./nixpkgs/home-manager/mac-os-personal.nix ];
         extraSpecialArgs = { inherit inputs; };
       };
-      homeConfiguration.DevDsk = inputs.home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.DevDsk = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = pkgs-linux-x86;
         modules = [ ./nixpkgs/home-manager/dev-dsk.nix ];
         extraSpecialArgs = { inherit inputs; };
