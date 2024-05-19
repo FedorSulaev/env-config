@@ -19,6 +19,9 @@
       pkgs-linux-arm = import nixpkgs {
         system = "aarch64-linux";
       };
+      pkgs-linux-x86 = import nixpkgs {
+        system = "x86_64-linux";
+      };
     in
     {
       homeConfigurations.MacBook-Pro-Fedor = inputs.home-manager.lib.homeManagerConfiguration {
@@ -28,6 +31,11 @@
       };
       homeConfiguration.Docker-Nix-Test = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = pkgs-linux-arm;
+        modules = [ ./nixpkgs/home-manager/mac-os-personal.nix ];
+        extraSpecialArgs = { inherit inputs; };
+      };
+      homeConfiguration.DevDsk = inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = pkgs-linux-x86;
         modules = [ ./nixpkgs/home-manager/mac-os-personal.nix ];
         extraSpecialArgs = { inherit inputs; };
       };
