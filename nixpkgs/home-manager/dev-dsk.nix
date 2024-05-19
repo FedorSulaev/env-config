@@ -7,7 +7,7 @@
     ./modules/nvim-module/neovim.nix
   ];
 
-  home.homeDirectory = "/Users/fssulaev";
+  home.homeDirectory = "/home/fssulaev";
   home.username = "fssulaev";
   home.stateVersion = "23.11";
 
