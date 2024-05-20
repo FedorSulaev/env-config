@@ -28,4 +28,8 @@
     enable = true;
     package = pkgs.jdk17_headless;
   };
+
+  home.sessionPath = [
+    "$HOME/.toolbox/bin"
+  ];
 }
