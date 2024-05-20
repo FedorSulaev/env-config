@@ -23,4 +23,9 @@
 
   # Let Home Manager install and manage itself
   programs.home-manager.enable = true;
+
+  programs.java = {
+    enable = true;
+    package = pkgs.jdk17_headless;
+  };
 }
