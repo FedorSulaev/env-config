@@ -11,7 +11,7 @@
     mason-nvim-dap.flake = false;
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, mason-nvim-dap }@inputs:
     let
       pkgs-mac-arm = import nixpkgs {
         system = "aarch64-darwin";
