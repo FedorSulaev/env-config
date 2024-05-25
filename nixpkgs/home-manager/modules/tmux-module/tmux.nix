@@ -13,7 +13,13 @@
       {
         plugin = dracula;
         extraConfig = ''
+          # Metrics
           set -g @dracula-plugins 'cpu-usage ram-usage'
+
+          # For preview rendering
+          set -g allow-passthrough on
+          set -ga update-environment TERM
+          set -ga update-environment TERM_PROGRAM
         '';
       }
     ];

@@ -9,6 +9,7 @@
 
   home.packages = with pkgs; [
     wezterm
+    yazi
     bottom
     tree-sitter
     lazygit
