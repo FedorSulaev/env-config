@@ -65,16 +65,29 @@
           config = toLuaFile ./plugins/conform.lua;
         }
         # Debug
-        # Creates a beautiful debugger UI
-        nvim-dap-ui
-        # Installs the debug adapters for you
-        mason-nvim
-        mason-nvim-dap
-        # Add your own debuggers here
-        nvim-dap-go
         {
           plugin = nvim-dap;
-          config = toLuaFile ./plugins/dap.lua;
+          config = toLuaFile ./plugins/dap/dap.lua;
+        }
+        # Creates a beautiful debugger UI
+        {
+          plugin = nvim-dap-ui;
+          config = toLuaFile ./plugins/dap/dapui.lua;
+        }
+        {
+          plugin = nvim-dap-virtual-text;
+          config = toLuaFile ./plugins/dap/dap-virtual-text.lua;
+        }
+        # Installs the debug adapters for you
+        mason-nvim
+        {
+          plugin = mason-nvim-dap;
+          config = toLuaFile ./plugins/dap/mason-dap.lua;
+        }
+        # Add your own debuggers here
+        {
+          plugin = nvim-dap-go;
+          config = toLuaFile ./plugins/dap/dap-go.lua;
         }
         # Testing
         {
