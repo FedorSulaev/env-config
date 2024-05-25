@@ -183,8 +183,8 @@
         vim-dadbod-ui
         # Theme
         {
-          plugin = tokyonight-nvim;
-          config = toLuaFile ./plugins/tokyonight.lua;
+          plugin = gruvbox-nvim;
+          config = toLuaFile ./plugins/theme.lua;
         }
       ];
     };
