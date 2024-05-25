@@ -8,6 +8,7 @@
   ];
 
   home.packages = with pkgs; [
+    wezterm
     bottom
     tree-sitter
     lazygit
@@ -24,4 +25,6 @@
     enable = true;
     package = pkgs.jdk17_headless;
   };
+
+  home.file.".wezterm.lua".source = ./wezterm.lua;
 }
