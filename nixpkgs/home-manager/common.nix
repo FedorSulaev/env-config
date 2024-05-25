@@ -3,7 +3,7 @@
   imports = [
     ./modules/tmux-module/tmux.nix
     ./modules/gh.nix
-    ./modules/zsh-module/zsh.nix
+    ./modules/zsh.nix
     ./modules/nvim-module/neovim.nix
   ];
 
