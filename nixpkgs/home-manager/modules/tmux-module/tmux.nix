@@ -15,11 +15,6 @@
         extraConfig = ''
           # Metrics
           set -g @dracula-plugins 'cpu-usage ram-usage'
-
-          # For preview rendering
-          set -g allow-passthrough on
-          set -ga update-environment TERM
-          set -ga update-environment TERM_PROGRAM
         '';
       }
     ];
@@ -30,6 +25,14 @@
       bind-key l select-pane -R
 
       set -g status-position top
+
+      # For preview rendering
+      set -g allow-passthrough on
+      set -ga update-environment TERM
+      set -ga update-environment TERM_PROGRAM
+
+      set -g default-terminal 'tmux-256color'
+      set-option -sa terminal-features ',*:RGB'
     '';
   };
 

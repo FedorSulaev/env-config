@@ -16,6 +16,11 @@
     cargo
     rustc
     nodejs_20
+    go
+    php83
+    php83Packages.composer
+    julia-bin
+    python311Packages.pynvim
   ];
 
   # Let Home Manager install and manage itself
