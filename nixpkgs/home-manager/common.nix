@@ -8,7 +8,6 @@
   ];
 
   home.packages = with pkgs; [
-    wezterm
     yazi
     bottom
     tree-sitter
@@ -26,6 +25,4 @@
     enable = true;
     package = pkgs.jdk17_headless;
   };
-
-  home.file.".wezterm.lua".source = ./wezterm.lua;
 }
