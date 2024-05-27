@@ -15,6 +15,7 @@
         extraConfig = ''
           # Metrics
           set -g @dracula-plugins 'cpu-usage ram-usage'
+          set -g @dracula-show-left-icon session
         '';
       }
     ];
