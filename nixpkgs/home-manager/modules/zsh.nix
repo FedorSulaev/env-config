@@ -6,6 +6,9 @@
     syntaxHighlighting.enable = true;
     enableAutosuggestions = true;
     initExtra = "[[ ! $(command -v nix) && -e ' /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ' ]] && source ' /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh '";
+    shellAliases = {
+      l = "eza -l -a";
+    };
   };
   programs.starship = {
     enable = true;
