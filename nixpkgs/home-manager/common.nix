@@ -12,6 +12,7 @@
     bottom
     tree-sitter
     lazygit
+    lazydocker
     wget
     cargo
     rustc
