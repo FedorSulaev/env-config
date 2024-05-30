@@ -8,6 +8,7 @@
     initExtra = "[[ ! $(command -v nix) && -e ' /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ' ]] && source ' /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh '";
     shellAliases = {
       l = "eza -l -a";
+      lt = "eza -l -a --tree --level=2";
     };
   };
   programs.starship = {
