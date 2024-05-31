@@ -24,6 +24,15 @@
     python311Packages.pynvim
   ];
 
+  programs.bottom = {
+    enable = true;
+    settings = {
+      flags = {
+        color = "gruvbox";
+        mem_as_value = true;
+      };
+    };
+  };
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;

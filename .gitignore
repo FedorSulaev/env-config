@@ -6,5 +6,6 @@ tmux/
 gh/
 nvim/
 iterm2/
+bottom/
 .DS_Store
 starship.toml
