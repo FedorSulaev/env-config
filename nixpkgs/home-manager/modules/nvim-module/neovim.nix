@@ -178,6 +178,11 @@
         lspkind-nvim
         # Rust
         rustaceanvim
+        # Java
+        {
+          plugin = nvim-jdtls;
+          config = toLuaFile ./plugins/jdtls.lua;
+        }
         # DB
         vim-dadbod
         vim-dadbod-completion
@@ -189,4 +194,7 @@
         }
       ];
     };
+
+  # FTplugins
+  home.file.".config/nvim/ftplugin/java.lua".source = ./plugins/java.lua;
 }

@@ -118,17 +118,6 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 local lspconfig = require("lspconfig")
-local util = require("lspconfig.util")
-
--- Function to find the root directory for Java
-local jdtls_find_root = function(fname)
-	return util.root_pattern(table.unpack({ "packageInfo", "Config" }))(fname) or util.path.dirname(fname)
-end
-
--- LSP on attach function for Java
-local jdtls_on_attach = function(client, bufnr)
-	client.config.root_dir = jdtls_find_root(vim.api.nvim_buf_get_name(bufnr))
-end
 
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -173,10 +162,7 @@ local servers = {
 	nil_ls = {},
 	bashls = {},
 	dockerls = {},
-	jdtls = {
-		on_attach = jdtls_on_attach,
-		root_dir = jdtls_find_root,
-	},
+	jdtls = {},
 }
 
 -- Ensure the servers and tools above are installed
@@ -198,12 +184,17 @@ vim.list_extend(ensure_installed, {
 	"markdownlint",
 	"luacheck",
 	"hadolint",
+	"java-debug-adapter",
+	"java-test",
 })
 require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 require("mason-lspconfig").setup({
 	handlers = {
 		function(server_name)
+			if server_name == "jdtls" then
+				return
+			end
 			local server = servers[server_name] or {}
 			-- This handles overriding only values explicitly passed
 			-- by the server configuration above. Useful when disabling
