@@ -105,7 +105,7 @@ local config = {
 	},
 	cmd = {
 		"jdtls",
-		"--jvm-arg=-javaagent:" .. home .. vim.fn.stdpath("data") .. "/mason/packages/jdtls/lombok.jar",
+		"--jvm-arg=-javaagent:" .. home .. "/.local/share/nvim/mason/packages/jdtls/lombok.jar",
 		"-data",
 		eclipse_workspace,
 	},
