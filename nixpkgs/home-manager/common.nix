@@ -7,6 +7,8 @@
     ./modules/nvim-module/neovim.nix
   ];
 
+  home.stateVersion = "24.05";
+
   home.packages = with pkgs; [
     yazi
     bottom

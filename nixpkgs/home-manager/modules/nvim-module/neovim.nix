@@ -147,6 +147,7 @@
               tree-sitter-go
               tree-sitter-dockerfile
               tree-sitter-diff
+              tree-sitter-rust
             ]
           ));
           config = toLuaFile ./plugins/treesitter.lua;
