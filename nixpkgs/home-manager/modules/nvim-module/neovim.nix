@@ -118,6 +118,19 @@
         }
         vim-tmux-navigator
         vimux
+        {
+          plugin = lualine-nvim;
+          config = toLuaFile ./plugins/lualine.lua;
+        }
+        nui-nvim
+        {
+          plugin = nvim-notify;
+          config = toLuaFile ./plugins/notify.lua;
+        }
+        {
+          plugin = noice-nvim;
+          config = toLuaFile ./plugins/noice.lua;
+        }
         # Lint
         {
           plugin = nvim-lint;
@@ -136,6 +149,7 @@
               tree-sitter-yaml
               tree-sitter-json
               tree-sitter-markdown
+              tree-sitter-markdown-inline
               tree-sitter-comment
               tree-sitter-bash
               tree-sitter-c
@@ -149,6 +163,7 @@
               tree-sitter-dockerfile
               tree-sitter-diff
               tree-sitter-rust
+              tree-sitter-regex
             ]
           ));
           config = toLuaFile ./plugins/treesitter.lua;
@@ -196,10 +211,6 @@
         {
           plugin = gruvbox-nvim;
           config = toLuaFile ./plugins/theme.lua;
-        }
-        {
-          plugin = lualine-nvim;
-          config = toLuaFile ./plugins/lualine.lua;
         }
       ];
     };
