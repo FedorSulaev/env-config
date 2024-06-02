@@ -12,21 +12,16 @@
       })
     ];
   };
+  imports = [
+    # Global settings
+    ./settings/neovim-settings.nix
+  ];
   programs.neovim =
     let
       toLua = str: "lua << EOF\n${str}\nEOF\n";
       toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
     in
     {
-      enable = true;
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-      extraLuaConfig = ''
-        ${builtins.readFile ./globals.lua}
-        ${builtins.readFile ./options.lua}
-        ${builtins.readFile ./keymaps.lua}
-      '';
       extraPackages = with pkgs; [
         ripgrep
         fd
