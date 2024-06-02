@@ -161,6 +161,10 @@
           plugin = telescope-nvim;
           config = toLuaFile ./plugins/telescope.lua;
         }
+        {
+          plugin = trouble-nvim;
+          config = toLuaFile ./plugins/trouble.lua;
+        }
         # LSP
         mason-lspconfig-nvim
         mason-tool-installer-nvim
