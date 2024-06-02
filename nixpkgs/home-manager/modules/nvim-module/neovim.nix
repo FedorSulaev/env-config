@@ -192,6 +192,10 @@
           plugin = gruvbox-nvim;
           config = toLuaFile ./plugins/theme.lua;
         }
+        {
+          plugin = lualine-nvim;
+          config = toLuaFile ./plugins/lualine.lua;
+        }
       ];
     };
 
