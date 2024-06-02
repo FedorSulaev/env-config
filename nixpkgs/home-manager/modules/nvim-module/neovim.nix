@@ -123,6 +123,7 @@
           plugin = nvim-lint;
           config = toLuaFile ./plugins/lint.lua;
         }
+        nvim-treesitter-textobjects
         {
           plugin = (nvim-treesitter.withPlugins (
             # https://github.com/NixOS/nixpkgs/tree/nixos-unstable/pkgs/development/tools/parsing/tree-sitter/grammars
