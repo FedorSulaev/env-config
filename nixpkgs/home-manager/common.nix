@@ -4,13 +4,13 @@
     ./modules/tmux-module/tmux.nix
     ./modules/gh.nix
     ./modules/zsh.nix
+    ./modules/yazi/yazi.nix
     ./modules/nvim-module/neovim.nix
   ];
 
   home.stateVersion = "24.05";
 
   home.packages = with pkgs; [
-    yazi
     bottom
     tree-sitter
     lazygit
