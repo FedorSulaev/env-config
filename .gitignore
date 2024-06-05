@@ -8,5 +8,6 @@ nvim/
 iterm2/
 bottom/
 JetBrains/
+fontconfig/
 .DS_Store
 starship.toml
