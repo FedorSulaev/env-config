@@ -2,16 +2,15 @@
 {
   imports = [
     ./modules/tmux-module/tmux.nix
-    ./modules/gh.nix
-    ./modules/zsh.nix
-    ./modules/yazi/yazi.nix
+    ./modules/github-module/gh.nix
+    ./modules/zsh-module/zsh.nix
+    ./modules/yazi-module/yazi.nix
     ./modules/nvim-module/neovim.nix
   ];
 
   home.stateVersion = "24.05";
 
   home.packages = with pkgs; [
-    bottom
     tree-sitter
     lazygit
     lazydocker
