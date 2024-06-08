@@ -105,10 +105,22 @@ local config = {
 	},
 	cmd = {
 		"jdtls",
+		"Declipse.application=org.eclipse.jdt.ls.core.id1",
+		"-Dosgi.bundles.defaultStartLevel=4",
+		"-Declipse.product=org.eclipse.jdt.ls.core.product",
+		"-Dlog.protocol=true",
+		"-Dlog.level=ALL",
+		"-Xmx2g",
+		"--add-modules=ALL-SYSTEM",
+		"--add-opens",
+		"java.base/java.util=ALL-UNNAMED",
+		"--add-opens",
+		"java.base/java.lang=ALL-UNNAMED",
 		"--jvm-arg=-javaagent:" .. home .. "/.local/share/nvim/mason/packages/jdtls/lombok.jar",
 		"-data",
 		eclipse_workspace,
 	},
+	capabilities = vim.lsp.protocol.make_client_capabilities(),
 }
 
 jdtls.start_or_attach(config)
