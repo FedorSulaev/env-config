@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   imports = [
     ./modules/tmux-module/tmux.nix
@@ -7,6 +7,8 @@
     ./modules/yazi-module/yazi.nix
     ./modules/nvim-module/neovim.nix
   ];
+
+  _module.args.utility = import ./modules/utility.nix { lib = lib; };
 
   home.stateVersion = "24.05";
 
