@@ -88,7 +88,6 @@
         plugin = mini-nvim;
         config = utility.toLuaFile ./plugins/mini.lua;
       }
-      plenary-nvim
       {
         plugin = todo-comments-nvim;
         config = utility.toLuaFile ./plugins/todo-comments.lua;
@@ -103,7 +102,6 @@
         plugin = lualine-nvim;
         config = utility.toLuaFile ./plugins/lualine.lua;
       }
-      nui-nvim
       {
         plugin = nvim-notify;
         config = utility.toLuaFile ./plugins/notify.lua;
@@ -152,7 +150,6 @@
       # Search
       telescope-fzf-native-nvim
       telescope-ui-select-nvim
-      nvim-web-devicons
       {
         plugin = telescope-nvim;
         config = utility.toLuaFile ./plugins/telescope.lua;
