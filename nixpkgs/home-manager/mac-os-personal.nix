@@ -2,6 +2,7 @@
 {
   imports = [
     ./common.nix
+    ./modules/tmux-module/tmux-mac-os-personal.nix
   ];
 
   home.packages = with pkgs; [

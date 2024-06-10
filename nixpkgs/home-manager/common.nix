@@ -1,7 +1,6 @@
 { pkgs, lib, ... }:
 {
   imports = [
-    ./modules/tmux-module/tmux.nix
     ./modules/github-module/gh.nix
     ./modules/zsh-module/zsh.nix
     ./modules/yazi-module/yazi.nix

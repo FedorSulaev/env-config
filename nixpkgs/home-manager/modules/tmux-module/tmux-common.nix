@@ -40,6 +40,4 @@
   home.packages = with pkgs; [
     tmuxifier
   ];
-
-  home.file.".tmux-layouts/envconfig.session.sh".source = ./tmux-session-envconfig.sh;
 }
