@@ -15,6 +15,7 @@
   imports = [
     ./settings-module/neovim-settings.nix
     ./navigation-module/neovim-navigation.nix
+    ./completion-module/neovim-completion.nix
   ];
   programs.neovim = {
     extraPackages = with pkgs; [
@@ -26,20 +27,6 @@
       rustfmt
     ];
     plugins = with pkgs.vimPlugins; [
-      # Completion
-      luasnip
-      cmp_luasnip
-      cmp-nvim-lsp
-      cmp-path
-      cmp-buffer
-      {
-        plugin = nvim-cmp;
-        config = utility.toLuaFile ./plugins/cmp.lua;
-      }
-      {
-        plugin = nvim-autopairs;
-        config = utility.toLuaFile ./plugins/autopairs.lua;
-      }
       # Formatters
       {
         plugin = conform-nvim;
