@@ -16,6 +16,7 @@
     ./settings-module/neovim-settings.nix
     ./navigation-module/neovim-navigation.nix
     ./completion-module/neovim-completion.nix
+    ./formatters-module/neovim-formatters.nix
   ];
   programs.neovim = {
     extraPackages = with pkgs; [
@@ -27,11 +28,6 @@
       rustfmt
     ];
     plugins = with pkgs.vimPlugins; [
-      # Formatters
-      {
-        plugin = conform-nvim;
-        config = utility.toLuaFile ./plugins/conform.lua;
-      }
       # Debug
       {
         plugin = nvim-dap;
