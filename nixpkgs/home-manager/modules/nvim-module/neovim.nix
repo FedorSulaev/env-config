@@ -17,6 +17,7 @@
     ./navigation-module/neovim-navigation.nix
     ./completion-module/neovim-completion.nix
     ./formatters-module/neovim-formatters.nix
+    ./debug-module/neovim-debug.nix
   ];
   programs.neovim = {
     extraPackages = with pkgs; [
@@ -28,31 +29,6 @@
       rustfmt
     ];
     plugins = with pkgs.vimPlugins; [
-      # Debug
-      {
-        plugin = nvim-dap;
-        config = utility.toLuaFile ./plugins/dap/dap.lua;
-      }
-      # Creates a beautiful debugger UI
-      {
-        plugin = nvim-dap-ui;
-        config = utility.toLuaFile ./plugins/dap/dapui.lua;
-      }
-      {
-        plugin = nvim-dap-virtual-text;
-        config = utility.toLuaFile ./plugins/dap/dap-virtual-text.lua;
-      }
-      # Installs the debug adapters for you
-      mason-nvim
-      {
-        plugin = mason-nvim-dap;
-        config = utility.toLuaFile ./plugins/dap/mason-dap.lua;
-      }
-      # Add your own debuggers here
-      {
-        plugin = nvim-dap-go;
-        config = utility.toLuaFile ./plugins/dap/dap-go.lua;
-      }
       # Testing
       {
         plugin = vim-test;
