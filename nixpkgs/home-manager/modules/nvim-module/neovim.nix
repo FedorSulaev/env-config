@@ -18,6 +18,7 @@
     ./completion-module/neovim-completion.nix
     ./formatters-module/neovim-formatters.nix
     ./debug-module/neovim-debug.nix
+    ./testing-module/neovim-testing.nix
   ];
   programs.neovim = {
     extraPackages = with pkgs; [
@@ -29,11 +30,6 @@
       rustfmt
     ];
     plugins = with pkgs.vimPlugins; [
-      # Testing
-      {
-        plugin = vim-test;
-        config = utility.toLua "vim.cmd(\"let test#strategy = 'vimux'\")";
-      }
       # Editor
       {
         plugin = gitsigns-nvim;
