@@ -1,17 +1,5 @@
-{ pkgs, inputs, utility, ... }:
+{ pkgs, utility, ... }:
 {
-  nixpkgs = {
-    overlays = [
-      (final: prev: {
-        vimPlugins = prev.vimPlugins // {
-          mason-nvim-dap = prev.vimUtils.buildVimPlugin {
-            name = "mason-nvim-dap";
-            src = inputs.mason-nvim-dap;
-          };
-        };
-      })
-    ];
-  };
   imports = [
     ./settings-module/neovim-settings.nix
     ./navigation-module/neovim-navigation.nix
@@ -19,6 +7,7 @@
     ./formatters-module/neovim-formatters.nix
     ./debug-module/neovim-debug.nix
     ./testing-module/neovim-testing.nix
+    ./editor-module/neovim-editor.nix
   ];
   programs.neovim = {
     extraPackages = with pkgs; [
@@ -30,41 +19,6 @@
       rustfmt
     ];
     plugins = with pkgs.vimPlugins; [
-      # Editor
-      {
-        plugin = gitsigns-nvim;
-        config = utility.toLuaFile ./plugins/gitsigns.lua;
-      }
-      {
-        plugin = indent-blankline-nvim;
-        config = utility.toLuaFile ./plugins/ibl.lua;
-      }
-      {
-        plugin = mini-nvim;
-        config = utility.toLuaFile ./plugins/mini.lua;
-      }
-      {
-        plugin = todo-comments-nvim;
-        config = utility.toLuaFile ./plugins/todo-comments.lua;
-      }
-      {
-        plugin = which-key-nvim;
-        config = utility.toLuaFile ./plugins/which-key.lua;
-      }
-      vim-tmux-navigator
-      vimux
-      {
-        plugin = lualine-nvim;
-        config = utility.toLuaFile ./plugins/lualine.lua;
-      }
-      {
-        plugin = nvim-notify;
-        config = utility.toLuaFile ./plugins/notify.lua;
-      }
-      {
-        plugin = noice-nvim;
-        config = utility.toLuaFile ./plugins/noice.lua;
-      }
       # Lint
       {
         plugin = nvim-lint;
