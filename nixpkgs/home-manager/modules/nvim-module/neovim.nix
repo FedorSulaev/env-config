@@ -8,6 +8,7 @@
     ./debug-module/neovim-debug.nix
     ./testing-module/neovim-testing.nix
     ./editor-module/neovim-editor.nix
+    ./search-module/neovim-search.nix
   ];
   programs.neovim = {
     extraPackages = with pkgs; [
@@ -55,17 +56,6 @@
           ]
         ));
         config = utility.toLuaFile ./plugins/treesitter.lua;
-      }
-      # Search
-      telescope-fzf-native-nvim
-      telescope-ui-select-nvim
-      {
-        plugin = telescope-nvim;
-        config = utility.toLuaFile ./plugins/telescope.lua;
-      }
-      {
-        plugin = trouble-nvim;
-        config = utility.toLuaFile ./plugins/trouble.lua;
       }
       # LSP
       mason-lspconfig-nvim
