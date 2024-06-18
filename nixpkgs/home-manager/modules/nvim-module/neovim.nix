@@ -9,6 +9,7 @@
     ./testing-module/neovim-testing.nix
     ./editor-module/neovim-editor.nix
     ./search-module/neovim-search.nix
+    ./languages-module/neovim-languages.nix
   ];
   programs.neovim = {
     extraPackages = with pkgs; [
@@ -16,8 +17,6 @@
       fd
       lua54Packages.luarocks
       maven
-      rust-analyzer
-      rustfmt
     ];
     plugins = with pkgs.vimPlugins; [
       # Lint
@@ -51,7 +50,6 @@
             tree-sitter-go
             tree-sitter-dockerfile
             tree-sitter-diff
-            tree-sitter-rust
             tree-sitter-regex
           ]
         ));
@@ -73,8 +71,6 @@
         config = utility.toLuaFile ./plugins/lspconfig.lua;
       }
       lspkind-nvim
-      # Rust
-      rustaceanvim
       # Java
       {
         plugin = nvim-jdtls;
