@@ -10,6 +10,7 @@
     ./editor-module/neovim-editor.nix
     ./search-module/neovim-search.nix
     ./languages-module/neovim-languages.nix
+    ./theme-module/neovim-theme.nix
   ];
   programs.neovim = {
     extraPackages = with pkgs; [
@@ -78,11 +79,6 @@
       vim-dadbod
       vim-dadbod-completion
       vim-dadbod-ui
-      # Theme
-      {
-        plugin = gruvbox-nvim;
-        config = utility.toLuaFile ./plugins/theme.lua;
-      }
     ];
   };
 
