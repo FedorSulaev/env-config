@@ -11,6 +11,7 @@
     ./search-module/neovim-search.nix
     ./languages-module/neovim-languages.nix
     ./theme-module/neovim-theme.nix
+    ./database-module/neovim-database.nix
   ];
   programs.neovim = {
     extraPackages = with pkgs; [
@@ -75,10 +76,6 @@
         plugin = nvim-jdtls;
         config = utility.toLuaFile ./plugins/jdtls.lua;
       }
-      # DB
-      vim-dadbod
-      vim-dadbod-completion
-      vim-dadbod-ui
     ];
   };
 
