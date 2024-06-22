@@ -24,11 +24,6 @@
       maven
     ];
     plugins = with pkgs.vimPlugins; [
-      # Lua
-      {
-        plugin = neodev-nvim;
-        config = utility.toLuaFile ./plugins/neodev.lua;
-      }
       # Java
       {
         plugin = nvim-jdtls;
