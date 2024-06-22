@@ -56,11 +56,7 @@
         ));
         config = utility.toLuaFile ./plugins/treesitter.lua;
       }
-      # LSP
-      {
-        plugin = fidget-nvim;
-        config = utility.toLuaFile ./plugins/fidget.lua;
-      }
+      # Lua
       {
         plugin = neodev-nvim;
         config = utility.toLuaFile ./plugins/neodev.lua;
