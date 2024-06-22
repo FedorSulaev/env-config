@@ -1,4 +1,4 @@
-{ pkgs, utility, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./settings-module/neovim-settings.nix
@@ -23,15 +23,5 @@
       lua54Packages.luarocks
       maven
     ];
-    plugins = with pkgs.vimPlugins; [
-      # Java
-      {
-        plugin = nvim-jdtls;
-        config = utility.toLuaFile ./plugins/jdtls.lua;
-      }
-    ];
   };
-
-  # FTplugins
-  home.file.".config/nvim/ftplugin/java.lua".source = ./plugins/java.lua;
 }

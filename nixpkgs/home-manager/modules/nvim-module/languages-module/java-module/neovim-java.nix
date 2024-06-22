@@ -1,19 +1,22 @@
 { pkgs, utility, ... }:
 {
+  imports = [
+  ];
   programs.neovim = {
     plugins = with pkgs.vimPlugins; [
       (nvim-treesitter.withPlugins
         (
           plugins: with plugins; [
-            tree-sitter-lua
-            tree-sitter-luadoc
+            tree-sitter-java
           ]
         )
       )
       {
-        plugin = neodev-nvim;
-        config = utility.toLuaFile ./neodev.lua;
+        plugin = nvim-jdtls;
+        config = utility.toLuaFile ./jdtls.lua;
       }
     ];
   };
+
+  home.file.".config/nvim/ftplugin/java.lua".source = ./java.lua;
 }

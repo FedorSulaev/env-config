@@ -24,7 +24,6 @@
             tree-sitter-javascript
             tree-sitter-nix
             tree-sitter-typescript
-            tree-sitter-java
             tree-sitter-query # for the tree-sitter itself
             tree-sitter-python
             tree-sitter-go
