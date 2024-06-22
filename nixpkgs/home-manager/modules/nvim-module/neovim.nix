@@ -5,6 +5,7 @@
     ./navigation-module/neovim-navigation.nix
     ./completion-module/neovim-completion.nix
     ./formatters-module/neovim-formatters.nix
+    ./lsp-module/neovim-lsp.nix
     ./debug-module/neovim-debug.nix
     ./testing-module/neovim-testing.nix
     ./editor-module/neovim-editor.nix
@@ -56,8 +57,6 @@
         config = utility.toLuaFile ./plugins/treesitter.lua;
       }
       # LSP
-      mason-lspconfig-nvim
-      mason-tool-installer-nvim
       {
         plugin = fidget-nvim;
         config = utility.toLuaFile ./plugins/fidget.lua;
@@ -66,11 +65,6 @@
         plugin = neodev-nvim;
         config = utility.toLuaFile ./plugins/neodev.lua;
       }
-      {
-        plugin = nvim-lspconfig;
-        config = utility.toLuaFile ./plugins/lspconfig.lua;
-      }
-      lspkind-nvim
       # Java
       {
         plugin = nvim-jdtls;
