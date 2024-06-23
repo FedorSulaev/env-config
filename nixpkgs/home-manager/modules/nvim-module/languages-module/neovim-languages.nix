@@ -8,5 +8,6 @@
     ./markdown-module/neovim-markdown.nix
     ./yaml-module/neovim-yaml.nix
     ./html-module/neovim-html.nix
+    ./json-module/neovim-json.nix
   ];
 }
