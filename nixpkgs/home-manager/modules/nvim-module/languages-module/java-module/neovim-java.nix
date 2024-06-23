@@ -3,6 +3,9 @@
   imports = [
   ];
   programs.neovim = {
+    extraPackages = with pkgs; [
+      maven
+    ];
     plugins = with pkgs.vimPlugins; [
       (nvim-treesitter.withPlugins
         (

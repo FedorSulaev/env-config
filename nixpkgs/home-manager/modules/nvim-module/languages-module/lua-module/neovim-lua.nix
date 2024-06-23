@@ -1,6 +1,9 @@
 { pkgs, utility, ... }:
 {
   programs.neovim = {
+    extraPackages = with pkgs; [
+      lua54Packages.luarocks
+    ];
     plugins = with pkgs.vimPlugins; [
       (nvim-treesitter.withPlugins
         (

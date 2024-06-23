@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   imports = [
     ./settings-module/neovim-settings.nix
@@ -15,13 +15,4 @@
     ./theme-module/neovim-theme.nix
     ./database-module/neovim-database.nix
   ];
-  # TODO: Move to modules
-  programs.neovim = {
-    extraPackages = with pkgs; [
-      ripgrep
-      fd
-      lua54Packages.luarocks
-      maven
-    ];
-  };
 }
