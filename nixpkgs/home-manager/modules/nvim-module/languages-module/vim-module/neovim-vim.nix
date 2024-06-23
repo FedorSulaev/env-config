@@ -1,0 +1,14 @@
+{ pkgs, ... }:
+{
+  programs.neovim = {
+    plugins = with pkgs.vimPlugins; [
+      (nvim-treesitter.withPlugins
+        (
+          plugins: with plugins; [
+            tree-sitter-vim
+            tree-sitter-vimdoc
+          ]
+        ))
+    ];
+  };
+}

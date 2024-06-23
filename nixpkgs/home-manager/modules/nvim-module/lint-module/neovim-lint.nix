@@ -13,8 +13,6 @@
         plugin = (nvim-treesitter.withPlugins (
           # https://github.com/NixOS/nixpkgs/tree/nixos-unstable/pkgs/development/tools/parsing/tree-sitter/grammars
           plugins: with plugins; [
-            tree-sitter-vim
-            tree-sitter-vimdoc
             tree-sitter-html
             tree-sitter-yaml
             tree-sitter-json
