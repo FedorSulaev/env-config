@@ -9,5 +9,6 @@
     ./yaml-module/neovim-yaml.nix
     ./html-module/neovim-html.nix
     ./json-module/neovim-json.nix
+    ./bash-module/neovim-bash.nix
   ];
 }

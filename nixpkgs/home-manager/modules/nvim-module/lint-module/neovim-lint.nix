@@ -14,7 +14,6 @@
           # https://github.com/NixOS/nixpkgs/tree/nixos-unstable/pkgs/development/tools/parsing/tree-sitter/grammars
           plugins: with plugins; [
             tree-sitter-comment
-            tree-sitter-bash
             tree-sitter-c
             tree-sitter-javascript
             tree-sitter-nix
