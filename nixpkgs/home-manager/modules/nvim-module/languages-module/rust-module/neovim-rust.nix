@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, utility, ... }:
 {
   programs.neovim = {
     extraPackages = with pkgs; [
@@ -13,6 +13,10 @@
           ]
         ))
       rustaceanvim
+      {
+        plugin = conform-nvim;
+        config = utility.toLuaFile ./conform-formatters-rust.lua;
+      }
     ];
   };
 }
