@@ -78,6 +78,13 @@ local config = {
 			signatureHelp = { enabled = true },
 			contentProvider = { preferred = "fernflower" },
 			completion = {
+				filteredTypes = {
+					"com.sun.*",
+					"io.micrometer.shaded.*",
+					"java.awt.*",
+					"jdk.*",
+					"sun.*",
+				},
 				favoriteStaticMembers = {
 					"org.hamcrest.MatcherAssert.assertThat",
 					"org.hamcrest.Matchers.*",
@@ -86,13 +93,6 @@ local config = {
 					"java.util.Objects.requireNonNull",
 					"java.util.Objects.requireNonNullElse",
 					"org.mockito.Mockito.*",
-				},
-				filteredTypes = {
-					"com.sun.*",
-					"io.micrometer.shaded.*",
-					"java.awt.*",
-					"jdk.*",
-					"sun.*",
 				},
 			},
 			sources = {

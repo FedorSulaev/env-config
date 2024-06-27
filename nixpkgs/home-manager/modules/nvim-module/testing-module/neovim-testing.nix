@@ -7,7 +7,7 @@
     plugins = with pkgs.vimPlugins; [
       {
         plugin = vim-test;
-        config = utility.toLua "vim.cmd(\"let test#strategy = 'vimux'\")";
+        config = utility.toLuaFile ./vim-test.lua;
       }
     ];
   };
