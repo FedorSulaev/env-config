@@ -1,6 +1,7 @@
-{ pkgs, utility, ... }:
+{ pkgs, ... }:
 {
   imports = [
+    ./jdtls-module/jdtls.nix
   ];
   programs.neovim = {
     extraPackages = with pkgs; [
@@ -14,10 +15,6 @@
           ]
         )
       )
-      {
-        plugin = nvim-jdtls;
-        config = utility.toLuaFile ./jdtls.lua;
-      }
     ];
   };
 
