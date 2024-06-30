@@ -46,7 +46,7 @@ local on_attach = function(client, bufnr)
 	-- nnoremap('<space>f', function() vim.lsp.buf.format { async = true } end, bufopts, "Format file")
 
 	-- Java extensions provided by jdtls
-	-- nnoremap("<C-o>", jdtls.organize_imports, bufopts, "Organize imports")
+	nnoremap("<space>di", jdtls.organize_imports, bufopts, "Organize imports")
 	nnoremap("<space>ev", jdtls.extract_variable, bufopts, "Extract variable")
 	nnoremap("<space>ec", jdtls.extract_constant, bufopts, "Extract constant")
 	nnoremap("<space>lf", function()
@@ -105,7 +105,7 @@ local config = {
 	},
 	cmd = {
 		"jdtls",
-		"Declipse.application=org.eclipse.jdt.ls.core.id1",
+		"-Declipse.application=org.eclipse.jdt.ls.core.id1",
 		"-Dosgi.bundles.defaultStartLevel=4",
 		"-Declipse.product=org.eclipse.jdt.ls.core.product",
 		"-Dlog.protocol=true",
