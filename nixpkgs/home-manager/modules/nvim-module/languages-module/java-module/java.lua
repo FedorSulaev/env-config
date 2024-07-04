@@ -93,6 +93,7 @@ local config = {
 					"java.util.Objects.requireNonNull",
 					"java.util.Objects.requireNonNullElse",
 					"org.mockito.Mockito.*",
+					"org.mockito.ArgumentMatchers.*",
 				},
 			},
 			sources = {
