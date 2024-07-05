@@ -19,7 +19,8 @@
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
-require("telescope").setup({
+local telescope = require("telescope")
+telescope.setup({
 	-- You can put your default mappings / updates / etc. in here
 	--  All the info you're looking for is in `:help telescope.setup()`
 	--
@@ -37,8 +38,8 @@ require("telescope").setup({
 })
 
 -- Enable Telescope extensions if they are installed
-pcall(require("telescope").load_extension, "fzf")
-pcall(require("telescope").load_extension, "ui-select")
+telescope.load_extension("fzf")
+telescope.load_extension("ui-select")
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "

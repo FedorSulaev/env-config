@@ -25,8 +25,8 @@ local on_attach = function(client, bufnr)
 	client.server_capabilities.semanticTokensProvider = nil
 
 	nnoremap("gD", vim.lsp.buf.declaration, bufopts, "Go to declaration")
-	nnoremap("gd", vim.lsp.buf.definition, bufopts, "Go to definition")
-	nnoremap("gi", vim.lsp.buf.implementation, bufopts, "Go to implementation")
+	--nnoremap("gd", builtin.lsp_definitions, bufopts, "Go to definition")-- Telescope
+	--nnoremap("gi", builtin.lsp_implementations, bufopts, "Go to implementation")-- Telescope
 	nnoremap("K", vim.lsp.buf.hover, bufopts, "Hover text")
 	nnoremap("<C-k>", vim.lsp.buf.signature_help, bufopts, "Show signature")
 	nnoremap("<space>wa", vim.lsp.buf.add_workspace_folder, bufopts, "Add workspace folder")
@@ -34,7 +34,7 @@ local on_attach = function(client, bufnr)
 	nnoremap("<space>wl", function()
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, bufopts, "List workspace folders")
-	nnoremap("<space>D", vim.lsp.buf.type_definition, bufopts, "Go to type definition")
+	--nnoremap("<space>D", builtin.lsp_type_definitions, bufopts, "Go to type definition")-- Telescope
 	nnoremap("<space>rn", vim.lsp.buf.rename, bufopts, "Rename")
 	nnoremap("<space>ca", vim.lsp.buf.code_action, bufopts, "Code actions")
 	vim.keymap.set(
