@@ -1,6 +1,6 @@
 local home = os.getenv("HOME")
 local jdtls = require("jdtls")
-local root_dir = require("jdtls.setup").find_root({ "packageInfo" }, "Config")
+local root_dir = require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew" })
 local eclipse_workspace = home .. "/.local/share/eclipse/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
 
 local ws_folders_jdtls = {}
