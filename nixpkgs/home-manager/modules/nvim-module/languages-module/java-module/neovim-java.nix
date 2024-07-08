@@ -3,6 +3,12 @@
   imports = [
     ./jdtls-module/jdtls.nix
   ];
+
+  programs.java = {
+    enable = true;
+    package = pkgs.jdk17_headless;
+  };
+
   programs.neovim = {
     extraPackages = with pkgs; [
       maven
