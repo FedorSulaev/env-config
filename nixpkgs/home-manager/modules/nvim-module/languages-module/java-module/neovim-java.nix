@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, utility, ... }:
 {
   imports = [
     ./jdtls-module/jdtls.nix
@@ -21,6 +21,10 @@
           ]
         )
       )
+      {
+        plugin = nvim-dap;
+        config = utility.toLuaFile ./dap-java.lua;
+      }
     ];
   };
 
