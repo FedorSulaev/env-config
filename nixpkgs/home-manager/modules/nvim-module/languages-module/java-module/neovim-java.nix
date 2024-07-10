@@ -9,6 +9,11 @@
     package = pkgs.jdk17_headless;
   };
 
+  home.packages = with pkgs; [
+    jdt-language-server
+    lombok
+  ];
+
   programs.neovim = {
     extraPackages = with pkgs; [
       maven
