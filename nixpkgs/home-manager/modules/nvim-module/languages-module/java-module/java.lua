@@ -117,7 +117,7 @@ local config = {
 		"java.base/java.util=ALL-UNNAMED",
 		"--add-opens",
 		"java.base/java.lang=ALL-UNNAMED",
-		"--jvm-arg=-javaagent:" .. home .. "/.local/share/nvim/mason/packages/jdtls/lombok.jar",
+		"--jvm-arg=-javaagent:" .. home .. "/.lombok/lombok.jar",
 		"-data",
 		eclipse_workspace,
 	},

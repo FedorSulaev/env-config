@@ -34,4 +34,5 @@
   };
 
   home.file.".config/nvim/ftplugin/java.lua".source = ./java.lua;
+  home.file.".lombok/lombok.jar".source = "${pkgs.lombok}/share/java/lombok.jar";
 }

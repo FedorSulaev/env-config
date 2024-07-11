@@ -162,7 +162,6 @@ local servers = {
 	nil_ls = {},
 	bashls = {},
 	dockerls = {},
-	jdtls = {},
 }
 
 -- Ensure the servers and tools above are installed
