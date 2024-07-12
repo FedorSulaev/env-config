@@ -10,6 +10,7 @@
       cmp-nvim-lsp
       cmp-path
       cmp-buffer
+      cmp-dap
       {
         plugin = nvim-cmp;
         config = utility.toLuaFile ./cmp.lua;
