@@ -9,9 +9,16 @@
     # Nvim plugins from GitHub
     mason-nvim-dap.url = "github:jay-babu/mason-nvim-dap.nvim";
     mason-nvim-dap.flake = false;
+
+    # Vscode plugins
+    java-debug.url = "github:microsoft/java-debug";
+    java-debug.flake = false;
+
+    java-test.url = "github:microsoft/vscode-java-test";
+    java-test.flake = false;
   };
 
-  outputs = { self, nixpkgs, home-manager, mason-nvim-dap }@inputs:
+  outputs = { self, nixpkgs, home-manager, mason-nvim-dap, java-debug, java-test }@inputs:
     let
       pkgs-mac-arm = import nixpkgs {
         system = "aarch64-darwin";
