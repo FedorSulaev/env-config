@@ -21,38 +21,6 @@
         "type": "github"
       }
     },
-    "java-debug": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1719455487,
-        "narHash": "sha256-Lke+yyCUqcoGYS6pNYXdQdAn9uZ+S3pk9JVhfakAFvY=",
-        "owner": "microsoft",
-        "repo": "java-debug",
-        "rev": "e06a1b686625b28a66e0bd6a22f4668fb4f02b4d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "microsoft",
-        "repo": "java-debug",
-        "type": "github"
-      }
-    },
-    "java-test": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1720091753,
-        "narHash": "sha256-OdkjJMU0tMfiryclcV5eqeDflg9j3NthmxgRmi7M6nI=",
-        "owner": "microsoft",
-        "repo": "vscode-java-test",
-        "rev": "f86932f8f3f4a8a73b03d5b8d9e97bb9be56884e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "microsoft",
-        "repo": "vscode-java-test",
-        "type": "github"
-      }
-    },
     "mason-nvim-dap": {
       "flake": false,
       "locked": {
@@ -88,8 +56,6 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "java-debug": "java-debug",
-        "java-test": "java-test",
         "mason-nvim-dap": "mason-nvim-dap",
         "nixpkgs": "nixpkgs"
       }

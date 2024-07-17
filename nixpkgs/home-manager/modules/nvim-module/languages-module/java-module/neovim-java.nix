@@ -1,4 +1,4 @@
-{ inputs, pkgs, utility, ... }:
+{ pkgs, utility, ... }:
 {
   imports = [
     ./jdtls-module/jdtls.nix
@@ -10,12 +10,12 @@
   };
 
   programs.neovim = {
-    extraPackages = [
-      pkgs.maven
-      pkgs.jdt-language-server
-      pkgs.lombok
-      inputs.java-debug
-      inputs.java-test
+    extraPackages = with pkgs; [
+      maven
+      jdt-language-server
+      lombok
+      vscode-extensions.vscjava.vscode-java-debug
+      vscode-extensions.vscjava.vscode-java-test
     ];
     plugins = with pkgs.vimPlugins; [
       (nvim-treesitter.withPlugins
