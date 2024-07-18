@@ -34,4 +34,5 @@
 
   home.file.".config/nvim/ftplugin/java.lua".source = ./java.lua;
   home.file.".lombok/lombok.jar".source = "${pkgs.lombok}/share/java/lombok.jar";
+  home.file.".java-debug/java-debug.jar".source = "${pkgs.vscode-extensions.vscjava.vscode-java-debug}/share/vscode/extensions/vscjava.vscode-java-debug/server/com.microsoft.java.debug.plugin-0.50.0.jar";
 }
