@@ -68,6 +68,10 @@ local config = {
 	root_dir = root_dir,
 	init_options = {
 		workspaceFolders = ws_folders_jdtls,
+		bundles = {
+			vim.fn.glob(home .. "/.java-debug/java-debug.jar", 1),
+			vim.fn.glob(home .. "/.java-test/java-test.jar", 1),
+		},
 	},
 	settings = {
 		java = {
