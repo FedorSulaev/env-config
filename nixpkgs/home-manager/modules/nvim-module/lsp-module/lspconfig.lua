@@ -183,8 +183,6 @@ vim.list_extend(ensure_installed, {
 	"markdownlint",
 	"luacheck",
 	"hadolint",
-	"java-debug-adapter",
-	"java-test",
 })
 require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
