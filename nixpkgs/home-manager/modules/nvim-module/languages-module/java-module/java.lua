@@ -76,8 +76,7 @@ local config = {
 	settings = {
 		java = {
 			format = {
-				-- TODO
-				-- settings = { url = "" },
+				settings = { url = "eclipse-java-google-style.xml" },
 			},
 			signatureHelp = { enabled = true },
 			contentProvider = { preferred = "fernflower" },
