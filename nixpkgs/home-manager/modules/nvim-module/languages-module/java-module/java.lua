@@ -76,7 +76,7 @@ local config = {
 	settings = {
 		java = {
 			format = {
-				settings = { url = "eclipse-java-google-style.xml" },
+				settings = { url = vim.fn.glob(home .. ".config/nvim/ftplugin/eclipse-java-google-style.xml", 1) },
 			},
 			signatureHelp = { enabled = true },
 			contentProvider = { preferred = "fernflower" },
