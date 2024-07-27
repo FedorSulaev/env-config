@@ -1,13 +1,9 @@
 { pkgs, ... }:
 {
   programs.neovim = {
-    plugins = with pkgs.vimPlugins; [
-      (nvim-treesitter.withPlugins
-        (
-          plugins: with plugins; [
-            tree-sitter-typescript
-          ]
-        ))
+    extraPackages = with pkgs; [
+      nodejs_20
     ];
   };
+  home.sessionPath = [ "${pkgs.nodejs_20}/bin" ];
 }

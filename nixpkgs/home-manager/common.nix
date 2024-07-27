@@ -18,7 +18,6 @@
     wget
     cargo
     rustc
-    nodejs_20
     go
     php83
     php83Packages.composer
