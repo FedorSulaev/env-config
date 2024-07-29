@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, utility, ... }:
 {
   imports = [
     ./javascript-module/neovim-javascript.nix
@@ -11,6 +11,10 @@
             tree-sitter-typescript
           ]
         ))
+      {
+        plugin = conform-nvim;
+        config = utility.toLuaFile ./conform-formatters-typescript.lua;
+      }
     ];
   };
 }
