@@ -5,7 +5,14 @@
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
-    initExtra = "[[ ! $(command -v nix) && -e ' /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ' ]] && source ' /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh '";
+    initExtra = ''
+      # Nix setup (environment variables, etc.)
+      if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
+        . ~/.nix-profile/etc/profile.d/nix.sh
+      fi
+      # Start up Starship shell
+      eval "$(starship init zsh)"
+    '';
     shellAliases = {
       l = "eza -l -a";
       lt = "eza -l -a --tree --level=2";
@@ -14,6 +21,7 @@
   programs.starship = {
     enable = true;
     settings = {
+      command_timeout = 1000;
       add_newline = false;
       format = "$directory$character";
       right_format = "$all";
