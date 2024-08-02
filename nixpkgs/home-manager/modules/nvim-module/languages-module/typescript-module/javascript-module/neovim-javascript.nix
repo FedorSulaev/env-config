@@ -3,6 +3,7 @@
   programs.neovim = {
     extraPackages = with pkgs; [
       nodejs_20
+      nodePackages.prettier
     ];
     plugins = with pkgs.vimPlugins; [
       {
