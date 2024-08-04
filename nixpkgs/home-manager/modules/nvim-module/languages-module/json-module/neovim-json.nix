@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, utility, ... }:
 {
   programs.neovim = {
     plugins = with pkgs.vimPlugins; [
@@ -8,6 +8,10 @@
             tree-sitter-json
           ]
         ))
+      {
+        plugin = conform-nvim;
+        config = utility.toLuaFile ./conform-formatters-json.lua;
+      }
     ];
   };
 }
