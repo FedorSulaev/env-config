@@ -12,6 +12,10 @@
         plugin = conform-nvim;
         config = utility.toLuaFile ./conform-formatters-html.lua;
       }
+      {
+        plugin = nvim-ts-autotag;
+        config = utility.toLuaFile ./autotag.lua;
+      }
     ];
   };
 }
