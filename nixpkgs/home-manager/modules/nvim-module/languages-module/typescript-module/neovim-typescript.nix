@@ -5,6 +5,7 @@
   ];
   programs.neovim = {
     extraPackages = with pkgs; [
+      nodePackages.typescript
       nodePackages.typescript-language-server
     ];
     plugins = with pkgs.vimPlugins; [
