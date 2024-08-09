@@ -21,7 +21,7 @@
   programs.starship = {
     enable = true;
     settings = {
-      command_timeout = 1000;
+      command_timeout = 2000;
       add_newline = false;
       format = "$directory$character";
       right_format = "$all";
