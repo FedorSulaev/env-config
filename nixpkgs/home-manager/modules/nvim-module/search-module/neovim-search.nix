@@ -9,6 +9,10 @@
         plugin = trouble-nvim;
         config = utility.toLuaFile ./trouble.lua;
       }
+      {
+        plugin = flash-nvim;
+        config = utility.toLuaFile ./flash-nvim.lua;
+      }
     ];
   };
 }
