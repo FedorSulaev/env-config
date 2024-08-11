@@ -51,3 +51,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+
+-- buffers
+vim.api.nvim_set_keymap("n", "<S-Tab>", ":bprev<enter>", { noremap = false })
+vim.api.nvim_set_keymap("n", "<Tab>", ":bnext<enter>", { noremap = false })
+vim.api.nvim_set_keymap("n", "<C-x>", ":bdelete<enter>", { noremap = false })
