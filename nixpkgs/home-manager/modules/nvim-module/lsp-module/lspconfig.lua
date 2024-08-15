@@ -141,24 +141,6 @@ local servers = {
 	-- But for many setups, the LSP (`tsserver`) will work just fine
 	-- tsserver = {},
 	--
-
-	lua_ls = {
-		-- cmd = {...},
-		-- filetypes = { ...},
-		-- capabilities = {},
-		settings = {
-			Lua = {
-				completion = {
-					callSnippet = "Replace",
-				},
-				diagnostics = {
-					globals = { "vim" },
-				},
-				-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-				-- diagnostics = { disable = { 'missing-fields' } },
-			},
-		},
-	},
 	nil_ls = {},
 	bashls = {},
 	dockerls = {},

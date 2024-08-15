@@ -3,6 +3,7 @@
   programs.neovim = {
     extraPackages = with pkgs; [
       lua54Packages.luarocks
+      lua-language-server
     ];
     plugins = with pkgs.vimPlugins; [
       (nvim-treesitter.withPlugins
@@ -20,6 +21,10 @@
       {
         plugin = conform-nvim;
         config = utility.toLuaFile ./conform-formatters-lua.lua;
+      }
+      {
+        plugin = nvim-lspconfig;
+        config = utility.toLuaFile ./lspconfig-lua.lua;
       }
     ];
   };
