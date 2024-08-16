@@ -1,6 +1,9 @@
 { pkgs, utility, ... }:
 {
   programs.neovim = {
+    extraPackages = with pkgs; [
+      nil
+    ];
     plugins = with pkgs.vimPlugins; [
       (nvim-treesitter.withPlugins
         (
@@ -11,6 +14,10 @@
       {
         plugin = conform-nvim;
         config = utility.toLuaFile ./conform-formatters-nix.lua;
+      }
+      {
+        plugin = nvim-lspconfig;
+        config = utility.toLuaFile ./lspconfig-nix.lua;
       }
     ];
   };

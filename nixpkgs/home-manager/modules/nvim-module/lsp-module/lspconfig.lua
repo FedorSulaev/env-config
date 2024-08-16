@@ -141,7 +141,6 @@ local servers = {
 	-- But for many setups, the LSP (`tsserver`) will work just fine
 	-- tsserver = {},
 	--
-	nil_ls = {},
 	bashls = {},
 	dockerls = {},
 }
