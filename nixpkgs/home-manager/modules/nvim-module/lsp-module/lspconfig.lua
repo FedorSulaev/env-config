@@ -141,7 +141,6 @@ local servers = {
 	-- But for many setups, the LSP (`tsserver`) will work just fine
 	-- tsserver = {},
 	--
-	bashls = {},
 	dockerls = {},
 }
 
@@ -158,8 +157,6 @@ require("mason").setup()
 local ensure_installed = vim.tbl_keys(servers or {})
 vim.list_extend(ensure_installed, {
 	"stylua", -- Used to format Lua code
-	"beautysh",
-	"shellcheck",
 	"nixpkgs-fmt",
 	"markdownlint",
 	"luacheck",
