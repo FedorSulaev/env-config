@@ -17,6 +17,7 @@
         plugin = conform-nvim;
         config = utility.toLuaFile ./conform-formatters-bash.lua;
       }
+      nvim-cmp
       {
         plugin = nvim-lspconfig;
         config = utility.toLuaFile ./lspconfig-bash.lua;
