@@ -20,6 +20,8 @@ vim.api.nvim_set_hl(0, "NoiceConfirmBorder", { fg = "#fbf1c7" })
 vim.api.nvim_set_hl(0, "NoicePopupBorder", { fg = "#fbf1c7" })
 vim.api.nvim_set_hl(0, "NoicePopupmenuBorder", { fg = "#fbf1c7" })
 vim.api.nvim_set_hl(0, "NoiceSplitBorder", { fg = "#fbf1c7" })
+vim.api.nvim_set_hl(0, "NoiceCmdlineIcon", { fg = "#cc241d" })
+vim.api.nvim_set_hl(0, "NoiceCmdlinePopupTitle", { fg = "#fbf1c7" })
 
 -- Notify
 vim.api.nvim_set_hl(0, "NotifyDEBUGBorder", { fg = "#fbf1c7" })
