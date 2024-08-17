@@ -4,6 +4,7 @@
     extraPackages = with pkgs; [
       lua54Packages.luarocks
       lua-language-server
+      stylua
     ];
     plugins = with pkgs.vimPlugins; [
       (nvim-treesitter.withPlugins
