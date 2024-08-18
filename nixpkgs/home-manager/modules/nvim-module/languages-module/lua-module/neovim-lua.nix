@@ -3,6 +3,7 @@
   programs.neovim = {
     extraPackages = with pkgs; [
       lua54Packages.luarocks
+      lua54Packages.luacheck
       lua-language-server
       stylua
     ];
