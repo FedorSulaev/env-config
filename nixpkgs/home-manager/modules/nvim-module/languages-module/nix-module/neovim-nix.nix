@@ -3,6 +3,7 @@
   programs.neovim = {
     extraPackages = with pkgs; [
       nil
+      nixpkgs-fmt
     ];
     plugins = with pkgs.vimPlugins; [
       (nvim-treesitter.withPlugins
