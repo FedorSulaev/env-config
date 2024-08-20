@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
   programs.neovim = {
+    extraPackages = with pkgs; [
+      markdownlint-cli
+    ];
     plugins = with pkgs.vimPlugins; [
       (nvim-treesitter.withPlugins
         (
