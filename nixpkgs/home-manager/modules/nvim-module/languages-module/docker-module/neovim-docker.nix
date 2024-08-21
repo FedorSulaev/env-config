@@ -3,6 +3,7 @@
   programs.neovim = {
     extraPackages = with pkgs; [
       nodePackages.dockerfile-language-server-nodejs
+      hadolint
     ];
     plugins = with pkgs.vimPlugins; [
       (nvim-treesitter.withPlugins
