@@ -32,10 +32,6 @@
       }
       mason-nvim
       {
-        plugin = mason-nvim-dap;
-        config = utility.toLuaFile ./mason-dap.lua;
-      }
-      {
         plugin = nvim-dap-go;
         config = utility.toLuaFile ./dap-go.lua;
       }

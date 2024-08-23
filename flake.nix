@@ -5,13 +5,9 @@
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Nvim plugins from GitHub
-    mason-nvim-dap.url = "github:jay-babu/mason-nvim-dap.nvim";
-    mason-nvim-dap.flake = false;
   };
 
-  outputs = { self, nixpkgs, home-manager, mason-nvim-dap }@inputs:
+  outputs = { self, nixpkgs, home-manager }@inputs:
     let
       pkgs-mac-arm = import nixpkgs {
         system = "aarch64-darwin";
