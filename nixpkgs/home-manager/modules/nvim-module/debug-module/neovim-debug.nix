@@ -30,7 +30,6 @@
         plugin = nvim-dap-virtual-text;
         config = utility.toLuaFile ./dap-virtual-text.lua;
       }
-      mason-nvim
       {
         plugin = nvim-dap-go;
         config = utility.toLuaFile ./dap-go.lua;
