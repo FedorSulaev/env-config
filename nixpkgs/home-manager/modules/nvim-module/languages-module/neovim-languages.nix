@@ -13,6 +13,7 @@
     ./json-module/neovim-json.nix
     ./bash-module/neovim-bash.nix
     ./yaml-module/neovim-yaml.nix
+    ./toml-module/neovim-toml.nix
     ./markdown-module/neovim-markdown.nix
     ./html-module/neovim-html.nix
     ./rust-module/neovim-rust.nix
