@@ -1,18 +1,5 @@
-{ inputs, pkgs, utility, ... }:
+{ pkgs, utility, ... }:
 {
-  nixpkgs = {
-    overlays = [
-      (final: prev: {
-        vimPlugins = prev.vimPlugins // {
-          mason-nvim-dap = prev.vimUtils.buildVimPlugin {
-            name = "mason-nvim-dap";
-            src = inputs.mason-nvim-dap;
-          };
-        };
-      })
-    ];
-  };
-
   imports = [
   ];
 
