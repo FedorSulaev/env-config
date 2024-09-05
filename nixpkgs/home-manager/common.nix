@@ -17,6 +17,7 @@
     lazydocker
     wget
     cargo
+    cargo-watch
     rustc
     go
     php83
