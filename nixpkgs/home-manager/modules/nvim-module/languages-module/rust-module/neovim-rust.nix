@@ -1,5 +1,11 @@
 { pkgs, utility, ... }:
 {
+  home.packages = with pkgs; [
+    cargo
+    rustc
+    cargo-watch
+    rustfilt
+  ];
   programs.neovim = {
     extraPackages = with pkgs; [
       rust-analyzer

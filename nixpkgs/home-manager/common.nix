@@ -18,8 +18,6 @@
     wget
     cargo
     rustc
-    cargo-watch
-    rustfilt
     go
     php83
     php83Packages.composer
