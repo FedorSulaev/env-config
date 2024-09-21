@@ -14,7 +14,6 @@
         # $ nix-env -qaP | grep wget
         environment.systemPackages =
           [
-            pkgs.vim
           ];
 
         # Auto upgrade nix package and the daemon service.
@@ -36,7 +35,7 @@
         system.stateVersion = 4;
 
         # The platform the configuration will be used on.
-        nixpkgs.hostPlatform = "x86_64-darwin";
+        nixpkgs.hostPlatform = "aarch64-darwin";
       };
     in
     {
