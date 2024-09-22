@@ -39,6 +39,7 @@ telescope.setup({
 				width = 0.6,
 			},
 			theme = "dropdown",
+			hidden = true,
 		},
 	},
 	extensions = {
