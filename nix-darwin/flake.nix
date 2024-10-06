@@ -1,10 +1,12 @@
 {
-  description = "Example Darwin system flake";
+  description = "Darwin system flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/release-24.05";
-    nix-darwin.url = "github:LnL7/nix-darwin";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,13 +45,21 @@
       };
     in
     {
-      # Build darwin flake using:
-      # $ darwin-rebuild build --flake .#MacBook-Pro-Fedor
-      darwinConfigurations."MacBook-Pro-Fedor" = nix-darwin.lib.darwinSystem {
-        modules = [ configuration ];
+      darwinConfigurations = {
+        "MacBook-Pro-Fedor" = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          hostPlatform = "aarch64-darwin";
+          modules = [
+            configuration
+            ./../nixpkgs/home-manager/mac-os-personal.nix
+            home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                extraSpecialArgs = { inherit inputs; };
+              };
+            }
+          ];
+        };
       };
-
-      # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations."MacBook-Pro-Fedor".pkgs;
     };
 }
