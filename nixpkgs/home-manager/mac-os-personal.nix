@@ -8,6 +8,7 @@
   home.packages = with pkgs; [
     (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     wezterm
+    postgresql
   ];
 
   home.homeDirectory = "/Users/fedorsulaev";
