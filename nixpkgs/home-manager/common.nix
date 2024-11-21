@@ -9,7 +9,7 @@
 
   _module.args.utility = import ./modules/utility.nix { lib = lib; };
 
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
 
   home.packages = with pkgs; [
     tree-sitter
@@ -41,7 +41,7 @@
   programs.fzf.enable = true;
   programs.eza = {
     enable = true;
-    icons = true;
+    icons = "auto";
     git = true;
   };
   programs.gradle.enable = true;
