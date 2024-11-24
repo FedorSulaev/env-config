@@ -22,7 +22,7 @@
     php83
     php83Packages.composer
     julia-bin
-    python311Packages.pynvim
+    python312Packages.pynvim
   ];
 
   programs.bottom = {
