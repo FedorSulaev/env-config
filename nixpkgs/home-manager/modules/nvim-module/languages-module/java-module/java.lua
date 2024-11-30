@@ -27,7 +27,6 @@ local on_attach = function(client, bufnr)
 	nnoremap("gD", vim.lsp.buf.declaration, bufopts, "Go to declaration")
 	--nnoremap("gd", builtin.lsp_definitions, bufopts, "Go to definition")-- Telescope
 	--nnoremap("gi", builtin.lsp_implementations, bufopts, "Go to implementation")-- Telescope
-	nnoremap("K", vim.lsp.buf.hover, bufopts, "Hover text")
 	nnoremap("<C-k>", vim.lsp.buf.signature_help, bufopts, "Show signature")
 	nnoremap("<space>wa", vim.lsp.buf.add_workspace_folder, bufopts, "Add workspace folder")
 	nnoremap("<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts, "Remove workspace folder")
