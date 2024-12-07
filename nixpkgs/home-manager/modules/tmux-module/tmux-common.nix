@@ -10,14 +10,6 @@
       sensible
       yank
       vim-tmux-navigator
-      {
-        plugin = dracula;
-        extraConfig = ''
-          # Metrics
-          set -g @dracula-plugins 'cpu-usage ram-usage'
-          set -g @dracula-show-left-icon session
-        '';
-      }
     ];
     extraConfig = ''
       set-option -g default-command zsh
