@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, inputs, ... }:
 {
   imports = [
     ./modules/github-module/gh.nix
@@ -10,6 +10,8 @@
   _module.args.utility = import ./modules/utility.nix { lib = lib; };
 
   home.stateVersion = "24.11";
+
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   home.packages = with pkgs; [
     tree-sitter
