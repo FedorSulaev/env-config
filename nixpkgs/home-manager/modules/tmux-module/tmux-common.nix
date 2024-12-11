@@ -16,6 +16,7 @@
           set -g status-right '#{cpu_bg_color} CPU: #{cpu_icon} #{cpu_percentage} | #{ram_bg_color} MEM: #{ram_icon} #{ram_percentage} | %a %h-%d %H:%M '
         '';
       }
+      gruvbox
     ];
     extraConfig = ''
       set-option -g default-command zsh
