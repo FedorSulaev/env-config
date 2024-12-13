@@ -2,7 +2,7 @@
 {
   programs.neovim = {
     extraPackages = with pkgs; [
-      nil
+      nixd
       nixpkgs-fmt
     ];
     plugins = with pkgs.vimPlugins; [
