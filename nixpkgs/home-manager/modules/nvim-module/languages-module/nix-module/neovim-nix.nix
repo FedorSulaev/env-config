@@ -23,4 +23,6 @@
       }
     ];
   };
+
+  home.file.".config/nvim/ftplugin/nix.lua".source = ./nix.lua;
 }
