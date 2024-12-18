@@ -40,6 +40,7 @@ in
       matplotlib
       seaborn
       contextily
+      geopandas
     ]))
   ];
   programs.neovim = {
