@@ -5,6 +5,7 @@
     rustc
     cargo-watch
     rustfilt
+    lldb
   ];
   programs.neovim = {
     extraPackages = with pkgs; [
