@@ -41,6 +41,7 @@ in
       seaborn
       contextily
       geopandas
+      mapclassify
     ]))
   ];
   programs.neovim = {
