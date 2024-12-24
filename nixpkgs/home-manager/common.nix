@@ -25,6 +25,7 @@
     php83Packages.composer
     julia-bin
     python312Packages.pynvim
+    nixos-generators
   ];
 
   programs.bottom = {
