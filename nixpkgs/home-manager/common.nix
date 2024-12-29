@@ -26,6 +26,7 @@
     julia-bin
     python312Packages.pynvim
     nixos-generators
+    nixos-rebuild
   ];
 
   programs.bottom = {
