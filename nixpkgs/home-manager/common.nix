@@ -27,6 +27,7 @@
     python312Packages.pynvim
     nixos-generators
     nixos-rebuild
+    sops
   ];
 
   programs.bottom = {
