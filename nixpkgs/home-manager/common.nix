@@ -28,6 +28,7 @@
     nixos-generators
     nixos-rebuild
     sops
+    age
   ];
 
   programs.bottom = {
