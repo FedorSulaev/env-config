@@ -12,6 +12,8 @@
       fi
       # Start up Starship shell
       eval "$(starship init zsh)"
+      export EDITOR=vi
+      export VISUAL=$EDITOR
     '';
     shellAliases = {
       l = "eza -l -a";
