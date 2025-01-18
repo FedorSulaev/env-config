@@ -82,31 +82,30 @@ vim.api.nvim_create_autocmd("LspAttach", {
         --
         -- When you move your cursor, the highlights will be cleared (the second autocommand).
         local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if not client then
-            return
-        end
-        if client.supports_method("textDocument/formatting", 0) then
-            -- Format the current buffer on save
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                buffer = event.buf,
-                callback = function()
-                    vim.lsp.buf.format({ bufnr = event.buf, id = client.id })
-                end,
-            })
-        end
-        if client.server_capabilities.documentHighlightProvider then
-            local highlight_autogroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
-            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-                buffer = event.buf,
-                group = highlight_autogroup,
-                callback = vim.lsp.buf.document_highlight,
-            })
+        if client then
+            if client.name == "jdtls" or client.supports_method("textDocument/formatting", 0) then
+                -- Format the current buffer on save
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                    buffer = event.buf,
+                    callback = function()
+                        vim.lsp.buf.format({ bufnr = event.buf, id = client.id })
+                    end,
+                })
+            end
+            if client.server_capabilities.documentHighlightProvider then
+                local highlight_autogroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
+                vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+                    buffer = event.buf,
+                    group = highlight_autogroup,
+                    callback = vim.lsp.buf.document_highlight,
+                })
 
-            vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-                buffer = event.buf,
-                group = highlight_autogroup,
-                callback = vim.lsp.buf.clear_references,
-            })
+                vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+                    buffer = event.buf,
+                    group = highlight_autogroup,
+                    callback = vim.lsp.buf.clear_references,
+                })
+            end
         end
         vim.api.nvim_create_autocmd("LspDetach", {
             group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
