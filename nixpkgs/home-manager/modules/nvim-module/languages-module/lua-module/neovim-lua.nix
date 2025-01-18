@@ -20,10 +20,6 @@
         plugin = neodev-nvim;
         config = utility.toLuaFile ./neodev.lua;
       }
-      {
-        plugin = conform-nvim;
-        config = utility.toLuaFile ./conform-formatters-lua.lua;
-      }
       nvim-cmp
       {
         plugin = nvim-lspconfig;
