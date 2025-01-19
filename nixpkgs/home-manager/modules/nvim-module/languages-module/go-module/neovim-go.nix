@@ -11,10 +11,6 @@
             tree-sitter-go
           ]
         ))
-      {
-        plugin = conform-nvim;
-        config = utility.toLuaFile ./conform-formatters-go.lua;
-      }
       nvim-cmp
       {
         plugin = nvim-lspconfig;
