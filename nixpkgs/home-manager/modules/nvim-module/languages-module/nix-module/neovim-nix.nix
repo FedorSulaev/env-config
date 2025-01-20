@@ -12,10 +12,6 @@
             tree-sitter-nix
           ]
         ))
-      {
-        plugin = conform-nvim;
-        config = utility.toLuaFile ./conform-formatters-nix.lua;
-      }
       nvim-cmp
       {
         plugin = nvim-lspconfig;
