@@ -1,4 +1,4 @@
-{ pkgs, utility, ... }:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     cargo
@@ -20,10 +20,6 @@
           ]
         ))
       rustaceanvim
-      {
-        plugin = conform-nvim;
-        config = utility.toLuaFile ./conform-formatters-rust.lua;
-      }
     ];
   };
 }
