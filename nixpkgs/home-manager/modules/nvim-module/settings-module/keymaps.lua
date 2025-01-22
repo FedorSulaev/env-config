@@ -53,3 +53,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.api.nvim_set_keymap("n", "<S-Tab>", ":bprev<enter>", { noremap = false })
 vim.api.nvim_set_keymap("n", "<Tab>", ":bnext<enter>", { noremap = false })
 vim.api.nvim_set_keymap("n", "<C-x>", ":bdelete<enter>", { noremap = false })
+
+-- source lua
+vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
+vim.keymap.set("n", "<space>x", ":.lua<CR>")
+vim.keymap.set("v", "<space>x", ":lua<CR>")
