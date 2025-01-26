@@ -2,6 +2,7 @@
 {
   imports = [
     ./settings-module/neovim-settings.nix
+    ./terminal-module/neovim-terminal.nix
     ./navigation-module/neovim-navigation.nix
     ./completion-module/neovim-completion.nix
     ./formatters-module/neovim-formatters.nix
