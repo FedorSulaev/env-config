@@ -11,6 +11,12 @@
 
   home.stateVersion = "24.11";
 
+  nix.gc = {
+    automatic = true;
+    frequency = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   home.packages = with pkgs; [
