@@ -9,6 +9,7 @@
     (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     wezterm
     postgresql
+    exercism
   ];
 
   home.homeDirectory = "/Users/fedorsulaev";
