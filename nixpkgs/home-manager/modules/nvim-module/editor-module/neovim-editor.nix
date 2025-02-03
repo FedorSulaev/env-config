@@ -1,6 +1,7 @@
 { pkgs, utility, ... }:
 {
   imports = [
+    ./surround-module/nvim-surround.nix
   ];
 
   programs.neovim = {
