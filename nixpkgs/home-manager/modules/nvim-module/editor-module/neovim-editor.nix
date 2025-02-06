@@ -1,7 +1,8 @@
 { pkgs, utility, ... }:
 {
   imports = [
-    ./surround-module/nvim-surround.nix
+    ./motions-module/nvim-surround.nix
+    ./motions-module/mini-ai.nix
   ];
 
   programs.neovim = {
@@ -13,10 +14,6 @@
       {
         plugin = indent-blankline-nvim;
         config = utility.toLuaFile ./ibl.lua;
-      }
-      {
-        plugin = mini-nvim;
-        config = utility.toLuaFile ./mini.lua;
       }
       {
         plugin = todo-comments-nvim;
