@@ -3,6 +3,7 @@
   imports = [
     ./motions-module/nvim-surround.nix
     ./motions-module/mini-ai.nix
+    ./notifications-module/fidget.nix
   ];
 
   programs.neovim = {
@@ -36,10 +37,6 @@
       {
         plugin = noice-nvim;
         config = utility.toLuaFile ./noice.lua;
-      }
-      {
-        plugin = fidget-nvim;
-        config = utility.toLuaFile ./fidget.lua;
       }
     ];
   };
