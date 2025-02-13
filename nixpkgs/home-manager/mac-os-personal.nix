@@ -10,6 +10,7 @@
     wezterm
     postgresql
     exercism
+    nixos-anywhere
   ];
 
   home.homeDirectory = "/Users/fedorsulaev";
