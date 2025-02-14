@@ -11,6 +11,8 @@
       yank
       vim-tmux-navigator
       gruvbox
+      resurrect
+      continuum
     ];
     extraConfig = ''
       set-option -g default-command zsh
@@ -29,6 +31,9 @@
 
       set -g default-terminal 'tmux-256color'
       set-option -sa terminal-features ',*:RGB'
+
+      # Persistent sessions
+      set -g @continuum-restore on
     '';
   };
 
