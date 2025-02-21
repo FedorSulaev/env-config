@@ -11,6 +11,7 @@
         plugin = sensible;
         extraConfig = ''
           set-option -g default-command zsh
+          set -g detach-on-destroy off
         '';
       }
       yank
