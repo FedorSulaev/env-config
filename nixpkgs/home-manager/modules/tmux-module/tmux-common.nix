@@ -48,7 +48,17 @@
     ];
   };
 
+  # Sesh dependencies
+  programs.fzf = {
+    enable = true;
+  };
+
+  programs.zoxide = {
+    enable = true;
+  };
+
   home.packages = with pkgs; [
     tmuxifier
+    sesh
   ];
 }
