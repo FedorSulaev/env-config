@@ -29,7 +29,7 @@
     go
     php83
     php83Packages.composer
-    julia-bin
+    julia-lts
     python312Packages.pynvim
     nixos-generators
     nixos-rebuild
