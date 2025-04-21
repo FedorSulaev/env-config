@@ -19,6 +19,10 @@
           };
           nodejs-slim_20 = final.nodejs_20_fixed;
           nodejs_20 = final.nodejs_20_fixed;
+          folly_fixed = prev.folly.overrideAttrs (_: {
+            doCheck = false;
+          });
+          folly = final.folly_fixed;
         })
       ];
       pkgs-mac-arm = import nixpkgs {
