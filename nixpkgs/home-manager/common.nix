@@ -17,8 +17,6 @@
     options = "--delete-older-than 30d";
   };
 
-  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-
   home.packages = with pkgs; [
     tree-sitter
     lazygit
@@ -35,6 +33,9 @@
     nixos-rebuild
     sops
     age
+    ssh-to-age
+    mkpasswd
+    just
   ];
 
   programs.bottom = {
