@@ -6,10 +6,7 @@
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
     initExtra = ''
-      # Nix setup (environment variables, etc.)
-      if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
-        . ~/.nix-profile/etc/profile.d/nix.sh
-      fi
+      export PATH="/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:$PATH"
       # Start up Starship shell
       eval "$(starship init zsh)"
       export EDITOR=vi
