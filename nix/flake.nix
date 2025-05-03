@@ -5,9 +5,13 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/nix-darwin-24.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager }@inputs:
+  outputs = { self, nixpkgs, home-manager, nix-darwin, ... }@inputs:
     let
       overlays = [
         (final: prev: {
@@ -42,13 +46,6 @@
       };
     in
     {
-      homeConfigurations.MacBook-Pro-Fedor = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs-mac-arm;
-        modules = [
-          ./../nixpkgs/home-manager/mac-os-personal.nix
-        ];
-        extraSpecialArgs = { inherit inputs; };
-      };
       homeConfigurations.Docker-Nix-Test = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = pkgs-linux-arm;
         modules = [
@@ -62,6 +59,25 @@
           ./../nixpkgs/home-manager/dev-dsk.nix
         ];
         extraSpecialArgs = { inherit inputs; };
+      };
+      darwinConfigurations = {
+        "MacBook-Pro-Fedor" = inputs.nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          pkgs = pkgs-mac-arm;
+          modules = [
+            ./../nixpkgs/darwin/personal.nix
+            home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = { inherit inputs; };
+                users.fedorsulaev = ./../nixpkgs/home-manager/mac-os-personal.nix;
+              };
+            }
+          ];
+          inputs = { inherit inputs; };
+        };
       };
     };
 }
