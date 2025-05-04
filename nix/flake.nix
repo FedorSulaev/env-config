@@ -61,7 +61,7 @@
         extraSpecialArgs = { inherit inputs; };
       };
       darwinConfigurations = {
-        "MacBook-Pro-Fedor" = inputs.nix-darwin.lib.darwinSystem {
+        "MacBook-Pro-Fedor" = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           pkgs = pkgs-mac-arm;
           modules = [
@@ -77,6 +77,14 @@
             }
           ];
           inputs = { inherit inputs; };
+        };
+      };
+      nixosConfigurations = {
+        "iso" = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [ ../nixpkgs/nixos/iso.nix ];
         };
       };
     };
