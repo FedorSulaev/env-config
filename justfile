@@ -4,4 +4,4 @@ default:
 
 # rebuild darwin flake for the current host
 build-darwin:
-  sh -c "darwin-rebuild switch --flake \"$HOME/env-config/nix#$(scutil --get ComputerName)\""
+  darwin-rebuild switch --flake "$HOME/env-config#$(scutil --get ComputerName)"

@@ -49,14 +49,14 @@
       homeConfigurations.Docker-Nix-Test = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = pkgs-linux-arm;
         modules = [
-          ./../nixpkgs/home-manager/mac-os-personal.nix
+          ./nixpkgs/home-manager/mac-os-personal.nix
         ];
         extraSpecialArgs = { inherit inputs; };
       };
       homeConfigurations.DevDsk = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = pkgs-linux-x86;
         modules = [
-          ./../nixpkgs/home-manager/dev-dsk.nix
+          ./nixpkgs/home-manager/dev-dsk.nix
         ];
         extraSpecialArgs = { inherit inputs; };
       };
@@ -65,14 +65,14 @@
           system = "aarch64-darwin";
           pkgs = pkgs-mac-arm;
           modules = [
-            ./../nixpkgs/darwin/personal.nix
+            ./nixpkgs/darwin/personal.nix
             home-manager.darwinModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = { inherit inputs; };
-                users.fedorsulaev = ./../nixpkgs/home-manager/mac-os-personal.nix;
+                users.fedorsulaev = ./nixpkgs/home-manager/mac-os-personal.nix;
               };
             }
           ];
@@ -84,7 +84,7 @@
           specialArgs = {
             inherit inputs;
           };
-          modules = [ ../nixpkgs/nixos/iso.nix ];
+          modules = [ ./nixpkgs/nixos/iso.nix ];
         };
       };
     };
