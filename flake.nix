@@ -65,7 +65,7 @@
           system = "aarch64-darwin";
           pkgs = pkgs-mac-arm;
           modules = [
-            ./nixpkgs/darwin/personal.nix
+            ./hosts/macbook-personal/macbook-personal.nix
             home-manager.darwinModules.home-manager
             {
               home-manager = {
@@ -86,7 +86,7 @@
           specialArgs = {
             inherit inputs;
           };
-          modules = [ ./nixpkgs/nixos/iso.nix ];
+          modules = [ ./hosts/iso/iso.nix ];
         };
       };
     };
