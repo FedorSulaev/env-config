@@ -1,5 +1,20 @@
 {
   "nodes": {
+    "env-secrets": {
+      "locked": {
+        "lastModified": 1745758789,
+        "narHash": "sha256-sTIAAbOfXZNaNPNhz5fzIivLY3bNAf/0aWgPWpfP/lg=",
+        "ref": "refs/heads/main",
+        "rev": "09c0fa763a2018dd06b674642aab0dc4b347abd8",
+        "revCount": 8,
+        "type": "git",
+        "url": "ssh://git@github.com/FedorSulaev/env-secrets.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/FedorSulaev/env-secrets.git"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -60,6 +75,7 @@
     },
     "root": {
       "inputs": {
+        "env-secrets": "env-secrets",
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs"

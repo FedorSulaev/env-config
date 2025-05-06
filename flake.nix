@@ -9,6 +9,10 @@
       url = "github:nix-darwin/nix-darwin/nix-darwin-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    env-secrets = {
+      url = "git+ssh://git@github.com/FedorSulaev/env-secrets.git";
+      inputs = { };
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, nix-darwin, ... }@inputs:
