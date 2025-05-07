@@ -47,6 +47,7 @@
       pkgs-linux-x86 = import nixpkgs {
         system = "x86_64-linux";
         overlays = overlays;
+        config.allowUnfree = true;
       };
     in
     {
