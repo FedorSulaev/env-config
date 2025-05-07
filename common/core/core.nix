@@ -1,5 +1,7 @@
 { config, lib, pkgs, hostSpec, ... }:
 {
+  imports = [ ../utility/host-spec.nix ];
+
   inherit hostSpec;
 
   services.ssh-agent.enable = true;
