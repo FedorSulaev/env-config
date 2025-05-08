@@ -10,4 +10,4 @@ build-darwin:
 iso:
   # Clean up the output
   rm -rf result
-  nix build --impure "$HOME/env-config#nixosConfigurations.iso.config.system.build.isoImage" --eval-store auto && ln -sf result/iso/*.iso latest.iso
+  nix build --debug --impure "$HOME/env-config#nixosConfigurations.iso.config.system.build.isoImage" --max-jobs 0 --option builders-use-substitutes true && ln -sf result/iso/*.iso latest.iso
