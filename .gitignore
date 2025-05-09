@@ -1,14 +1,1 @@
-NuGet/
-configstore/
-stetic/
-xbuild/
-tmux/
-gh/
-nvim/
-iterm2/
-bottom/
-JetBrains/
-fontconfig/
-.DS_Store
-starship.toml
-yazi/
+/result
