@@ -11,6 +11,7 @@
     postgresql
     exercism
     nixos-anywhere
+    qemu
   ];
 
   home.homeDirectory = "/Users/fedorsulaev";
