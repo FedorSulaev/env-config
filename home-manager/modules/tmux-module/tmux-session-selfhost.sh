@@ -10,7 +10,6 @@ if initialize_session "selfhost"; then
     window_root "$HOME/Projects/SelfHosting/"
     new_window "Terminal"
     split_h 50
-    run_cmd "cd ~/Projects/SelfHosting/"
 fi
 
 finalize_and_go_to_session

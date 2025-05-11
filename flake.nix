@@ -54,14 +54,14 @@
       homeConfigurations.Docker-Nix-Test = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = pkgs-linux-arm;
         modules = [
-          ./nixpkgs/home-manager/mac-os-personal.nix
+          ./home-manager/mac-os-personal.nix
         ];
         extraSpecialArgs = { inherit inputs; };
       };
       homeConfigurations.DevDsk = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = pkgs-linux-x86;
         modules = [
-          ./nixpkgs/home-manager/dev-dsk.nix
+          ./home-manager/dev-dsk.nix
         ];
         extraSpecialArgs = { inherit inputs; };
       };
@@ -77,7 +77,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = { inherit inputs; };
-                users.fedorsulaev = ./nixpkgs/home-manager/mac-os-personal.nix;
+                users.fedorsulaev = ./home-manager/mac-os-personal.nix;
               };
             }
           ];
