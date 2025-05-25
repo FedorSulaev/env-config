@@ -1,12 +1,15 @@
 {
   "nodes": {
     "env-secrets": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
       "locked": {
-        "lastModified": 1745758789,
-        "narHash": "sha256-sTIAAbOfXZNaNPNhz5fzIivLY3bNAf/0aWgPWpfP/lg=",
+        "lastModified": 1748179858,
+        "narHash": "sha256-OWlmvUQGVCfAPgloeeTeTTeU2yLGRtnq/8SI7HST8Os=",
         "ref": "refs/heads/main",
-        "rev": "09c0fa763a2018dd06b674642aab0dc4b347abd8",
-        "revCount": 8,
+        "rev": "bcc8811f36aad9f18a7d25b8cf90a32d710464bb",
+        "revCount": 21,
         "type": "git",
         "url": "ssh://git@github.com/FedorSulaev/env-secrets.git"
       },
@@ -22,11 +25,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1745557122,
-        "narHash": "sha256-eqSo9ugzsqhFgaDFYUZj943nurlX4L6f+AW0skJ4W+M=",
+        "lastModified": 1747688870,
+        "narHash": "sha256-ypL9WAZfmJr5V70jEVzqGjjQzF0uCkz+AFQF7n9NmNc=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "dd26f75fb4ec1c731d4b1396eaf4439ce40a91c1",
+        "rev": "d5f1f641b289553927b3801580598d200a501863",
         "type": "github"
       },
       "original": {
@@ -59,11 +62,23 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1746106928,
+        "lastModified": 0,
         "narHash": "sha256-3k617UUCu1ZZpdl+tc2S+qmkROGRBueoICkxg6m3OtU=",
+        "path": "/nix/store/j001rnqn18pr055xkfffhbgdzi40xcg6-source",
+        "type": "path"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1748156602,
+        "narHash": "sha256-/hWn3zOBVJzHS3AbcZO/kf4tgpfzsHVAkjucy+y05Lg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "4f26308e45fad1ba0596071d3fedb87a206b8ac0",
+        "rev": "80fb562f11be908d2e286df23b7659d6898a153a",
         "type": "github"
       },
       "original": {
@@ -78,7 +93,7 @@
         "env-secrets": "env-secrets",
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       }
     }
   },
