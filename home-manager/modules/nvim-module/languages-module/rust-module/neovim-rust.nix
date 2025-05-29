@@ -4,7 +4,6 @@
     cargo
     rustc
     cargo-watch
-    rustfilt
     lldb
   ];
   programs.neovim = {
