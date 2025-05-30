@@ -5,7 +5,7 @@
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
-    initExtra = ''
+    initContent = ''
       export PATH="/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:$PATH"
       # Start up Starship shell
       eval "$(starship init zsh)"
