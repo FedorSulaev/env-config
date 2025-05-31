@@ -26,6 +26,7 @@ let
         requests
         joblib
         xyzservices
+        scipy
       ];
     };
 in
