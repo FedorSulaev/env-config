@@ -9,7 +9,7 @@
 
   _module.args.utility = import ./modules/utility.nix { lib = lib; };
 
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
 
   nix.gc = {
     automatic = true;
