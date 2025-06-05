@@ -18,20 +18,6 @@
   outputs = { self, nixpkgs, home-manager, nix-darwin, ... }@inputs:
     let
       overlays = [
-        (final: prev: {
-          nodejs_20_fixed = prev.nodejs_20.overrideAttrs (_: {
-            doCheck = false;
-          });
-          nodePackages = prev.nodePackages.override {
-            nodejs = final.nodejs_20_fixed;
-          };
-          nodejs-slim_20 = final.nodejs_20_fixed;
-          nodejs_20 = final.nodejs_20_fixed;
-          folly_fixed = prev.folly.overrideAttrs (_: {
-            doCheck = false;
-          });
-          folly = final.folly_fixed;
-        })
       ];
       pkgs-mac-arm = import nixpkgs {
         system = "aarch64-darwin";
