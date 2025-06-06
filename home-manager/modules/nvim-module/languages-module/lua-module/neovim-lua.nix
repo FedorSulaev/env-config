@@ -21,10 +21,8 @@
         config = utility.toLuaFile ./neodev.lua;
       }
       nvim-cmp
-      {
-        plugin = nvim-lspconfig;
-        config = utility.toLuaFile ./lspconfig-lua.lua;
-      }
     ];
   };
+
+  home.file.".config/nvim/lsp/lua_ls.lua".source = ./lspconfig-lua.lua;
 }
