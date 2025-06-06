@@ -3,11 +3,10 @@
   imports = [
   ];
   programs.neovim = {
+    extraLuaConfig = ''
+      ${builtins.readFile ./lspconfig.lua}
+    '';
     plugins = with pkgs.vimPlugins; [
-      {
-        plugin = nvim-lspconfig;
-        config = utility.toLuaFile ./lspconfig.lua;
-      }
       lspkind-nvim
     ];
   };

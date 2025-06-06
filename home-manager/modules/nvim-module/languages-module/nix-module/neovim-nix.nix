@@ -1,4 +1,4 @@
-{ pkgs, utility, ... }:
+{ pkgs, ... }:
 {
   programs.neovim = {
     extraPackages = with pkgs; [
@@ -13,12 +13,8 @@
           ]
         ))
       nvim-cmp
-      {
-        plugin = nvim-lspconfig;
-        config = utility.toLuaFile ./lspconfig-nix.lua;
-      }
     ];
   };
-
+  home.file.".config/nvim/lsp/nixd.lua".source = ./lspconfig-nix.lua;
   home.file.".config/nvim/after/ftplugin/nix.lua".source = ./nix.lua;
 }
