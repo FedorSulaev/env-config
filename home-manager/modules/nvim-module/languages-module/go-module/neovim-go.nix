@@ -12,10 +12,8 @@
           ]
         ))
       nvim-cmp
-      {
-        plugin = nvim-lspconfig;
-        config = utility.toLuaFile ./lspconfig-go.lua;
-      }
     ];
   };
+
+  home.file.".config/nvim/lsp/gopls.lua".source = ./lspconfig-go.lua;
 }

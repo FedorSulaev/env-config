@@ -92,5 +92,6 @@ vim.lsp.enable({
     "nixd",
     "lua_ls",
     "bashls",
-    "ts_ls"
+    "ts_ls",
+    "gopls",
 })
