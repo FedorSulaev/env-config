@@ -1,4 +1,4 @@
-{ pkgs, utility, ... }:
+{ pkgs, ... }:
 {
   programs.neovim = {
     extraPackages = with pkgs; [
@@ -13,10 +13,8 @@
           ]
         ))
       nvim-cmp
-      {
-        plugin = nvim-lspconfig;
-        config = utility.toLuaFile ./lspconfig-dockerfile.lua;
-      }
     ];
   };
+
+  home.file.".config/nvim/lsp/dockerls.lua".source = ./lspconfig-dockerfile.lua;
 }

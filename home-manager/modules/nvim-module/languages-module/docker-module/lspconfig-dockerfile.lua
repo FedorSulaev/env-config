@@ -1,6 +1,5 @@
-local lspconfig = require("lspconfig")
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-lspconfig["dockerls"].setup({
-	capabilities = capabilities,
-})
+vim.lsp.config["dockerls"] = {
+    cmd = { "docker-langserver", "--stdio" },
+    filetypes = { "dockerfile" },
+    root_markers = { "Dockerfile" },
+}

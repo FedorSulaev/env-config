@@ -94,4 +94,5 @@ vim.lsp.enable({
     "bashls",
     "ts_ls",
     "gopls",
+    "dockerls",
 })
