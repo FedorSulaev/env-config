@@ -91,5 +91,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.lsp.enable({
     "nixd",
     "lua_ls",
-    "bashls"
+    "bashls",
+    "ts_ls"
 })

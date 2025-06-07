@@ -20,10 +20,8 @@
         config = utility.toLuaFile ./conform-formatters-typescript.lua;
       }
       nvim-cmp
-      {
-        plugin = nvim-lspconfig;
-        config = utility.toLuaFile ./lspconfig-typescript.lua;
-      }
     ];
   };
+
+  home.file.".config/nvim/lsp/ts_ls.lua".source = ./lspconfig-typescript.lua;
 }
