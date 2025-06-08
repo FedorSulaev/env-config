@@ -1,4 +1,4 @@
-{ pkgs, utility, ... }:
+{ pkgs, ... }:
 {
   programs.neovim = {
     extraPackages = with pkgs; [
@@ -16,10 +16,6 @@
           ]
         )
       )
-      {
-        plugin = neodev-nvim;
-        config = utility.toLuaFile ./neodev.lua;
-      }
       nvim-cmp
     ];
   };

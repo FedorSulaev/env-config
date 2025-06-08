@@ -1,4 +1,4 @@
-{ pkgs, utility, ... }:
+{ pkgs, ... }:
 {
   imports = [
   ];
