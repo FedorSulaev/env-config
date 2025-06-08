@@ -21,11 +21,6 @@
         plugin = nvim-dap-go;
         config = utility.toLuaFile ./dap-go.lua;
       }
-      cmp-dap
-      {
-        plugin = nvim-cmp;
-        config = utility.toLuaFile ./cmp-dap.lua;
-      }
     ];
   };
 }

@@ -11,7 +11,6 @@
             tree-sitter-go
           ]
         ))
-      nvim-cmp
     ];
   };
 

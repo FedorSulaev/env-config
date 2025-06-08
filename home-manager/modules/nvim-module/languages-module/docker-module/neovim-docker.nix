@@ -12,7 +12,6 @@
             tree-sitter-dockerfile
           ]
         ))
-      nvim-cmp
     ];
   };
 

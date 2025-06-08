@@ -19,7 +19,6 @@
         plugin = conform-nvim;
         config = utility.toLuaFile ./conform-formatters-typescript.lua;
       }
-      nvim-cmp
     ];
   };
 

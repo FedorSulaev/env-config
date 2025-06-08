@@ -12,7 +12,6 @@
             tree-sitter-nix
           ]
         ))
-      nvim-cmp
     ];
   };
   home.file.".config/nvim/lsp/nixd.lua".source = ./lspconfig-nix.lua;
