@@ -106,3 +106,9 @@ vim.lsp.enable({
     "gopls",
     "dockerls",
 })
+
+vim.diagnostic.config({
+    virtual_lines = {
+        current_line = true,
+    },
+})
