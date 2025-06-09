@@ -6,7 +6,7 @@
   ];
 
   home.packages = with pkgs; [
-    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    nerd-fonts.jetbrains-mono
     wezterm
     postgresql
     exercism
