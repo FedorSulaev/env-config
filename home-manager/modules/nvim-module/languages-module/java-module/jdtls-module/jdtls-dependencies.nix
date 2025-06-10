@@ -2,7 +2,7 @@
 {
   programs.neovim = {
     extraPackages = with pkgs; [
-      python312Packages.pynvim
+      python313Packages.pynvim
     ];
   };
 }

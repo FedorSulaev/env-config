@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
-  buildPythonPackage = pkgs.python3Packages.buildPythonPackage;
-  fetchPypi = pkgs.python3Packages.fetchPypi;
+  buildPythonPackage = pkgs.python313Packages.buildPythonPackage;
+  fetchPypi = pkgs.python313Packages.fetchPypi;
   contextily = buildPythonPackage
     rec {
       pname = "contextily";
@@ -16,7 +16,7 @@ let
         sha256 = "sha256-PHR5JSab4kipsadhhZ4F0WgShuBNXQeWva8d40CUdLs=";
       };
 
-      propagatedBuildInputs = with pkgs.python3Packages; [
+      propagatedBuildInputs = with pkgs.python313Packages; [
         setuptools_scm
         geopy
         matplotlib
@@ -33,7 +33,7 @@ in
 {
 
   home.packages = with pkgs; [
-    (python3.withPackages (ps: with ps; [
+    (python313.withPackages (ps: with ps; [
       ipython
       jupyter
       numpy
