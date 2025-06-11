@@ -26,7 +26,6 @@ let
         requests
         joblib
         xyzservices
-        scipy
       ];
     };
 in
@@ -42,6 +41,7 @@ in
       seaborn
       contextily
       geopandas
+      scipy
     ]))
   ];
   programs.neovim = {
