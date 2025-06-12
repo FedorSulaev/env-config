@@ -42,6 +42,7 @@ in
       contextily
       geopandas
       scipy
+      sklearn-compat
     ]))
   ];
   programs.neovim = {
