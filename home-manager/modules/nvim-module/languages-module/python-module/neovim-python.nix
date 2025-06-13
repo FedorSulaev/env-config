@@ -43,6 +43,7 @@ in
       geopandas
       scipy
       sklearn-compat
+      imbalanced-learn
     ]))
   ];
   programs.neovim = {
