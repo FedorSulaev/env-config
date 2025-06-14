@@ -44,6 +44,7 @@ in
       scipy
       sklearn-compat
       imbalanced-learn
+      nltk
     ]))
   ];
   programs.neovim = {
