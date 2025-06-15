@@ -45,6 +45,7 @@ in
       sklearn-compat
       imbalanced-learn
       nltk
+      optuna
     ]))
   ];
   programs.neovim = {
