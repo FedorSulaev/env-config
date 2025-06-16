@@ -46,6 +46,7 @@ in
       imbalanced-learn
       nltk
       optuna
+      shap
     ]))
   ];
   programs.neovim = {
