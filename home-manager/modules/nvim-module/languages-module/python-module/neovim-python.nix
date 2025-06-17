@@ -47,6 +47,7 @@ in
       nltk
       optuna
       shap
+      lime
     ]))
   ];
   programs.neovim = {
