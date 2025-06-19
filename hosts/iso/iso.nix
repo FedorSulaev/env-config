@@ -10,4 +10,12 @@
     ../../common/users/user-primary.nix
     ../../common/users/temp-password.nix
   ];
+
+  hostSpec = {
+    # ISO host settings
+    inherit (inputs.env-secrets) iso;
+
+    # Generic networking settings
+    inherit (inputs.env-secrets) networking;
+  };
 }
