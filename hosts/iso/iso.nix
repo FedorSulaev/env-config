@@ -17,5 +17,8 @@
 
     # Generic networking settings
     inherit (inputs.env-secrets) networking;
+
+    # Git ids
+    inherit (inputs.env-secrets) git;
   };
 }
