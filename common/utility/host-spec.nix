@@ -35,6 +35,11 @@
       type = lib.types.str;
       description = "The handle of the user (eg: github user)";
     };
+    github = lib.mkOption {
+      default = { };
+      type = lib.types.attrsOf lib.types.anything;
+      description = "An attribute set of github properties";
+    };
     home = lib.mkOption {
       type = lib.types.str;
       description = "The home directory of the user";
