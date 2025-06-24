@@ -28,7 +28,7 @@
     php83
     php83Packages.composer
     julia-lts
-    python312Packages.pynvim
+    python313Packages.pynvim
     nixos-generators
     nixos-rebuild
     sops
