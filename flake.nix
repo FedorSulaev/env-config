@@ -67,7 +67,7 @@
               };
             }
           ];
-          inputs = { inherit inputs; };
+          inputs = inputs;
         };
       };
       nixosConfigurations = {
