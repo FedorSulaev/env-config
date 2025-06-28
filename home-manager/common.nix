@@ -36,6 +36,7 @@
     ssh-to-age
     mkpasswd
     just
+    curl
   ];
 
   programs.bottom = {
