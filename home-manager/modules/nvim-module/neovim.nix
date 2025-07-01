@@ -14,5 +14,6 @@
     ./languages-module/neovim-languages.nix
     ./theme-module/neovim-theme.nix
     ./database-module/neovim-database.nix
+    ./ai-module/neovim-ai.nix
   ];
 }
