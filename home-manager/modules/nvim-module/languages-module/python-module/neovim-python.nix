@@ -48,6 +48,8 @@ in
       optuna
       shap
       lime
+      # Requires python 3.13.5
+      # umap-learn
     ]))
   ];
   programs.neovim = {
