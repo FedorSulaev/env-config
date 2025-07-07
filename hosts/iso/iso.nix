@@ -21,4 +21,11 @@
     # Git ids
     inherit (inputs.env-secrets) git;
   };
+
+  # root's ssh key are mainly used for remote deployment
+  users.extraUsers.root = {
+    inherit (config.users.users.${config.hostSpec.username}) hashedPassword;
+    openssh.authorizedKeys.keys =
+      config.users.users.${config.hostSpec.username}.openssh.authorizedKeys.keys;
+  };
 }
