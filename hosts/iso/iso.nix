@@ -8,7 +8,7 @@
     inputs.home-manager.nixosModules.home-manager
     ../../common/utility/host-spec.nix
     ../../common/users/user-primary.nix
-    ../../common/users/temp-password.nix
+    ../common/sops.nix
   ];
 
   hostSpec = {
@@ -20,6 +20,11 @@
 
     # Git ids
     inherit (inputs.env-secrets) git;
+  };
+
+  users.users.${config.hostSpec.username} = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ];
   };
 
   # root's ssh key are mainly used for remote deployment
