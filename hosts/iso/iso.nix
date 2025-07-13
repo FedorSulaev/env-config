@@ -8,7 +8,6 @@
     inputs.home-manager.nixosModules.home-manager
     ../../common/utility/host-spec.nix
     ../../common/users/user-primary.nix
-    ../common/sops.nix
   ];
 
   hostSpec = {
@@ -24,6 +23,7 @@
 
   users.users.${config.hostSpec.username} = {
     isNormalUser = true;
+    inherit (inputs.env-secrets.iso) hashedPassword;
     extraGroups = [ "wheel" ];
   };
 
