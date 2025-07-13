@@ -5,11 +5,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1752323528,
-        "narHash": "sha256-uPwT9tAYu4Icd8Tk9/626X5zKKmMnf/DDAIPukRuWKg=",
+        "lastModified": 1752378937,
+        "narHash": "sha256-penPzMcS3+IH4ZFYwbFbocnfsbTU+RZhGC9sF60lDtw=",
         "ref": "refs/heads/main",
-        "rev": "a4e388846f4b55655fc09908c6508e80faee2632",
-        "revCount": 33,
+        "rev": "fb9c855a5fec16371d974e9fac166c4b2474c129",
+        "revCount": 35,
         "type": "git",
         "url": "ssh://git@github.com/FedorSulaev/env-secrets.git"
       },
@@ -74,11 +74,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1752318164,
-        "narHash": "sha256-q4bJleKtQ3pPVufWHCsDid0BNl8pWgM5C8y/BO6DG6U=",
+        "lastModified": 1752341689,
+        "narHash": "sha256-XC+rqtxc9j0J8IEyXOXRMRUSkUQfVtURmE8eL0NqgWo=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "613440a7f1db76d6845fbd8fda629b15df2914d3",
+        "rev": "e40e235767b5b5bb5f9fd254c1aa42dd561fe21b",
         "type": "github"
       },
       "original": {
