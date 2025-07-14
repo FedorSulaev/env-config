@@ -12,13 +12,13 @@
 
   hostSpec = {
     # ISO host settings
-    inherit (inputs.env-secrets) iso;
+    inherit (inputs.env-secrets.iso) hostName username;
 
     # Generic networking settings
     inherit (inputs.env-secrets) networking;
 
     # Git ids
-    inherit (inputs.env-secrets) git;
+    inherit (inputs.env-secrets) github;
   };
 
   users.users.${config.hostSpec.username} = {
