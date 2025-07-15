@@ -50,4 +50,7 @@
   programs.bash.promptInit = ''
     export PS1="\\[\\033[01;32m\\]\\u@\\h-$(cat /etc/isoBuildTime)\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$ "
   '';
+
+  # The default compression-level is 6, 3 is quicker to compress/decompress
+  isoImage.squashfsCompression = "zstd -Xcompression-level 3";
 }
