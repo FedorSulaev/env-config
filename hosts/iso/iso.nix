@@ -33,4 +33,16 @@
     openssh.authorizedKeys.keys =
       config.users.users.${config.hostSpec.username}.openssh.authorizedKeys.keys;
   };
+
+  environment.etc = {
+    isoBuildTime = {
+      # Used to identify the latest build
+      text = lib.readFile (
+        "${pkgs.runCommand "timestamp" {
+           # builtins.currentTime requires --impure because it depends on real time
+           env.when = builtins.currentTime;
+         } "echo -n `date -d @$when  +%Y-%m-%d_%H-%M-%S` > $out"}"
+      );
+    };
+  };
 }
