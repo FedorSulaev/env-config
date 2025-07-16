@@ -61,4 +61,12 @@
     ];
     extraOptions = "experimental-features = nix-command flakes";
   };
+
+  services = {
+    qemuGuest.enable = true;
+    openssh = {
+      ports = [ config.hostSpec.networking.ports.tcp.ssh ];
+      settings.PermitRootLogin = lib.mkForce "yes";
+    };
+  };
 }
