@@ -53,4 +53,12 @@
 
   # The default compression-level is 6, 3 is quicker to compress/decompress
   isoImage.squashfsCompression = "zstd -Xcompression-level 3";
+
+  nix = {
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    extraOptions = "experimental-features = nix-command flakes";
+  };
 }
