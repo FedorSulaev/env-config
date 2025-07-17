@@ -77,4 +77,8 @@
       "vfat"
     ];
   };
+
+  networking = {
+    hostName = "iso";
+  };
 }
