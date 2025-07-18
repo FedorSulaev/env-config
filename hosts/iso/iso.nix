@@ -81,4 +81,14 @@
   networking = {
     hostName = "iso";
   };
+
+  systemd = {
+    services.sshd.wantedBy = lib.mkForce [ "multi-user.target" ];
+    targets = {
+      sleep.enable = false;
+      suspend.enable = false;
+      hibernate.enable = false;
+      hybrid-sleep.enable = false;
+    };
+  };
 }
