@@ -50,6 +50,7 @@ in
       lime
       # Requires python 3.13.5
       # umap-learn
+      torch
     ]))
   ];
   programs.neovim = {
