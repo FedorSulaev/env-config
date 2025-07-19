@@ -4,7 +4,7 @@ default:
 
 # rebuild darwin flake for the current host
 build-darwin:
-  darwin-rebuild switch --flake "$HOME/env-config#$(scutil --get ComputerName)"
+  sudo darwin-rebuild switch --flake "$HOME/env-config#$(scutil --get ComputerName)"
 
 # Build an iso image and create a symlink for qemu usage
 iso:
