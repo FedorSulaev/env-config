@@ -3,8 +3,8 @@ default:
   @just --list
 
 # rebuild darwin flake for the current host
-build-darwin:
-  sudo darwin-rebuild switch --flake "$HOME/env-config#$(scutil --get ComputerName)"
+build-breezora:
+  sudo darwin-rebuild switch --flake "$HOME/env-config#breezora"
 
 # Build an iso image and create a symlink for qemu usage
 iso:

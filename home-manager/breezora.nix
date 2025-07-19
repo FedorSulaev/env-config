@@ -2,7 +2,7 @@
 {
   imports = [
     ./common.nix
-    ./modules/tmux-module/tmux-mac-os-personal.nix
+    ./modules/tmux-module/tmux-breezora.nix
   ];
 
   home.packages = with pkgs; [

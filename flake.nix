@@ -40,7 +40,7 @@
       homeConfigurations.Docker-Nix-Test = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = pkgs-linux-arm;
         modules = [
-          ./home-manager/mac-os-personal.nix
+          ./home-manager/breezora.nix
         ];
         extraSpecialArgs = { inherit inputs; };
       };
@@ -52,18 +52,18 @@
         extraSpecialArgs = { inherit inputs; };
       };
       darwinConfigurations = {
-        "MacBook-Pro-Fedor" = nix-darwin.lib.darwinSystem {
+        "breezora" = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           pkgs = pkgs-mac-arm;
           modules = [
-            ./hosts/macbook-personal/macbook-personal.nix
+            ./hosts/breezora/breezora.nix
             home-manager.darwinModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = { inherit inputs; };
-                users.fedorsulaev = ./home-manager/mac-os-personal.nix;
+                users.fedorsulaev = ./home-manager/breezora.nix;
               };
             }
           ];
