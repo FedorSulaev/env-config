@@ -7,6 +7,7 @@
     autosuggestion.enable = true;
     initContent = ''
       export PATH="/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:$PATH"
+      export PATH="/usr/sbin:$PATH"
       # Start up Starship shell
       eval "$(starship init zsh)"
       export EDITOR=vi
