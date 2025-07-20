@@ -2,6 +2,9 @@
 default:
   @just --list
 
+update:
+  nix flake update
+
 # rebuild darwin flake for the current host
 build-breezora:
   sudo darwin-rebuild switch --flake "$HOME/env-config#breezora"
