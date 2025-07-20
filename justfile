@@ -7,7 +7,23 @@ build-breezora:
   sudo darwin-rebuild switch --flake "$HOME/env-config#breezora"
 
 # Build an iso image and create a symlink for qemu usage
-iso:
+build-iso:
   # Clean up the output
   rm -rf result
   nix build --debug --impure "$HOME/env-config#nixosConfigurations.iso.config.system.build.isoImage" --max-jobs 0 --option builders-use-substitutes true && ln -sf result/iso/*.iso latest.iso
+
+# Create resources and run qemu vm to test the iso
+run-vm-iso:
+  qemu-img create -f qcow2 ./iso-vm-disk.qcow2 10G
+  qemu-system-x86_64 \
+    -m 2048 \
+    -smp 1 \
+    -boot d \
+    -cdrom ./latest.iso \
+    -drive file=./iso-vm-disk.qcow2,format=qcow2 \
+    -name test-iso \
+    -nic user,model=virtio,hostfwd=tcp::10022-:22 \
+    -nographic
+
+cleanup-vm-iso:
+  rm -f ./iso-vm-disk.qcow2
