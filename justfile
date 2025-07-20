@@ -30,3 +30,7 @@ run-vm-iso:
 
 cleanup-vm-iso:
   rm -f ./iso-vm-disk.qcow2
+
+# Install the latest iso to a flash drive
+install-iso DRIVE: build-iso
+  sudo dd if=$(eza --sort changed result/iso/*.iso | tail -n1) of={{DRIVE}} bs=4M status=progress oflag=sync
