@@ -28,6 +28,9 @@ run-vm-iso:
     -nic user,model=virtio,hostfwd=tcp::10022-:22 \
     -nographic
 
+ssh-vm-iso:
+  ssh -p 10022 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null isouser@localhost
+
 cleanup-vm-iso:
   rm -f ./iso-vm-disk.qcow2
 
