@@ -37,3 +37,8 @@ cleanup-vm-iso:
 # Install the latest iso to a flash drive
 install-iso DRIVE: build-iso
   sudo dd if=$(eza --sort changed result/iso/*.iso | tail -n1) of={{DRIVE}} bs=4M status=progress oflag=sync
+
+# Copy all the config files to the remote host
+sync USER HOST PATH:
+  rsync -av --filter=':- .gitignore' -e "ssh -l {{USER}} -oport=22" . {{USER}}@{{HOST}}:{{PATH}}/nix-config
+
