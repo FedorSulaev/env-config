@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
   imports = [
-    ./common.nix
-    ./modules/tmux-module/tmux-breezora.nix
+    ./../common/home-manager/common.nix
+    ./../common/home-manager/modules/tmux-module/tmux-breezora.nix
   ];
 
   home.packages = with pkgs; [
@@ -17,7 +17,7 @@
   home.homeDirectory = "/Users/fedorsulaev";
   home.username = "fedorsulaev";
 
-  home.file.".wezterm.lua".source = ./wezterm.lua;
+  home.file.".wezterm.lua".source = ./../common/home-manager/modules/wezterm.lua;
 
   fonts.fontconfig.enable = true;
 }

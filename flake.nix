@@ -47,7 +47,7 @@
       homeConfigurations.DevDsk = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = pkgs-linux-x86;
         modules = [
-          ./home-manager/dev-dsk.nix
+          ./hosts/dev-dsk/dev-dsk-home-manager.nix
         ];
         extraSpecialArgs = { inherit inputs; };
       };
@@ -63,7 +63,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = { inherit inputs; };
-                users.fedorsulaev = ./home-manager/breezora.nix;
+                users.fedorsulaev = ./hosts/breezora/breezora-home-manager.nix;
               };
             }
           ];
