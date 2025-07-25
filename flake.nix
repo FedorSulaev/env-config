@@ -79,6 +79,14 @@
           };
           modules = [ ./hosts/iso/iso.nix ];
         };
+        "stonebark" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          pkgs = pkgs-linux-x86;
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [ ./hosts/stonebark/stonebark.nix ];
+        };
       };
     };
 }
