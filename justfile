@@ -42,3 +42,6 @@ install-iso DRIVE: build-iso
 sync USER HOST PATH:
   rsync -av --filter=':- .gitignore' -e "ssh -l {{USER}} -oport=22" . {{USER}}@{{HOST}}:{{PATH}}/nix-config
 
+build-system-remote HOST:
+  nix build --debug .#nixosConfigurations.{{HOST}}.config.system.build.toplevel \
+    --max-jobs 0 --option builders-use-substitutes true --impure
