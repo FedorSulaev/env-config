@@ -26,4 +26,6 @@
 
   services.qemuGuest.enable = true;
   virtualisation.libvirtd.enable = true;
+
+  system.stateVersion = "25.05";
 }
