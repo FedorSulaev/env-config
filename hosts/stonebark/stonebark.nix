@@ -1,11 +1,12 @@
 { inputs, lib, config, pkgs, ... }:
 {
   imports = [
+    ../../common/utility/host-spec.nix
+
     # ===== Hardware =====
     ./hardware-configuration.nix
     inputs.hardware.nixosModules.common-cpu-amd
     inputs.hardware.nixosModules.common-pc-ssd
-    ../../common/utility/host-spec.nix
   ];
 
   hostSpec = {
@@ -33,9 +34,13 @@
   services.qemuGuest.enable = true;
   virtualisation.libvirtd.enable = true;
 
-  users.users.fedorsulaev = {
-    name = config.hostSpec.username;
-    home = config.hostSpec.home;
+  users = {
+    users.fedorsulaev = {
+      name = config.hostSpec.username;
+      home = config.hostSpec.home;
+    };
+    extraGroups.libvrtd.members = [ config.hostSpec.username ];
   };
+
   system.stateVersion = "25.05";
 }
