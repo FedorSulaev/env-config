@@ -5,7 +5,13 @@
     ./hardware-configuration.nix
     inputs.hardware.nixosModules.common-cpu-amd
     inputs.hardware.nixosModules.common-pc-ssd
+    ../../common/utility/host-spec.nix
   ];
+
+  hostSpec = {
+    username = inputs.env-secrets.stonebark.username;
+    hostName = inputs.env-secrets.stonebark.hostName;
+  };
 
   boot = {
     kernelParams = [
@@ -27,5 +33,9 @@
   services.qemuGuest.enable = true;
   virtualisation.libvirtd.enable = true;
 
+  users.users.fedorsulaev = {
+    name = config.hostSpec.username;
+    home = config.hostSpec.home;
+  };
   system.stateVersion = "25.05";
 }
