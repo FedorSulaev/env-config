@@ -36,11 +36,15 @@
 
   users = {
     users.fedorsulaev = {
+      isNormalUser = true;
       name = config.hostSpec.username;
       home = config.hostSpec.home;
+      extraGroups = [ "networkmanager" "wheel" ];
     };
     extraGroups.libvrtd.members = [ config.hostSpec.username ];
   };
+
+  nix.settings.trusted-users = [ "root" config.hostSpec.username ];
 
   system.stateVersion = "25.05";
 }
