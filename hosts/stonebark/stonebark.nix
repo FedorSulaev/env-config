@@ -10,8 +10,8 @@
   ];
 
   hostSpec = {
-    username = inputs.env-secrets.stonebark.username;
-    hostName = inputs.env-secrets.stonebark.hostName;
+    inherit (inputs.env-secrets.stonebark) hostName username;
+    inherit (inputs.env-secrets) networking;
   };
 
   boot = {
@@ -45,6 +45,26 @@
   };
 
   nix.settings.trusted-users = [ "root" config.hostSpec.username ];
+
+  networking = {
+    hostName = config.hostSpec.hostName;
+    networkmanager.enable = true;
+    interfaces = {
+      enp5s0 = {
+        useDHCP = false;
+        ipv4.addresses = [{
+          address = config.hostSpec.networking.hosts.stonebark.address;
+          prefixLength = config.hostSpec.networking.hosts.stonebark.prefixLength;
+
+        }];
+      };
+    };
+    defaultGateway = {
+      address = config.hostSpec.networking.hosts.stonebark.gatewayAddress;
+      interface = "enp5s0";
+    };
+    nameservers = config.hostSpec.networking.hosts.stonebark.nameservers;
+  };
 
   system.stateVersion = "25.05";
 }
