@@ -7,6 +7,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/helpers.sh"
 
 # User variables
 target_hostname=""
+target_destination=""
 
 # Create a temp directory for generated host keys
 temp=$(mktemp -d)
@@ -24,10 +25,11 @@ function help_and_exit() {
     echo
     echo "Remotely bootstraps new host from this nix-config"
     echo
-    echo "USAGE: $0 -n <target_hostname> [OPTIONS]"
+    echo "USAGE: $0 -n <target_hostname> -d <target_destination> [OPTIONS]"
     echo
     echo "ARGS:"
     echo "  -n <target_hostname>                specify target_hostname of the host to deploy the config on."
+    echo "  -d <target_destination>             specify ip or domain for the target host."
     echo
     echo "OPTIONS:"
     exit 0
@@ -40,6 +42,10 @@ while [[ $# -gt 0 ]]; do
             shift
             target_hostname=$1
             ;;
+        -d)
+            shift
+            target_destination=$1
+            ;;
         *)
             red "ERROR: Invalid argument."
             help_and_exit
@@ -48,8 +54,23 @@ while [[ $# -gt 0 ]]; do
     shift
 done
 
-if [ -z "$target_hostname" ]; then
-    red "ERROR: -n is required"
+if [ -z "$target_hostname" ] || [ -z "$target_destination" ]; then
+    red "ERROR: -n, -d are required"
     echo
     help_and_exit
+fi
+
+# Bootstrap functions
+function nixos_anywhere() {
+    # Clear the known keys to replace with newly generated
+    green "Wiping known_hosts of $target_destination"
+    ssh-keygen -R "$target_hostname" || true
+    ssh-keygen -R "$target_destination" || true
+
+    green "Installing NixOS on remote host $target_hostname at $target_destination"
+}
+
+# Bootstrap
+if yes_or_no "Run nixos-anywhere installation?"; then
+    nixos_anywhere
 fi

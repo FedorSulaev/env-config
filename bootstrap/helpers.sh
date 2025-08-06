@@ -29,3 +29,16 @@ function yellow() {
         echo -e "\x1B[33m[*] $($2) \x1B[0m"
     fi
 }
+
+# Ask yes or no, with yes being the default
+function yes_or_no() {
+    echo -en "\x1B[34m[?] $* [y/n] (default: y): \x1B[0m"
+    while true; do
+        read -rp "" yn
+        yn=${yn:-y}
+        case $yn in
+            [Yy]*) return 0 ;;
+            [Nn]*) return 1 ;;
+        esac
+    done
+}
