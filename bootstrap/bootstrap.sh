@@ -8,6 +8,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/helpers.sh"
 # User variables
 target_hostname=""
 target_destination=""
+target_user="isouser"
 
 # Create a temp directory for generated host keys
 temp=$(mktemp -d)
@@ -60,6 +61,7 @@ if [ -z "$target_hostname" ] || [ -z "$target_destination" ]; then
     help_and_exit
 fi
 
+
 # Bootstrap functions
 function nixos_anywhere() {
     # Clear the known keys to replace with newly generated
@@ -68,6 +70,21 @@ function nixos_anywhere() {
     ssh-keygen -R "$target_destination" || true
 
     green "Installing NixOS on remote host $target_hostname at $target_destination"
+
+    # Generate SSH key
+    green "Preparing a new ssh_host_ed25519_key pair for $target_hostname."
+    # Create the directory where sshd expects to find the host keys
+    install -d -m755 "$temp/etc/ssh"
+
+    # Generate host ssh key pair without a passphrase
+    ssh-keygen -t ed25519 -f "$temp/etc/ssh/ssh_host_ed25519_key" -C "$target_user"@"$target_hostname" -N ""
+
+    # Set the correct permissions so sshd will accept the key
+    chmod 600 "$temp/etc/ssh/ssh_host_ed25519_key"
+
+    green "Adding ssh host fingerprint at $target_destination to ~/.ssh/known_hosts"
+    # This will fail if we already know the host, but that's fine
+    ssh-keyscan -p "$ssh_port" "$target_destination" | grep -v '^#' >>~/.ssh/known_hosts || true
 }
 
 # Bootstrap
