@@ -9,6 +9,8 @@ source "$(dirname "${BASH_SOURCE[0]}")/helpers.sh"
 target_hostname=""
 target_destination=""
 target_user="isouser"
+ssh_port="22"
+ssh_key=""
 
 # Create a temp directory for generated host keys
 temp=$(mktemp -d)
@@ -61,6 +63,36 @@ if [ -z "$target_hostname" ] || [ -z "$target_destination" ]; then
     help_and_exit
 fi
 
+# SSH Commands
+# Base options shared by ssh/scp
+ssh_port_opt=(-o Port="$ssh_port")
+ssh_base_opts=(
+    -o IdentitiesOnly=yes
+    -o StrictHostKeyChecking=no
+    -o UserKnownHostsFile=/dev/null
+    -i "$ssh_key"
+)
+
+# Optional: faster repeated connections
+ssh_mux_opts=(
+    -o ControlMaster=auto
+    -o ControlPersist=60
+    -o ControlPath="$HOME/.ssh/cm-%r@%h:%p"
+)
+# If you explicitly want to disable multiplexing, keep: (-o ControlPath=none)
+
+# Only add agent forwarding if required
+ssh_agent_opt=() # or: ssh_agent_opt=(-A)  # equals -o ForwardAgent=yes
+
+# Build targets
+user_host="${target_user}@${target_destination}"
+root_host="root@${target_destination}"
+
+# Final commands as arrays
+# "${ssh_cmd[@]}" -- some-remote-command
+ssh_cmd=(ssh "${ssh_mux_opts[@]}" "${ssh_base_opts[@]}" "${ssh_agent_opt[@]}" "${ssh_port_opt[@]}" -t "$user_host")
+ssh_root_cmd=(ssh "${ssh_mux_opts[@]}" "${ssh_base_opts[@]}" "${ssh_agent_opt[@]}" "${ssh_port_opt[@]}" -t "$root_host")
+scp_cmd=(scp -P "$ssh_port" -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i "$ssh_key")
 
 # Bootstrap functions
 function nixos_anywhere() {
