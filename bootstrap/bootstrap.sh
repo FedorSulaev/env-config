@@ -33,6 +33,9 @@ function help_and_exit() {
     echo "ARGS:"
     echo "  -n <target_hostname>                specify target_hostname of the host to deploy the config on."
     echo "  -d <target_destination>             specify ip or domain for the target host."
+    echo "  -k <ssh_key>                        specify the full path to the ssh_key for remote access"
+    echo "                                      to the target host."
+    echo "                                      Example: -k /home/user/.ssh/my_ssh_key"
     echo
     echo "OPTIONS:"
     exit 0
@@ -48,6 +51,10 @@ while [[ $# -gt 0 ]]; do
         -d)
             shift
             target_destination=$1
+            ;;
+        -k)
+            shift
+            ssh_key=$1
             ;;
         *)
             red "ERROR: Invalid argument."
