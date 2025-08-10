@@ -102,6 +102,7 @@ ssh_root_cmd=(ssh "${ssh_mux_opts[@]}" "${ssh_base_opts[@]}" "${ssh_agent_opt[@]
 scp_cmd=(scp -P "$ssh_port" -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i "$ssh_key")
 
 # Bootstrap functions
+generated_hardware_config=0
 function nixos_anywhere() {
     # Clear the known keys to replace with newly generated
     green "Wiping known_hosts of $target_destination"
@@ -124,6 +125,18 @@ function nixos_anywhere() {
     green "Adding ssh host fingerprint at $target_destination to ~/.ssh/known_hosts"
     # This will fail if we already know the host, but that's fine
     ssh-keyscan -p "$ssh_port" "$target_destination" | grep -v '^#' >>~/.ssh/known_hosts || true
+
+    # Nixos-anywhere installation
+
+    # If you already have hardware config in the host flake, this is not needed
+    if no_or_yes "Generate a new hardware config for this host? Yes if your nix-config doesn't have an entry for this host."; then
+        green "Generating hardware-configuration.nix on $target_hostname and adding it to the local nix-config."
+        "${ssh_root_cmd[@]}" "nixos-generate-config --no-filesystems --root /mnt"
+        "${scp_cmd[@]}" root@"$target_destination":/mnt/etc/nixos/hardware-configuration.nix \
+            "${git_root}"/hosts/nixos/"$target_hostname"/hardware-configuration.nix
+        generated_hardware_config=1
+    fi
+
 }
 
 # Bootstrap
