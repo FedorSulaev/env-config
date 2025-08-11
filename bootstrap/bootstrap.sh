@@ -137,6 +137,13 @@ function nixos_anywhere() {
         generated_hardware_config=1
     fi
 
+    # --extra-files puts the ssh host key we generated onto the target machine
+    SHELL=/bin/sh nix run github:nix-community/nixos-anywhere -- \
+        --ssh-port "$ssh_port" \
+        --post-kexec-ssh-port "$ssh_port" \
+        --extra-files "$temp" \
+        --flake .#"$target_hostname" \
+        root@"$target_destination"
 }
 
 # Bootstrap
