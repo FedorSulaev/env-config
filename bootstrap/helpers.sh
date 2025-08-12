@@ -42,3 +42,16 @@ function yes_or_no() {
         esac
     done
 }
+
+# Ask yes or no, with no being the default
+function no_or_yes() {
+    echo -en "\x1B[34m[?] $* [y/n] (default: n): \x1B[0m"
+    while true; do
+        read -rp "" yn
+        yn=${yn:-n}
+        case $yn in
+            [Yy]*) return 0 ;;
+            [Nn]*) return 1 ;;
+        esac
+    done
+}
