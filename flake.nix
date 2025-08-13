@@ -19,13 +19,20 @@
   outputs = { self, nixpkgs, home-manager, nix-darwin, ... }@inputs:
     let
       overlays = [
+        (final: prev: {
+          python313 = prev.python313.override {
+            packageOverrides = pyFinal: pyPrev: {
+              # tests fail on 1.32.1
+              cfn-lint = pyPrev.cfn-lint.overridePythonAttrs (_: {
+                doCheck = false;
+              });
+            };
+          };
+        })
       ];
       pkgs-mac-arm = import nixpkgs {
         system = "aarch64-darwin";
         overlays = overlays;
-        # Required as workaround for failing tests when building nodejs-slim_20
-        # nodejs-slim_20 is not officially supported but pulled as dependency
-        # tests are failing on Macos aarch64
       };
       pkgs-linux-arm = import nixpkgs {
         system = "aarch64-linux";
