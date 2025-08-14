@@ -12,6 +12,7 @@
     exercism
     nixos-anywhere
     qemu
+    awscli2
   ];
 
   home.homeDirectory = "/Users/fedorsulaev";
