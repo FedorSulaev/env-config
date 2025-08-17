@@ -144,6 +144,15 @@ function nixos_anywhere() {
         --extra-files "$temp" \
         --flake .#"$target_hostname" \
         root@"$target_destination"
+
+    if ! yes_or_no "Has your system restarted and are you ready to continue? (no exits)"; then
+        exit 0
+    fi
+
+    green "Adding $target_destination's ssh host fingerprint to ~/.ssh/known_hosts"
+    ssh-keyscan -p "$ssh_port" "$target_destination" | grep -v '^#' >>~/.ssh/known_hosts || true
+
+    cd - >/dev/null
 }
 
 # Bootstrap
