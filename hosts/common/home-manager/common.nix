@@ -25,6 +25,7 @@
     cargo
     rustc
     go
+    yq-go
     php83
     php83Packages.composer
     julia-lts
