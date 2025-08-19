@@ -155,6 +155,28 @@ function nixos_anywhere() {
     cd - >/dev/null
 }
 
+function sops_generate_host_age_key() {
+    green "Generating an age key based on the new ssh_host_ed25519_key"
+
+    # Get the SSH key
+    target_key=$(ssh-keyscan -p "$ssh_port" -t ssh-ed25519 "$target_destination" 2>&1 | grep ssh-ed25519 | cut -f2- -d" ") || {
+        red "Failed to get ssh key. Host down or maybe SSH port now changed?"
+        exit 1
+    }
+
+    host_age_key=$(echo "$target_key" | ssh-to-age)
+
+    if grep -qv '^age1' <<<"$host_age_key"; then
+        red "The result from generated age key does not match the expected format."
+        yellow "Result: $host_age_key"
+        yellow "Expected format: age10000000000000000000000000000000000000000000000000000000000"
+        exit 1
+    fi
+
+    green "Updating nix-secrets/.sops.yaml"
+    sops_update_age_key "hosts" "$target_hostname" "$host_age_key"
+}
+
 # Bootstrap
 if yes_or_no "Run nixos-anywhere installation?"; then
     nixos_anywhere
