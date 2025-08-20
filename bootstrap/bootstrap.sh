@@ -206,3 +206,39 @@ if yes_or_no "Generate host (ssh-based) age key?"; then
     sops_generate_host_age_key
     updated_age_keys=1
 fi
+
+function sops_setup_user_age_key() {
+    target_user="$1"
+    target_hostname="$2"
+
+    secret_file="${nix_secrets_dir}/sops/${target_hostname}.yaml"
+    config="${nix_secrets_dir}/.sops.yaml"
+    # If the secret file doesn't exist, it means we're generating a new user key as well
+    if [ ! -f "$secret_file" ]; then
+        green "Host secret file does not exist. Creating $secret_file"
+        sops_generate_user_age_key "${target_user}" "${target_hostname}"
+        mkdir -p "$(dirname "$secret_file")"
+        echo "{}" >"$secret_file"
+        sops --config "$config" -e "$secret_file" >"$secret_file.enc"
+        mv "$secret_file.enc" "$secret_file"
+    fi
+    if ! sops --config "$config" -d --extract '["keys]["age"]' "$secret_file" >/dev/null 2>&1; then
+        if [ -z "$age_secret_key" ]; then
+            sops_generate_user_age_key "${target_user}" "${target_hostname}"
+        fi
+        # shellcheck disable=SC2116,SC2086
+        sops --config "$config" --set "$(echo '["keys"]["age"] "'$age_secret_key'"')" "$secret_file"
+    else
+        green "Age key already exists for ${target_hostname}"
+    fi
+}
+
+if yes_or_no "Generate user age key?"; then
+    # This may end up creating the host.yaml file, so add creation rules in advance
+    sops_setup_user_age_key "$target_user" "$target_hostname"
+    # We need to add the new file before we rekey later
+    cd "$nix_secrets_dir"
+    git add sops/"${target_hostname}".yaml
+    cd - >/dev/null
+    updated_age_keys=1
+fi
