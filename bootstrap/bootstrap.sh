@@ -155,6 +155,25 @@ function nixos_anywhere() {
     cd - >/dev/null
 }
 
+function sops_update_age_key() {
+    field="$1"
+    keyname="$2"
+    key="$3"
+
+    if [ ! "$field" == "hosts" ] && [ ! "$field" == "users" ]; then
+        red "Invalid field passed to sops_update_age_key. Must be either 'hosts' or 'users'."
+        exit 1
+    fi
+
+    if [[ -n $(yq ".keys.${field}[] | select(anchor == \"$keyname\")" "${SOPS_FILE}") ]]; then
+        green "Updating existing ${keyname} key"
+        yq -i "(.keys.${field}[] | select(anchor == \"$keyname\")) = \"$key\"" "$SOPS_FILE"
+    else
+        green "Adding new ${keyname} key"
+        yq -i ".keys.$field += [\"$key\"] | .keys.${field}[-1] anchor = \"$keyname\"" "$SOPS_FILE"
+    fi
+}
+
 function sops_generate_host_age_key() {
     green "Generating an age key based on the new ssh_host_ed25519_key"
 
@@ -180,4 +199,10 @@ function sops_generate_host_age_key() {
 # Bootstrap
 if yes_or_no "Run nixos-anywhere installation?"; then
     nixos_anywhere
+fi
+
+updated_age_keys=0
+if yes_or_no "Generate host (ssh-based) age key?"; then
+    sops_generate_host_age_key
+    updated_age_keys=1
 fi
