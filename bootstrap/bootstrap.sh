@@ -207,6 +207,77 @@ if yes_or_no "Generate host (ssh-based) age key?"; then
     updated_age_keys=1
 fi
 
+# Adds the user and host to the shared.yaml creation rules
+function sops_add_shared_creation_rules() {
+    u="\"$1_$2\"" # quoted user_host for yaml
+    h="\"$2\""    # quoted hostname for yaml
+
+    shared_selector='.creation_rules[] | select(.path_regex == "shared\.yaml$")'
+    if [[ -n $(yq "$shared_selector" "${SOPS_FILE}") ]]; then
+        echo "BEFORE"
+        cat "${SOPS_FILE}"
+        if [[ -z $(yq "$shared_selector.key_groups[].age[] | select(alias == $h)" "${SOPS_FILE}") ]]; then
+            green "Adding $u and $h to shared.yaml rule"
+            # NOTE: Split on purpose to avoid weird file corruption
+            yq -i "($shared_selector).key_groups[].age += [$u, $h]" "$SOPS_FILE"
+            yq -i "($shared_selector).key_groups[].age[-2] alias = $u" "$SOPS_FILE"
+            yq -i "($shared_selector).key_groups[].age[-1] alias = $h" "$SOPS_FILE"
+        fi
+    else
+        red "shared.yaml rule not found"
+    fi
+}
+
+# Adds the user and host to the host.yaml creation rules
+function sops_add_host_creation_rules() {
+    host="$2"                     # hostname for selector
+    h="\"$2\""                    # quoted hostname for yaml
+    u="\"$1_$2\""                 # quoted user_host for yaml
+    w="\"$(whoami)_$(hostname)\"" # quoted whoami_hostname for yaml
+    n="\"$(hostname)\""           # quoted hostname for yaml
+
+    host_selector=".creation_rules[] | select(.path_regex | contains(\"${host}\.yaml\"))"
+    if [[ -z $(yq "$host_selector" "${SOPS_FILE}") ]]; then
+        green "Adding new host file creation rule"
+        yq -i ".creation_rules += {\"path_regex\": \"${host}\\.yaml$\", \"key_groups\": [{\"age\": [$u, $h]}]}" "$SOPS_FILE"
+        # Add aliases one by one
+        yq -i "($host_selector).key_groups[].age[0] alias = $u" "$SOPS_FILE"
+        yq -i "($host_selector).key_groups[].age[1] alias = $h" "$SOPS_FILE"
+        yq -i "($host_selector).key_groups[].age[2] alias = $w" "$SOPS_FILE"
+        yq -i "($host_selector).key_groups[].age[3] alias = $n" "$SOPS_FILE"
+    fi
+}
+
+# Adds the user and host to the shared.yaml and host.yaml creation rules
+function sops_add_creation_rules() {
+    user="$1"
+    host="$2"
+
+    sops_add_shared_creation_rules "$user" "$host"
+    sops_add_host_creation_rules "$user" "$host"
+}
+
+age_secret_key=""
+# Generate a user age key, update the .sops.yaml entries, and return the key in age_secret_key
+# args: user, hostname
+function sops_generate_user_age_key() {
+    target_user="$1"
+    target_hostname="$2"
+    key_name="${target_user}_${target_hostname}"
+    green "Age key does not exist. Generating."
+    user_age_key=$(age-keygen)
+    readarray -t entries <<<"$user_age_key"
+    age_secret_key=${entries[2]}
+    public_key=$(echo "${entries[1]}" | rg key: | cut -f2 -d: | xargs)
+    green "Generated age key for ${key_name}"
+    # Place the anchors into .sops.yaml so other commands can reference them
+    sops_update_age_key "users" "$key_name" "$public_key"
+    sops_add_creation_rules "${target_user}" "${target_hostname}"
+
+    # "return" key so it can be used by caller
+    export age_secret_key
+}
+
 function sops_setup_user_age_key() {
     target_user="$1"
     target_hostname="$2"
