@@ -45,3 +45,14 @@ sync USER HOST PATH:
 build-system-remote HOST:
   nix build --debug .#nixosConfigurations.{{HOST}}.config.system.build.toplevel \
     --max-jobs 0 --option builders-use-substitutes true --impure
+# Called by the rekey recipe
+sops-rekey:
+  cd ../env-secrets && for file in $(ls sops/*.yaml); do \
+    sops updatekeys -y $file; \
+  done
+
+# Update all keys in sops/*.yaml files in nix-secrets to match the creation rules keys
+rekey: sops-rekey
+  cd ../env-secrets && \
+    (pre-commit run --all-files || true) && \
+    git add -u && (git commit -nm "chore: rekey" || true) && git push

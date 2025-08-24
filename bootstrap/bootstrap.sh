@@ -313,3 +313,13 @@ if yes_or_no "Generate user age key?"; then
     cd - >/dev/null
     updated_age_keys=1
 fi
+
+if [[ $updated_age_keys == 1 ]]; then
+    # If the age generation commands added previously unseen keys (and associated anchors) we want to add those
+    # to creation rules, namely <host>.yaml and shared.yaml
+    sops_add_creation_rules "${target_user}" "${target_hostname}"
+    # Since we may update the sops.yaml file twice above, only rekey once at the end
+    just rekey
+    green "Updating flake input to pick up new .sops.yaml"
+    nix flake update nix-secrets
+fi
