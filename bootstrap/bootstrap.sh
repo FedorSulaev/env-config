@@ -23,6 +23,13 @@ function cleanup() {
 }
 trap cleanup exit
 
+
+# Copy data to the target machine
+function sync() {
+    # $1 = user, $2 = source, $3 = destination
+    rsync -av --mkpath --filter=':- .gitignore' -e "ssh -oControlMaster=no -l $1 -oport=${ssh_port}" "$2" "$1@${target_destination}:${nix_src_path}"
+}
+
 # Usage help function
 function help_and_exit() {
     echo
@@ -323,3 +330,38 @@ if [[ $updated_age_keys == 1 ]]; then
     green "Updating flake input to pick up new .sops.yaml"
     nix flake update env-secrets
 fi
+
+if yes_or_no "Do you want to copy your full env-config and env-secrets to $target_hostname?"; then
+    green "Adding ssh host fingerprint at $target_destination to ~/.ssh/known_hosts"
+    ssh-keyscan -p "$ssh_port" "$target_destination" 2>/dev/null | grep -v '^#' >>~/.ssh/known_hosts || true
+    green "Copying full env-config to $target_hostname"
+    sync "$target_user" "${git_root}"/../env-config
+    green "Copying full env-secrets to $target_hostname"
+    sync "$target_user" "${nix_secrets_dir}"
+
+    if yes_or_no "Do you want to rebuild immediately?"; then
+        green "Rebuilding env-config on $target_hostname"
+        $ssh_cmd "cd ${nix_src_path}env-config && sudo nixos-rebuild --impure --show-trace --flake .#$target_hostname switch"
+    fi
+else
+    echo
+    green "NixOS was successfully installed!"
+    echo "Post-install config build instructions:"
+    echo "To copy nix-config from this machine to the $target_hostname, run the following command"
+    echo "just sync $target_user $target_destination"
+    echo "To rebuild, sign into $target_hostname and run the following command"
+    echo "cd env-config"
+    echo "sudo nixos-rebuild --show-trace --flake .#$target_hostname switch"
+    echo
+fi
+
+if [[ $generated_hardware_config == 1 ]]; then
+    if yes_or_no "Do you want to commit and push the generated hardware-configuration.nix for $target_hostname to env-config?"; then
+        (pre-commit run --all-files 2>/dev/null || true) &&
+        git add "$git_root/hosts/$target_hostname/hardware-configuration.nix" &&
+        (git commit -m "feat: hardware-configuration.nix for $target_hostname" || true) &&
+        git push
+    fi
+fi
+
+green "Success!"
