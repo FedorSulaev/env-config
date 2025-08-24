@@ -26,7 +26,7 @@ trap cleanup exit
 # Usage help function
 function help_and_exit() {
     echo
-    echo "Remotely bootstraps new host from this nix-config"
+    echo "Remotely bootstraps new host from this env-config"
     echo
     echo "USAGE: $0 -n <target_hostname> -d <target_destination> [OPTIONS]"
     echo
@@ -129,8 +129,8 @@ function nixos_anywhere() {
     # Nixos-anywhere installation
 
     # If you already have hardware config in the host flake, this is not needed
-    if no_or_yes "Generate a new hardware config for this host? Yes if your nix-config doesn't have an entry for this host."; then
-        green "Generating hardware-configuration.nix on $target_hostname and adding it to the local nix-config."
+    if no_or_yes "Generate a new hardware config for this host? Yes if your env-config doesn't have an entry for this host."; then
+        green "Generating hardware-configuration.nix on $target_hostname and adding it to the local env-config."
         "${ssh_root_cmd[@]}" "nixos-generate-config --no-filesystems --root /mnt"
         "${scp_cmd[@]}" root@"$target_destination":/mnt/etc/nixos/hardware-configuration.nix \
             "${git_root}"/hosts/nixos/"$target_hostname"/hardware-configuration.nix
@@ -192,7 +192,7 @@ function sops_generate_host_age_key() {
         exit 1
     fi
 
-    green "Updating nix-secrets/.sops.yaml"
+    green "Updating env-secrets/.sops.yaml"
     sops_update_age_key "hosts" "$target_hostname" "$host_age_key"
 }
 
@@ -321,5 +321,5 @@ if [[ $updated_age_keys == 1 ]]; then
     # Since we may update the sops.yaml file twice above, only rekey once at the end
     just rekey
     green "Updating flake input to pick up new .sops.yaml"
-    nix flake update nix-secrets
+    nix flake update env-secrets
 fi
