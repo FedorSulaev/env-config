@@ -51,6 +51,7 @@ in
       # Requires python 3.13.5
       # umap-learn
       torch
+      xgboost
     ]))
   ];
   programs.neovim = {
