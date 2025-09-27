@@ -11,7 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     env-secrets = {
-      url = "git+ssh://git@github.com/FedorSulaev/env-secrets.git";
+      url = "git+ssh://git@github.com-env-secrets/FedorSulaev/env-secrets.git";
       inputs = { };
     };
   };
