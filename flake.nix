@@ -14,6 +14,7 @@
       url = "git+ssh://git@github.com-env-secrets/FedorSulaev/env-secrets.git";
       inputs = { };
     };
+    disko.url = "github:nix-community/disko";
   };
 
   outputs = { self, nixpkgs, home-manager, nix-darwin, ... }@inputs:
@@ -93,7 +94,11 @@
           specialArgs = {
             inherit inputs;
           };
-          modules = [ ./hosts/stonebark/stonebark.nix ];
+          modules = [
+            inputs.disko.nixosModules.disko
+            ./hosts/common/disks/host-disk.nix
+            ./hosts/stonebark/stonebark.nix
+          ];
         };
       };
     };
