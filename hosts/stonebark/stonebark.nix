@@ -10,7 +10,7 @@
   ];
 
   hostSpec = {
-    inherit (inputs.env-secrets.stonebark) hostName username authorizedKeys;
+    inherit (inputs.env-secrets.stonebark) hostName username authorizedKeys hashedPassword rootHashedPassword;
     inherit (inputs.env-secrets) networking;
   };
 
@@ -52,6 +52,10 @@
       home = config.hostSpec.home;
       extraGroups = [ "networkmanager" "wheel" ];
       openssh.authorizedKeys.keys = config.hostSpec.authorizedKeys;
+      hashedPassword = config.hostSpec.hashedPassword;
+    };
+    users.root = {
+      hashedPassword = config.hostSpec.rootHashedPassword;
     };
     extraGroups.libvrtd.members = [ config.hostSpec.username ];
   };
@@ -81,6 +85,11 @@
   };
 
   time.timeZone = "Europe/Bucharest";
+
+  environment.systemPackages = with pkgs; [
+    git
+    vim
+  ];
 
   system.stateVersion = "25.05";
 }
