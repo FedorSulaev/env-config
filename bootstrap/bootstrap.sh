@@ -11,6 +11,8 @@ target_destination=""
 target_user="isouser"
 ssh_port="22"
 ssh_key=""
+git_root=$(git rev-parse --show-toplevel)
+nix_src_path="./"
 
 # Create a temp directory for generated host keys
 temp=$(mktemp -d)
@@ -45,6 +47,7 @@ function help_and_exit() {
     echo "                                      Example: -k /home/user/.ssh/my_ssh_key"
     echo
     echo "OPTIONS:"
+    echo "  --port <ssh_port>                   specify the ssh port to use for remote access. Default=${ssh_port}."
     exit 0
 }
 
@@ -62,6 +65,10 @@ while [[ $# -gt 0 ]]; do
         -k)
             shift
             ssh_key=$1
+            ;;
+        --port)
+            shift
+            ssh_port=$1
             ;;
         *)
             red "ERROR: Invalid argument."
@@ -134,6 +141,7 @@ function nixos_anywhere() {
     ssh-keyscan -p "$ssh_port" "$target_destination" | grep -v '^#' >>~/.ssh/known_hosts || true
 
     # Nixos-anywhere installation
+    cd bootstrap
 
     # If you already have hardware config in the host flake, this is not needed
     if no_or_yes "Generate a new hardware config for this host? Yes if your env-config doesn't have an entry for this host."; then
