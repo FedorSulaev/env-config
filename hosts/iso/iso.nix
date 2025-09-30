@@ -74,6 +74,7 @@
     kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = lib.mkForce [
       "btrfs"
+      "ext4"
       "vfat"
     ];
   };
