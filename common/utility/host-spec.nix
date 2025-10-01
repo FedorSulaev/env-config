@@ -9,6 +9,19 @@
       type = lib.types.str;
       description = "The hostname of the host";
     };
+    authorizedKeys = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+      description = "Array of authorized SSH public keys for the host user";
+    };
+    hashedPassword = lib.mkOption {
+      type = lib.types.str;
+      description = "Hashed user password";
+    };
+    rootHashedPassword = lib.mkOption {
+      type = lib.types.str;
+      description = "Hashed root password";
+    };
     email = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
       description = "The email of the user";
