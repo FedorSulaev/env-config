@@ -43,7 +43,10 @@
     };
   };
 
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu.runAsRoot = false;
+  };
 
   users = {
     users.fedorsulaev = {
