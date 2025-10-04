@@ -38,6 +38,7 @@
     mkpasswd
     just
     curl
+    rsync
   ];
 
   programs.bottom = {
