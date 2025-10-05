@@ -70,7 +70,8 @@
 
   networking = {
     hostName = config.hostSpec.hostName;
-    networkmanager.enable = true;
+    useNetworkd = true;
+    bridges.br0.interfaces = [ "enp5s0" ];
     interfaces = {
       enp5s0 = {
         useDHCP = false;
@@ -82,7 +83,7 @@
     };
     defaultGateway = {
       address = config.hostSpec.networking.hosts.stonebark.gatewayAddress;
-      interface = "enp5s0";
+      interface = "br0";
     };
     nameservers = config.hostSpec.networking.hosts.stonebark.nameservers;
   };
