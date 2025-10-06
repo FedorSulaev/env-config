@@ -72,14 +72,12 @@
     hostName = config.hostSpec.hostName;
     useNetworkd = true;
     bridges.br0.interfaces = [ "enp5s0" ];
-    interfaces = {
-      enp5s0 = {
-        useDHCP = false;
-        ipv4.addresses = [{
-          address = config.hostSpec.networking.hosts.stonebark.address;
-          prefixLength = config.hostSpec.networking.hosts.stonebark.prefixLength;
-        }];
-      };
+    interfaces.br0 = {
+      useDHCP = false;
+      ipv4.addresses = [{
+        address = config.hostSpec.networking.hosts.stonebark.address;
+        prefixLength = config.hostSpec.networking.hosts.stonebark.prefixLength;
+      }];
     };
     defaultGateway = {
       address = config.hostSpec.networking.hosts.stonebark.gatewayAddress;
