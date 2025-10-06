@@ -43,9 +43,35 @@
     };
   };
 
+  networking = {
+    hostName = config.hostSpec.hostName;
+    useNetworkd = true;
+    bridges.br0.interfaces = [ "enp5s0" ];
+    interfaces.br0 = {
+      useDHCP = false;
+      ipv4.addresses = [{
+        address = config.hostSpec.networking.hosts.stonebark.address;
+        prefixLength = config.hostSpec.networking.hosts.stonebark.prefixLength;
+      }];
+    };
+    defaultGateway = {
+      address = config.hostSpec.networking.hosts.stonebark.gatewayAddress;
+      interface = "br0";
+    };
+    nameservers = config.hostSpec.networking.hosts.stonebark.nameservers;
+  };
+
   virtualisation.libvirtd = {
     enable = true;
     qemu.runAsRoot = false;
+    networks = {
+      br0 = {
+        name = "br0";
+        mode = "bridge";
+        bridge = "br0";
+        autostart = true;
+      };
+    };
   };
 
   users = {
@@ -66,24 +92,6 @@
   nix.settings = {
     trusted-users = [ "root" config.hostSpec.username ];
     experimental-features = [ "nix-command" "flakes" ];
-  };
-
-  networking = {
-    hostName = config.hostSpec.hostName;
-    useNetworkd = true;
-    bridges.br0.interfaces = [ "enp5s0" ];
-    interfaces.br0 = {
-      useDHCP = false;
-      ipv4.addresses = [{
-        address = config.hostSpec.networking.hosts.stonebark.address;
-        prefixLength = config.hostSpec.networking.hosts.stonebark.prefixLength;
-      }];
-    };
-    defaultGateway = {
-      address = config.hostSpec.networking.hosts.stonebark.gatewayAddress;
-      interface = "br0";
-    };
-    nameservers = config.hostSpec.networking.hosts.stonebark.nameservers;
   };
 
   time.timeZone = "Europe/Bucharest";
