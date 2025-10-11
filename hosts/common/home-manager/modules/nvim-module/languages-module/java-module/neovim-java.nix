@@ -6,7 +6,7 @@
 
   programs.java = {
     enable = true;
-    package = pkgs.jdk17_headless;
+    package = pkgs.jdk21_headless;
   };
 
   programs.neovim = {
