@@ -64,14 +64,15 @@
   virtualisation.libvirtd = {
     enable = true;
     qemu.runAsRoot = false;
-    networks = {
-      br0 = {
-        name = "br0";
-        mode = "bridge";
-        bridge = "br0";
-        autostart = true;
-      };
-    };
+    # requires 25.11
+    #networks = {
+    #  br0 = {
+    #    name = "br0";
+    #    mode = "bridge";
+    #    bridge = "br0";
+    #    autostart = true;
+    #  };
+    #};
   };
 
   users = {
