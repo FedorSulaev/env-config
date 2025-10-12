@@ -107,6 +107,7 @@
             inherit inputs;
           };
           modules = [
+            "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
             ./hosts/riverfall/riverfall.nix
           ];
         };

@@ -1,10 +1,8 @@
 { pkgs, ... }:
 {
-  imports = [
-    "${pkgs.path}/nixos/modules/virtualisation/qemu-vm.nix"
-  ];
-
-  virtualisation.qemu.diskInterface = "virtio";
-  virtualisation.qemu.memorySize = 2048;
-  virtualisation.qemu.networkingOptions = [ "bridge=br0" ];
+  virtualisation.qemu = {
+    diskInterface = "virtio";
+    memorySize = 2048;
+    networkingOptions = [ "bridge=br0" ];
+  };
 }
