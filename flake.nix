@@ -109,6 +109,13 @@
           modules = [
             "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
             ./hosts/riverfall/riverfall.nix
+            {
+              virtualisation.qemu = {
+                diskInterface = "virtio";
+                memorySize = 2048;
+                networkingOptions = [ "bridge=br0" ];
+              };
+            }
           ];
         };
       };
