@@ -100,6 +100,16 @@
             ./hosts/stonebark/stonebark.nix
           ];
         };
+        "riverfall" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          pkgs = pkgs-linux-x86;
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            ./hosts/riverfall/riverfall.nix
+          ];
+        };
       };
     };
 }
