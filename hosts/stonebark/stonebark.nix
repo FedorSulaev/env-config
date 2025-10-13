@@ -32,7 +32,6 @@
   };
 
   services = {
-    qemuGuest.enable = true;
     openssh = {
       enable = true;
       settings = {
@@ -80,7 +79,7 @@
       isNormalUser = true;
       name = config.hostSpec.username;
       home = config.hostSpec.home;
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [ "wheel" ];
       openssh.authorizedKeys.keys = config.hostSpec.authorizedKeys;
       hashedPassword = config.hostSpec.hashedPassword;
     };
