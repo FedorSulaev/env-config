@@ -23,7 +23,7 @@ run-vm-iso:
     -smp 1 \
     -boot d \
     -cdrom ./latest.iso \
-    -drive file=./iso-vm-disk.qcow2,format=qcow2 \
+    -drive file=./iso-vm-disk.qcow2,if=virtio,format=qcow2 \
     -name test-iso \
     -nic user,model=virtio,hostfwd=tcp::10022-:22 \
     -nographic
@@ -39,12 +39,17 @@ install-iso DRIVE: build-iso
   sudo dd if=$(eza --sort changed result/iso/*.iso | tail -n1) of={{DRIVE}} bs=4M status=progress oflag=sync
 
 # Copy all the config files to the remote host
-sync USER HOST PATH:
-  rsync -av --filter=':- .gitignore' -e "ssh -l {{USER}} -oport=22" . {{USER}}@{{HOST}}:{{PATH}}/nix-config
+sync USER HOST PATH PORT:
+  rsync -av --filter=':- .gitignore' -e "ssh -l {{USER}} -oport={{PORT}}" . {{USER}}@{{HOST}}:{{PATH}}/env-config
 
 build-system-remote HOST:
   nix build --debug .#nixosConfigurations.{{HOST}}.config.system.build.toplevel \
     --max-jobs 0 --option builders-use-substitutes true --impure
+
+# Run nixos-rebuild on the remote host
+build-host HOST PORT:
+  NIX_SSHOPTS="-p{{PORT}}" nixos-rebuild --target-host {{HOST}} --use-remote-sudo --show-trace --impure --flake .#"{{HOST}}" switch
+
 # Called by the rekey recipe
 sops-rekey:
   cd ../env-secrets && for file in $(ls sops/*.yaml); do \
@@ -56,3 +61,4 @@ rekey: sops-rekey
   cd ../env-secrets && \
     (pre-commit run --all-files || true) && \
     git add -u && (git commit -nm "chore: rekey" || true) && git push
+
