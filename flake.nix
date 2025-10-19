@@ -61,7 +61,7 @@
         extraSpecialArgs = { inherit inputs; };
       };
       darwinConfigurations = {
-        "breezora" = nix-darwin.lib.darwinSystem {
+        breezora = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           pkgs = pkgs-mac-arm;
           modules = [
@@ -80,7 +80,7 @@
         };
       };
       nixosConfigurations = {
-        "iso" = nixpkgs.lib.nixosSystem {
+        iso = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           pkgs = pkgs-linux-x86;
           specialArgs = {
@@ -88,7 +88,7 @@
           };
           modules = [ ./hosts/iso/iso.nix ];
         };
-        "stonebark" = nixpkgs.lib.nixosSystem {
+        stonebark = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           pkgs = pkgs-linux-x86;
           specialArgs = {
@@ -100,17 +100,35 @@
             ./hosts/stonebark/stonebark.nix
           ];
         };
-        "riverfall" = nixpkgs.lib.nixosSystem {
+        riverfall = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           pkgs = pkgs-linux-x86;
           specialArgs = {
             inherit inputs;
           };
           modules = [
-            "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
             ./hosts/riverfall/riverfall.nix
           ];
         };
       };
+      packages.x86_64-linux.riverfall-qcow2 =
+        let
+          system = "x86_64-linux";
+          pkgs = pkgs-linux-x86;
+          lib = pkgs.lib;
+          # 👇 Use nixpkgs.lib.nixosSystem, not pkgs.lib.nixosSystem
+          nixosConfig = nixpkgs.lib.nixosSystem {
+            inherit system;
+            specialArgs = { inherit inputs; };
+            modules = [ ./hosts/riverfall/riverfall.nix ];
+          };
+        in
+        import "${nixpkgs}/nixos/lib/make-disk-image.nix" {
+          inherit pkgs lib;
+          name = "riverfall";
+          format = "qcow2";
+          diskSize = 8192; # MB
+          config = nixosConfig.config;
+        };
     };
 }

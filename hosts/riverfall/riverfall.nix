@@ -9,14 +9,17 @@
     inherit (inputs.env-secrets) networking;
   };
 
-  virtualisation.qemu.options = [
-    "-m"
-    "2048"
-    "-device"
-    "virtio-net-pci,netdev=net0"
-    "-netdev"
-    "bridge,id=net0,br=br0"
-  ];
+  # Minimal filesystem definition for image builds
+  fileSystems."/" = {
+    device = "/dev/vda1";
+    fsType = "ext4";
+  };
+
+  # Enable a simple boot loader for disk images
+  boot.loader.grub = {
+    enable = true;
+    device = "/dev/vda"; # virtual disk device in qcow2 image
+  };
 
   services = {
     qemuGuest.enable = true;
