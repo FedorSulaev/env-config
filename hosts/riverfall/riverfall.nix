@@ -9,20 +9,7 @@
     inherit (inputs.env-secrets) networking;
   };
 
-  # Minimal filesystem definition for image builds
-  fileSystems."/" = {
-    device = "/dev/vda1";
-    fsType = "ext4";
-  };
-
-  # Enable a simple boot loader for disk images
-  boot.loader.grub = {
-    enable = true;
-    device = "/dev/vda"; # virtual disk device in qcow2 image
-  };
-
   services = {
-    qemuGuest.enable = true;
     openssh = {
       enable = true;
       settings = {
@@ -45,7 +32,7 @@
     };
     defaultGateway = {
       address = config.hostSpec.networking.hosts.riverfall.gatewayAddress;
-      interface = "eth0";
+      interface = "enp1s0";
     };
     nameservers = config.hostSpec.networking.hosts.stonebark.nameservers;
   };

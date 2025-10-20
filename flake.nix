@@ -116,11 +116,13 @@
           system = "x86_64-linux";
           pkgs = pkgs-linux-x86;
           lib = pkgs.lib;
-          # 👇 Use nixpkgs.lib.nixosSystem, not pkgs.lib.nixosSystem
           nixosConfig = nixpkgs.lib.nixosSystem {
             inherit system;
             specialArgs = { inherit inputs; };
-            modules = [ ./hosts/riverfall/riverfall.nix ];
+            modules = [
+              ./hosts/riverfall/riverfall.nix
+              ./hosts/riverfall/riverfall-qcow.nix
+            ];
           };
         in
         import "${nixpkgs}/nixos/lib/make-disk-image.nix" {
