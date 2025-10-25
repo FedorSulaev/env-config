@@ -40,38 +40,88 @@
         PubkeyAuthentication = true;
       };
     };
-  };
-
-  networking = {
-    hostName = config.hostSpec.hostName;
-    useNetworkd = true;
-    bridges.br0.interfaces = [ "enp5s0" ];
-    interfaces.br0 = {
-      useDHCP = false;
-      ipv4.addresses = [{
-        address = config.hostSpec.networking.hosts.stonebark.address;
-        prefixLength = config.hostSpec.networking.hosts.stonebark.prefixLength;
-      }];
+    resolved = {
+      llmnr = "false";
     };
-    defaultGateway = {
-      address = config.hostSpec.networking.hosts.stonebark.gatewayAddress;
-      interface = "br0";
-    };
-    nameservers = config.hostSpec.networking.hosts.stonebark.nameservers;
   };
 
   virtualisation.libvirtd = {
     enable = true;
-    qemu.runAsRoot = false;
-    # requires 25.11
-    #networks = {
-    #  br0 = {
-    #    name = "br0";
-    #    mode = "bridge";
-    #    bridge = "br0";
-    #    autostart = true;
-    #  };
-    #};
+    onBoot = "start";
+    onShutdown = "shutdown";
+    qemu = {
+      ovmf.enable = true; # UEFI guest support
+      swtpm.enable = true; # virtual TPM for Windows/modern OS
+    };
+  };
+
+  environment.sessionVariables = {
+    LIBVIRT_DEFAULT_URI = "qemu:///system";
+  };
+
+  networking = {
+    networkmanager.enable = lib.mkForce false;
+    hostName = config.hostSpec.hostName;
+    useDHCP = false;
+    useNetworkd = true;
+  };
+
+  systemd = {
+    network = {
+      enable = true;
+      netdevs.br0 = {
+        enable = true;
+        netdevConfig = {
+          Kind = "bridge";
+          Name = "br0";
+        };
+      };
+      networks = {
+        br0-lan = {
+          enable = true;
+          matchConfig = {
+            Name = [ "br0" ];
+          };
+          networkConfig = {
+            Bridge = "br0";
+          };
+        };
+
+        br0-lan-bridge = {
+          enable = true;
+          matchConfig = {
+            Name = "br0";
+          };
+
+          networkConfig = {
+            DHCP = "no";
+            Address = [
+              "${config.hostSpec.networking.hosts.stonebark.address}/${toString config.hostSpec.networking.hosts.stonebark.prefixLength}"
+            ];
+            DNS = config.hostSpec.networking.hosts.stonebark.nameservers;
+          };
+
+          routes = [
+            {
+              Destination = " 0.0.0.0/0 ";
+              Gateway = config.hostSpec.networking.hosts.stonebark.gatewayAddress;
+            }
+          ];
+        };
+
+        enp5s0 = {
+          matchConfig = {
+            Name = "enp5s0";
+          };
+
+          networkConfig = {
+            Bridge = "br0";
+            DHCP = "no";
+            DNS = config.hostSpec.networking.hosts.stonebark.nameservers;
+          };
+        };
+      };
+    };
   };
 
   users = {
