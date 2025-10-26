@@ -45,6 +45,65 @@
     };
   };
 
+  virtualisation.libvirt = {
+    enable = true;
+    verbose = true;
+    connections."qemu:///system" = {
+      pools = [
+        {
+          definition = inputs.NixVirt.lib.pool.writeXML {
+            name = "ImagePool";
+            uuid = "c0fbd6d8-0e05-4287-8e37-5f8699ea7d3b";
+            type = "dir";
+            target.path = "/var/lib/libvirt/images";
+          };
+          active = true;
+        }
+      ];
+      domains = [
+        {
+          definition = inputs.NixVirt.lib.domain.writeXML (
+            let
+              base = inputs.NixVirt.lib.domain.templates.linux {
+                name = "riverfall";
+                uuid = "185fb457-a102-4a4a-8f4c-f133d1ee962a";
+                vcpu = { count = 2; };
+                memory = { count = 3; unit = "GiB"; };
+                virtio_video = false;
+                storage_vol = {
+                  pool = "ImagePool";
+                  volume = "riverfall.qcow2";
+                };
+                bridge_name = "br0";
+                virtio_net = true;
+              };
+            in
+            # extend the base definition with serial + console devices
+            base // {
+              devices = base.devices or { } // {
+                serial = [
+                  {
+                    type = "pty";
+                    target.port = 0;
+                  }
+                ];
+                console = [
+                  {
+                    type = "pty";
+                    target = {
+                      type = "serial";
+                      port = 0;
+                    };
+                  }
+                ];
+              };
+            }
+          );
+          active = true;
+        }
+      ];
+    };
+  };
   virtualisation.libvirtd = {
     enable = true;
     onBoot = "start";
@@ -53,10 +112,7 @@
       ovmf.enable = true; # UEFI guest support
       swtpm.enable = true; # virtual TPM for Windows/modern OS
     };
-  };
-
-  environment.sessionVariables = {
-    LIBVIRT_DEFAULT_URI = "qemu:///system";
+    allowedBridges = [ "br0" ];
   };
 
   networking = {
@@ -129,7 +185,7 @@
       isNormalUser = true;
       name = config.hostSpec.username;
       home = config.hostSpec.home;
-      extraGroups = [ "wheel" ];
+      extraGroups = [ "wheel" "libvirtd" "kvm" ];
       openssh.authorizedKeys.keys = config.hostSpec.authorizedKeys;
       hashedPassword = config.hostSpec.hashedPassword;
     };
@@ -153,3 +209,5 @@
 
   system.stateVersion = "25.05";
 }
+
+
