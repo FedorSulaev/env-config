@@ -1,35 +1,34 @@
 { ... }:
 {
-  # ensure kernel modules for virtio disks are included early
+  boot.loader.grub = {
+    enable = true;
+    device = "/dev/vda";
+    extraConfig = ''
+      serial --unit=0 --speed=115200 --word=8 --parity=no --stop=1
+      terminal_input serial
+      terminal_output serial
+    '';
+  };
+
+  boot.kernelParams = [ "console=ttyS0,115200n8" ];
+
   boot.initrd.availableKernelModules = [
     "virtio_pci"
     "virtio_blk"
     "virtio_scsi"
     "virtio_net"
-    "9p"
-    "9pnet_virtio"
   ];
 
-  # Enable a simple boot loader for disk images
-  boot.loader.grub = {
-    enable = true;
-    device = "/dev/vda"; # virtual disk device in qcow2 image
-  };
   fileSystems."/" = {
-    device = "/dev/vda";
+    device = "/dev/vda1";
     fsType = "ext4";
   };
 
-  boot.kernelParams = [ "console=ttyS0,115200n8" "console=tty0" ];
+  services.qemuGuest.enable = true;
 
-  # Enable getty on serial console
   systemd.services."serial-getty@ttyS0" = {
     enable = true;
     wantedBy = [ "multi-user.target" ];
+    serviceConfig.Restart = "always";
   };
-
-  services = {
-    qemuGuest.enable = true;
-  };
-
 }

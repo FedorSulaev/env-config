@@ -23,7 +23,7 @@
   networking = {
     hostName = config.hostSpec.hostName;
     useNetworkd = true;
-    interfaces.eth0 = {
+    interfaces.enp1s0 = {
       useDHCP = false;
       ipv4.addresses = [{
         address = config.hostSpec.networking.hosts.riverfall.address;
