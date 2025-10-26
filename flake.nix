@@ -18,8 +18,8 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    terranix = {
-      url = "github:terranix/terranix";
+    NixVirt = {
+      url = "https://flakehub.com/f/AshleyYakeley/NixVirt/*.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -103,6 +103,7 @@
           };
           modules = [
             inputs.disko.nixosModules.disko
+            inputs.NixVirt.nixosModules.default
             ./hosts/common/disks/host-disk.nix
             ./hosts/stonebark/stonebark.nix
           ];
