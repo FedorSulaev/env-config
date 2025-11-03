@@ -116,6 +116,7 @@
           };
           modules = [
             ./hosts/riverfall/riverfall.nix
+            ./hosts/riverfall/riverfall-qcow.nix
           ];
         };
       };
