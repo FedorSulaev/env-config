@@ -58,6 +58,17 @@
             target.path = "/var/lib/libvirt/images";
           };
           active = true;
+          volumes = [
+            {
+              definition = inputs.NixVirt.lib.volume.writeXML {
+                name = "riverfall.qcow2";
+                capacity = {
+                  count = 40;
+                  unit = "GiB";
+                };
+              };
+            }
+          ];
         }
       ];
       domains = [
@@ -68,7 +79,7 @@
                 name = "riverfall";
                 uuid = "185fb457-a102-4a4a-8f4c-f133d1ee962a";
                 vcpu = { count = 2; };
-                memory = { count = 3; unit = "GiB"; };
+                memory = { count = 2; unit = "GiB"; };
                 virtio_video = false;
                 storage_vol = {
                   pool = "ImagePool";
