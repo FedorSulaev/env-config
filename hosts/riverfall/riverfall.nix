@@ -62,6 +62,7 @@
 
   environment.systemPackages = with pkgs; [
     vim
+    cloud-utils
   ];
 
   virtualisation.containers.enable = true;
@@ -97,9 +98,9 @@
           # ACTUAL_UPLOAD_FILE_SIZE_LIMIT_MB = "20";
         };
         ports = [ "5006:5006" ];
-        volumes = [
-          "/home/fedors/actual-data:/data"
-        ];
+        #volumes = [
+        #  "/home/fedors/actual-data:/data"
+        #];
       };
     };
   };
