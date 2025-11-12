@@ -138,7 +138,7 @@
           inherit pkgs lib;
           name = "riverfall";
           format = "qcow2";
-          diskSize = 8192; # MB
+          diskSize = 40960; # MB
           config = nixosConfig.config;
         };
     };
