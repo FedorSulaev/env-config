@@ -119,27 +119,61 @@
             ./hosts/riverfall/riverfall-qcow.nix
           ];
         };
-      };
-      packages.x86_64-linux.riverfall-qcow2 =
-        let
+        sunpeak = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           pkgs = pkgs-linux-x86;
-          lib = pkgs.lib;
-          nixosConfig = nixpkgs.lib.nixosSystem {
-            inherit system;
-            specialArgs = { inherit inputs; };
-            modules = [
-              ./hosts/riverfall/riverfall.nix
-              ./hosts/riverfall/riverfall-qcow.nix
-            ];
+          specialArgs = {
+            inherit inputs;
           };
-        in
-        import "${nixpkgs}/nixos/lib/make-disk-image.nix" {
-          inherit pkgs lib;
-          name = "riverfall";
-          format = "qcow2";
-          diskSize = 40960; # MB
-          config = nixosConfig.config;
+          modules = [
+            ./hosts/sunpeak/sunpeak.nix
+            ./hosts/sunpeak/sunpeak-qcow.nix
+          ];
         };
+      };
+      packages.x86_64-linux = {
+        riverfall-qcow2 =
+          let
+            system = "x86_64-linux";
+            pkgs = pkgs-linux-x86;
+            lib = pkgs.lib;
+            nixosConfig = nixpkgs.lib.nixosSystem {
+              inherit system;
+              specialArgs = { inherit inputs; };
+              modules = [
+                ./hosts/riverfall/riverfall.nix
+                ./hosts/riverfall/riverfall-qcow.nix
+              ];
+            };
+          in
+          import "${nixpkgs}/nixos/lib/make-disk-image.nix" {
+            inherit pkgs lib;
+            name = "riverfall";
+            format = "qcow2";
+            diskSize = 40960; # MB
+            config = nixosConfig.config;
+          };
+        sunpeak-qcow2 =
+          let
+            system = "x86_64-linux";
+            pkgs = pkgs-linux-x86;
+            lib = pkgs.lib;
+            nixosConfig = nixpkgs.lib.nixosSystem {
+              inherit system;
+              specialArgs = { inherit inputs; };
+              modules = [
+                ./hosts/sunpeak/sunpeak.nix
+                ./hosts/sunpeak/sunpeak-qcow.nix
+              ];
+            };
+          in
+          import "${nixpkgs}/nixos/lib/make-disk-image.nix" {
+            inherit pkgs lib;
+            name = "sunpeak";
+            format = "qcow2";
+            diskSize = 524288; # MB
+            config = nixosConfig.config;
+          };
+      };
     };
 }
