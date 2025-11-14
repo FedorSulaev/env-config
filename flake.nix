@@ -171,7 +171,7 @@
             inherit pkgs lib;
             name = "sunpeak";
             format = "qcow2";
-            diskSize = 524288; # MB
+            diskSize = 40960; # MB
             config = nixosConfig.config;
           };
       };
