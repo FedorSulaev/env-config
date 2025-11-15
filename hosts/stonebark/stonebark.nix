@@ -68,6 +68,15 @@
                 };
               };
             }
+            {
+              definition = inputs.NixVirt.lib.volume.writeXML {
+                name = "sunpeak.qcow2";
+                capacity = {
+                  count = 512;
+                  unit = "GiB";
+                };
+              };
+            }
           ];
         }
       ];
@@ -84,6 +93,46 @@
                 storage_vol = {
                   pool = "ImagePool";
                   volume = "riverfall.qcow2";
+                };
+                bridge_name = "br0";
+                virtio_net = true;
+              };
+            in
+            # extend the base definition with serial + console devices
+            base // {
+              devices = base.devices or { } // {
+                serial = [
+                  {
+                    type = "pty";
+                    target.port = 0;
+                  }
+                ];
+                console = [
+                  {
+                    type = "pty";
+                    target = {
+                      type = "serial";
+                      port = 0;
+                    };
+                  }
+                ];
+              };
+            }
+          );
+          active = true;
+        }
+        {
+          definition = inputs.NixVirt.lib.domain.writeXML (
+            let
+              base = inputs.NixVirt.lib.domain.templates.linux {
+                name = "sunpeak";
+                uuid = "f33b7e4a-15c3-4c67-a913-3a6c8c1caa4d";
+                vcpu = { count = 12; };
+                memory = { count = 24; unit = "GiB"; };
+                virtio_video = false;
+                storage_vol = {
+                  pool = "ImagePool";
+                  volume = "sunpeak.qcow2";
                 };
                 bridge_name = "br0";
                 virtio_net = true;
