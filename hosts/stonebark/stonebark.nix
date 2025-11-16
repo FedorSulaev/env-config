@@ -19,6 +19,9 @@
     kernelParams = [
       "amd_iommu=on"
       "iommu=pt"
+      "isolcpus=12-23"
+      "nohz_full=12-23"
+      "irqaffinity=0-11"
     ];
     kernelModules = [ "vfio" "vfio_pci" "vfio_iommu_type1" "vfio_virqfd" ];
     loader = {
@@ -127,7 +130,26 @@
               base = inputs.NixVirt.lib.domain.templates.linux {
                 name = "sunpeak";
                 uuid = "f33b7e4a-15c3-4c67-a913-3a6c8c1caa4d";
-                vcpu = { count = 12; };
+                vcpu = {
+                  count = 12;
+                  placement = "static";
+                };
+                cputune = {
+                  vcpupin = [
+                    { vcpu = 0; cpuset = "12"; }
+                    { vcpu = 1; cpuset = "13"; }
+                    { vcpu = 2; cpuset = "14"; }
+                    { vcpu = 3; cpuset = "15"; }
+                    { vcpu = 4; cpuset = "16"; }
+                    { vcpu = 5; cpuset = "17"; }
+                    { vcpu = 6; cpuset = "18"; }
+                    { vcpu = 7; cpuset = "19"; }
+                    { vcpu = 8; cpuset = "20"; }
+                    { vcpu = 9; cpuset = "21"; }
+                    { vcpu = 10; cpuset = "22"; }
+                    { vcpu = 11; cpuset = "23"; }
+                  ];
+                };
                 memory = { count = 24; unit = "GiB"; };
                 virtio_video = false;
                 storage_vol = {
