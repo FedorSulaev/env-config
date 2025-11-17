@@ -127,38 +127,53 @@
         {
           definition = inputs.NixVirt.lib.domain.writeXML (
             let
-              base = inputs.NixVirt.lib.domain.templates.linux {
-                name = "sunpeak";
-                uuid = "f33b7e4a-15c3-4c67-a913-3a6c8c1caa4d";
-                vcpu = {
-                  count = 12;
-                  placement = "static";
+              base = inputs.NixVirt.lib.domain.templates.linux
+                {
+                  name = "sunpeak";
+                  uuid = "f33b7e4a-15c3-4c67-a913-3a6c8c1caa4d";
+                  vcpu = {
+                    count = 12;
+                    placement = "static";
+                  };
+                  cpu = {
+                    mode = "host-passthrough";
+                    topology = {
+                      sockets = 1;
+                      cores = 6;
+                      threads = 2;
+                    };
+                  };
+                  cputune = {
+                    vcpupin = [
+                      # physical cores 6–11 (thread 0)
+                      { vcpu = 0; cpuset = "6"; }
+                      { vcpu = 1; cpuset = "7"; }
+                      { vcpu = 2; cpuset = "8"; }
+                      { vcpu = 3; cpuset = "9"; }
+                      { vcpu = 4; cpuset = "10"; }
+                      { vcpu = 5; cpuset = "11"; }
+
+                      # physical cores 6–11 (thread 1 / SMT)
+                      { vcpu = 6; cpuset = "18"; }
+                      { vcpu = 7; cpuset = "19"; }
+                      { vcpu = 8; cpuset = "20"; }
+                      { vcpu = 9; cpuset = "21"; }
+                      { vcpu = 10; cpuset = "22"; }
+                      { vcpu = 11; cpuset = "23"; }
+                    ];
+                    emulatorpin = {
+                      cpuset = "0-5,12-17";
+                    };
+                  };
+                  memory = { count = 24; unit = "GiB"; };
+                  virtio_video = false;
+                  storage_vol = {
+                    pool = "ImagePool";
+                    volume = "sunpeak.qcow2";
+                  };
+                  bridge_name = "br0";
+                  virtio_net = true;
                 };
-                cputune = {
-                  vcpupin = [
-                    { vcpu = 0; cpuset = "12"; }
-                    { vcpu = 1; cpuset = "13"; }
-                    { vcpu = 2; cpuset = "14"; }
-                    { vcpu = 3; cpuset = "15"; }
-                    { vcpu = 4; cpuset = "16"; }
-                    { vcpu = 5; cpuset = "17"; }
-                    { vcpu = 6; cpuset = "18"; }
-                    { vcpu = 7; cpuset = "19"; }
-                    { vcpu = 8; cpuset = "20"; }
-                    { vcpu = 9; cpuset = "21"; }
-                    { vcpu = 10; cpuset = "22"; }
-                    { vcpu = 11; cpuset = "23"; }
-                  ];
-                };
-                memory = { count = 24; unit = "GiB"; };
-                virtio_video = false;
-                storage_vol = {
-                  pool = "ImagePool";
-                  volume = "sunpeak.qcow2";
-                };
-                bridge_name = "br0";
-                virtio_net = true;
-              };
             in
             # extend the base definition with serial + console devices
             base // {
