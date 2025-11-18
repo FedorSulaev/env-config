@@ -22,6 +22,8 @@
       "isolcpus=12-23"
       "nohz_full=12-23"
       "irqaffinity=0-11"
+      "video=efifb:off"
+      "nomodeset"
     ];
     kernelModules = [ "vfio" "vfio_pci" "vfio_iommu_type1" "vfio_virqfd" ];
     loader = {
@@ -137,10 +139,14 @@
                   };
                   cpu = {
                     mode = "host-passthrough";
+                    check = "none";
                     topology = {
                       sockets = 1;
                       cores = 6;
                       threads = 2;
+                    };
+                    features = {
+                      hypervisor = "off";
                     };
                   };
                   cputune = {
@@ -190,6 +196,36 @@
                     target = {
                       type = "serial";
                       port = 0;
+                    };
+                  }
+                ];
+                video = [ ];
+                hostdev = [
+                  {
+                    type = "pci";
+                    managed = true;
+                    source.address = {
+                      domain = 0;
+                      bus = 9;
+                      slot = 0;
+                      function = 0;
+                    };
+                  }
+                  {
+                    type = "pci";
+                    managed = true;
+                    source.address = {
+                      domain = 0;
+                      bus = 9;
+                      slot = 0;
+                      function = 1;
+                    };
+                  }
+                ];
+                features = [
+                  {
+                    kvm = {
+                      hidden = true;
                     };
                   }
                 ];
@@ -302,6 +338,7 @@
   environment.systemPackages = with pkgs; [
     git
     vim
+    pciutils
   ];
 
   system.stateVersion = "25.05";
