@@ -60,6 +60,7 @@
   environment.systemPackages = with pkgs; [
     vim
     cloud-utils
+    pciutils
   ];
 
   system.stateVersion = "25.05";
