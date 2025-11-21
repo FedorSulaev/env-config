@@ -9,6 +9,25 @@
     inherit (inputs.env-secrets) networking;
   };
 
+  boot = {
+    blacklistedKernelModules = [ "nouveau" ];
+    initrd.kernelModules = [ "nvidia" ];
+    kernelModules = [ "nvidia" ];
+    kernelParams = [
+      "nvidia-drm.modeset=1"
+      "fbcon=map:1"
+    ];
+  };
+
+  hardware = {
+    opengl.enable = true;
+    nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = true;
+      open = false;
+    };
+  };
+
   services = {
     openssh = {
       enable = true;
@@ -17,6 +36,10 @@
         PermitRootLogin = "no";
         PubkeyAuthentication = true;
       };
+    };
+    xserver = {
+      enable = false;
+      videoDrivers = [ "nvidia" ];
     };
   };
 
