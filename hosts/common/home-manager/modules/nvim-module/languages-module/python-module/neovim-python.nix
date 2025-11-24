@@ -17,7 +17,7 @@ let
       };
 
       propagatedBuildInputs = with pkgs.python313Packages; [
-        setuptools_scm
+        setuptools-scm
         geopy
         matplotlib
         mercantile
