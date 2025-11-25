@@ -5,7 +5,7 @@ let
   contextily = buildPythonPackage
     rec {
       pname = "contextily";
-      version = "1.6.2";
+      version = "1.7.0";
 
       doCheck = false;
       dontUseCmakeConfigure = true;
@@ -13,7 +13,7 @@ let
 
       src = fetchPypi {
         inherit pname version;
-        sha256 = "sha256-PHR5JSab4kipsadhhZ4F0WgShuBNXQeWva8d40CUdLs=";
+        sha256 = "sha256:6534faa5702b89b46d0d81b4c538754f2d8b3dd8cc298454b11ccedfa67e73ac";
       };
 
       propagatedBuildInputs = with pkgs.python313Packages; [
