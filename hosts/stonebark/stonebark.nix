@@ -259,16 +259,6 @@
     onBoot = "start";
     onShutdown = "shutdown";
     qemu = {
-      ovmf =
-        {
-          enable = true;
-          packages = [
-            (pkgs.OVMF.override {
-              secureBoot = true;
-              tpmSupport = true;
-            }).fd
-          ];
-        };
       swtpm.enable = true; # virtual TPM for Windows/modern OS
     };
     allowedBridges = [ "br0" ];
