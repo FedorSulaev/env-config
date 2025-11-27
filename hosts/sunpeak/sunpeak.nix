@@ -20,7 +20,10 @@
   };
 
   hardware = {
-    opengl.enable = true;
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
     nvidia = {
       modesetting.enable = true;
       powerManagement.enable = true;
@@ -79,6 +82,11 @@
   };
 
   time.timeZone = "Europe/Bucharest";
+
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
 
   environment.systemPackages = with pkgs; [
     vim
