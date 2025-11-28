@@ -51,6 +51,7 @@ in
       umap-learn
       torch
       xgboost
+      statsmodels
     ]))
   ];
   programs.neovim = {
