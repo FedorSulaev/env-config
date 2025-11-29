@@ -355,6 +355,7 @@
     git
     vim
     pciutils
+    usbutils
   ];
 
   system.stateVersion = "25.05";
