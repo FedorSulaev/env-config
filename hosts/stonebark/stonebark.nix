@@ -24,16 +24,20 @@
       "irqaffinity=0-11"
       "video=efifb:off"
       "nomodeset"
+      # GPU, GPU audio, USB
+      "vfio-pci.ids=10de:2484,10de:228b,1022:149c"
     ];
-    kernelModules = [ "vfio" "vfio_pci" "vfio_iommu_type1" "vfio_virqfd" ];
+    kernelModules = [
+      "vfio"
+      "vfio_pci"
+      "vfio_iommu_type1"
+      "vfio_virqfd"
+    ];
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
     blacklistedKernelModules = [ "nouveau" "nvidia" ];
-    extraModprobeConfig = ''
-      options vfio-pci ids=10de:2484,10de:228b
-    '';
   };
 
   services = {
@@ -243,6 +247,17 @@
                         slot = 0;
                         function = 1;
                       };
+                    };
+                  }
+                  {
+                    type = "pci";
+                    managed = true;
+                    driver = { name = "vfio"; };
+                    source.address = {
+                      domain = 0;
+                      bus = 11; # 0x0b == 11
+                      slot = 0;
+                      function = 3;
                     };
                   }
                 ];
