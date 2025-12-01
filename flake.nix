@@ -128,6 +128,17 @@
           modules = [
             ./hosts/sunpeak/sunpeak.nix
             ./hosts/sunpeak/sunpeak-qcow.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                extraSpecialArgs = {
+                  inherit inputs;
+                };
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users."${inputs.env-secrets.sunpeak.username}" = ./hosts/sunpeak/sunpeak-home.nix;
+              };
+            }
           ];
         };
       };

@@ -64,7 +64,7 @@
   };
 
   users = {
-    users.fedorsulaev = {
+    users.${config.hostSpec.username} = {
       isNormalUser = true;
       name = config.hostSpec.username;
       home = config.hostSpec.home;
