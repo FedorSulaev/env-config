@@ -41,9 +41,11 @@
       };
     };
     xserver = {
-      enable = false;
+      enable = true;
       videoDrivers = [ "nvidia" ];
     };
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
   };
 
   networking = {
@@ -68,7 +70,10 @@
       isNormalUser = true;
       name = config.hostSpec.username;
       home = config.hostSpec.home;
-      extraGroups = [ "wheel" ];
+      extraGroups = [
+        "wheel"
+        "video"
+      ];
       openssh.authorizedKeys.keys = config.hostSpec.authorizedKeys;
       hashedPassword = config.hostSpec.hashedPassword;
     };
@@ -88,11 +93,13 @@
     xwayland.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    vim
-    cloud-utils
-    pciutils
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      vim
+      cloud-utils
+      pciutils
+    ];
+  };
 
   system.stateVersion = "25.05";
 }
