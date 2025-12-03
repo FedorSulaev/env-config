@@ -98,6 +98,7 @@
       vim
       cloud-utils
       pciutils
+      usbutils
     ];
   };
 
