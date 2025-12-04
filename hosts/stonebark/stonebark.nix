@@ -37,7 +37,11 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    blacklistedKernelModules = [ "nouveau" "nvidia" ];
+    blacklistedKernelModules = [
+      "nouveau"
+      "nvidia"
+      "btusb"
+    ];
   };
 
   services = {
@@ -259,6 +263,13 @@
                       slot = 0;
                       function = 3;
                     };
+                  }
+                  {
+                    mode = "subsystem";
+                    type = "usb";
+                    managed = false;
+                    source.vendor.id = 32903; # 0x8087
+                    source.product.id = 50; # 0x0032
                   }
                 ];
               };
