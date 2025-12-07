@@ -382,6 +382,7 @@
     vim
     pciutils
     usbutils
+    dmidecode
   ];
 
   system.stateVersion = "25.05";
