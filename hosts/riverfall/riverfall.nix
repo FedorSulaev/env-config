@@ -85,12 +85,12 @@
     oci-containers.backend = "podman";
     oci-containers.containers = {
       actualBudget = {
-        image = "docker.io/actualbudget/actual-server:25.11.0-alpine";
+        image = "docker.io/actualbudget/actual-server:25.12.0-alpine";
         autoStart = true;
         environment = {
           # Environment variables for the Actual Server
-          ACTUAL_HTTPS_KEY = "/data/selfhost.key";
-          ACTUAL_HTTPS_CERT = "/data/selfhost.crt";
+          # ACTUAL_HTTPS_KEY = "/data/selfhost.key";
+          # ACTUAL_HTTPS_CERT = "/data/selfhost.crt";
           # Uncomment and customize additional options if needed
           # ACTUAL_PORT = "5006";
           # ACTUAL_UPLOAD_FILE_SYNC_SIZE_LIMIT_MB = "20";
