@@ -18,6 +18,12 @@
     NIXOS_OZONE_WL = "1";
   };
 
+  dconf.settings = {
+    "org/gnome/desktop/input-sources" = {
+      xkb-options = [ "ctrl:nocaps" ];
+    };
+  };
+
   programs.firefox = {
     enable = true;
   };
