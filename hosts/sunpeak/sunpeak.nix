@@ -50,9 +50,10 @@
 
   networking = {
     hostName = config.hostSpec.hostName;
-    useNetworkd = true;
+    useNetworkd = false;
+    networkmanager.enable = true;
+    useDHCP = false;
     interfaces.enp1s0 = {
-      useDHCP = false;
       ipv4.addresses = [{
         address = config.hostSpec.networking.hosts.sunpeak.address;
         prefixLength = config.hostSpec.networking.hosts.sunpeak.prefixLength;
@@ -84,6 +85,7 @@
 
   nix.settings = {
     trusted-users = [ "root" config.hostSpec.username ];
+    experimental-features = "nix-command flakes";
   };
 
   time.timeZone = "Europe/Bucharest";

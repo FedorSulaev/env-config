@@ -2,6 +2,8 @@
 {
   imports = [
     ../../common/utility/host-spec.nix
+    ./../common/home-manager/modules/tmux-module/tmux-common.nix
+    ./../common/home-manager/common.nix
   ];
 
   hostSpec = {
@@ -16,29 +18,19 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  programs.kitty.enable = true;
-
-  programs.wofi.enable = true;
+  programs.firefox = {
+    enable = true;
+  };
 
   home.packages = with pkgs; [
     gnome-tweaks
     gnomeExtensions.appindicator
-    git
-    neovim
-    htop
-    ripgrep
-    fd
-    jq
-    firefox
     blanket
     bitwarden-desktop
     bitwarden-cli
+    nerd-fonts.jetbrains-mono
+    wezterm
   ];
 
-  programs.zsh = {
-    enable = true;
-    oh-my-zsh.enable = true;
-    oh-my-zsh.theme = "agnoster";
-  };
+  home.file.".wezterm.lua".source = ./../common/home-manager/modules/wezterm-gnome.lua;
 }
-

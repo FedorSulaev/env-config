@@ -39,6 +39,7 @@
     just
     curl
     rsync
+    git
   ];
 
   programs.bottom = {
