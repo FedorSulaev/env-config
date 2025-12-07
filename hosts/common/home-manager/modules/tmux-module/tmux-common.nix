@@ -7,7 +7,7 @@
     keyMode = "vi";
     prefix = "C-s";
     extraConfig = ''
-      set -g default-command "$SHELL -l"
+      if-shell 'test -e /etc/NIXOS' 'set -g default-command "$SHELL -l"'
       bind-key "T" run-shell "sesh connect \"$(
         sesh list --icons | fzf-tmux -p 80%,70% \
           --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
@@ -27,6 +27,7 @@
       {
         plugin = sensible;
         extraConfig = ''
+          if-shell '! test -e /etc/NIXOS' 'set-option -g default-command zsh'
           set -g detach-on-destroy off
         '';
       }
