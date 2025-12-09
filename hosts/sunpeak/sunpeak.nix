@@ -75,6 +75,7 @@
         "wheel"
         "video"
       ];
+      shell = pkgs.zsh;
       openssh.authorizedKeys.keys = config.hostSpec.authorizedKeys;
       hashedPassword = config.hostSpec.hashedPassword;
     };
@@ -90,9 +91,12 @@
 
   time.timeZone = "Europe/Bucharest";
 
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
+  programs = {
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
+    zsh.enable = true;
   };
 
   environment = {

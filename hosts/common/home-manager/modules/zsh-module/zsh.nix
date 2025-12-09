@@ -5,19 +5,30 @@
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
+
     initContent = ''
-      export PATH="/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:$PATH"
-      export PATH="/usr/sbin:$PATH"
-      # Start up Starship shell
+      # On NixOS, make sure /run/wrappers/bin is first in PATH
+      if [ -d /run/wrappers/bin ]; then
+        path=("/run/wrappers/bin" $path)
+      fi
+
+      # /usr/sbin first (non-NixOS)
+      if [ ! -e /etc/NIXOS ]; then
+        export PATH="/usr/sbin:$PATH"
+      fi
+
       eval "$(starship init zsh)"
+
       export EDITOR=vi
       export VISUAL=$EDITOR
     '';
+
     shellAliases = {
       l = "eza -l -a";
       lt = "eza -l -a --tree --level=2";
     };
   };
+
   programs.starship = {
     enable = true;
     settings = {

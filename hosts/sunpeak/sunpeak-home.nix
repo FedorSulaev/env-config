@@ -37,6 +37,8 @@
     bitwarden-cli
     nerd-fonts.jetbrains-mono
     wezterm
+    steam
+    libreoffice
   ];
 
   home.file.".wezterm.lua".source = ./../common/home-manager/modules/wezterm-gnome.lua;
