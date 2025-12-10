@@ -97,6 +97,7 @@
       xwayland.enable = true;
     };
     zsh.enable = true;
+    dconf.enable = true;
   };
 
   environment = {

@@ -39,6 +39,8 @@
     wezterm
     steam
     libreoffice
+    evolution
+    evolution-ews
   ];
 
   home.file.".wezterm.lua".source = ./../common/home-manager/modules/wezterm-gnome.lua;
