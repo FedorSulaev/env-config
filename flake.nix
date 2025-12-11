@@ -27,16 +27,7 @@
   outputs = { self, nixpkgs, home-manager, nix-darwin, ... }@inputs:
     let
       overlays = [
-        (final: prev: {
-          python313 = prev.python313.override {
-            packageOverrides = pyFinal: pyPrev: {
-              # tests fail on 1.32.1
-              cfn-lint = pyPrev.cfn-lint.overridePythonAttrs (_: {
-                doCheck = false;
-              });
-            };
-          };
-        })
+        (final: prev: { })
       ];
       pkgs-mac-arm = import nixpkgs {
         system = "aarch64-darwin";
