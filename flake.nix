@@ -136,6 +136,7 @@
                 };
                 useGlobalPkgs = true;
                 useUserPackages = true;
+                backupFileExtension = "hm-backup";
                 users."${inputs.env-secrets.sunpeak.username}" = ./hosts/sunpeak/sunpeak-home.nix;
               };
             }
