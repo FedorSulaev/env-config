@@ -87,13 +87,6 @@
         };
     in
     {
-      homeConfigurations.Docker-Nix-Test = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs-linux-arm;
-        modules = [
-          ./home-manager/breezora.nix
-        ];
-        extraSpecialArgs = { inherit inputs; };
-      };
       homeConfigurations.DevDsk = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = pkgs-linux-x86;
         modules = [
