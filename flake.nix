@@ -29,19 +29,62 @@
       overlays = [
         (final: prev: { })
       ];
-      pkgs-mac-arm = import nixpkgs {
-        system = "aarch64-darwin";
-        overlays = overlays;
-      };
-      pkgs-linux-arm = import nixpkgs {
-        system = "aarch64-linux";
-        overlays = overlays;
-      };
-      pkgs-linux-x86 = import nixpkgs {
-        system = "x86_64-linux";
-        overlays = overlays;
+
+      mkPkgs = system: import nixpkgs {
+        inherit system overlays;
         config.allowUnfree = true;
       };
+      pkgs-mac-arm = mkPkgs "aarch64-darwin";
+      pkgs-linux-x86 = mkPkgs "x86_64-linux";
+
+      mkNixos = modules: nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        pkgs = pkgs-linux-x86;
+        specialArgs = { inherit inputs; };
+        inherit modules;
+      };
+
+      vmDefs = {
+        riverfall = {
+          modules = [
+            ./hosts/riverfall/riverfall.nix
+            ./hosts/riverfall/riverfall-qcow.nix
+          ];
+          diskSize = 40960;
+          imageName = "riverfall-qcow2";
+        };
+        sunpeak = {
+          modules = [
+            ./hosts/sunpeak/sunpeak.nix
+            ./hosts/sunpeak/sunpeak-qcow.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                extraSpecialArgs = { inherit inputs; };
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "hm-backup";
+                users."${inputs.env-secrets.sunpeak.username}" =
+                  ./hosts/sunpeak/sunpeak-home.nix;
+              };
+            }
+          ];
+          diskSize = 40960;
+          imageName = "sunpeak-qcow2";
+        };
+      };
+      mkVMImage = { imageName, modules, diskSize }:
+        let
+          vmConfig = mkNixos modules;
+        in
+        import "${nixpkgs}/nixos/lib/make-disk-image.nix" {
+          pkgs = pkgs-linux-x86;
+          lib = pkgs-linux-x86.lib;
+          inherit diskSize;
+          name = imageName;
+          format = "qcow2";
+          config = vmConfig.config;
+        };
     in
     {
       homeConfigurations.Docker-Nix-Test = inputs.home-manager.lib.homeManagerConfiguration {
@@ -58,6 +101,7 @@
         ];
         extraSpecialArgs = { inherit inputs; };
       };
+
       darwinConfigurations = {
         breezora = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
@@ -77,106 +121,31 @@
           inputs = inputs;
         };
       };
+
       nixosConfigurations = {
-        iso = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          pkgs = pkgs-linux-x86;
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [ ./hosts/iso/iso.nix ];
-        };
-        stonebark = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          pkgs = pkgs-linux-x86;
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            inputs.disko.nixosModules.disko
-            inputs.NixVirt.nixosModules.default
-            ./hosts/common/disks/host-disk.nix
-            ./hosts/stonebark/stonebark.nix
-          ];
-        };
-        riverfall = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          pkgs = pkgs-linux-x86;
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            ./hosts/riverfall/riverfall.nix
-            ./hosts/riverfall/riverfall-qcow.nix
-          ];
-        };
-        sunpeak = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          pkgs = pkgs-linux-x86;
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            ./hosts/sunpeak/sunpeak.nix
-            ./hosts/sunpeak/sunpeak-qcow.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                extraSpecialArgs = {
-                  inherit inputs;
-                };
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                backupFileExtension = "hm-backup";
-                users."${inputs.env-secrets.sunpeak.username}" = ./hosts/sunpeak/sunpeak-home.nix;
-              };
-            }
-          ];
-        };
-      };
-      packages.x86_64-linux = {
-        riverfall-qcow2 =
+        iso = mkNixos [ ./hosts/iso/iso.nix ];
+        stonebark = mkNixos [
+          inputs.disko.nixosModules.disko
+          inputs.NixVirt.nixosModules.default
+          ./hosts/common/disks/host-disk.nix
+          ./hosts/stonebark/stonebark.nix
+        ];
+      }
+      // nixpkgs.lib.mapAttrs (_name: def: mkNixos def.modules) vmDefs;
+
+      packages.x86_64-linux = nixpkgs.lib.mapAttrs'
+        (vmName: def:
           let
-            system = "x86_64-linux";
-            pkgs = pkgs-linux-x86;
-            lib = pkgs.lib;
-            nixosConfig = nixpkgs.lib.nixosSystem {
-              inherit system;
-              specialArgs = { inherit inputs; };
-              modules = [
-                ./hosts/riverfall/riverfall.nix
-                ./hosts/riverfall/riverfall-qcow.nix
-              ];
-            };
+            imageName = def.imageName or "${vmName}-qcow2";
           in
-          import "${nixpkgs}/nixos/lib/make-disk-image.nix" {
-            inherit pkgs lib;
-            name = "riverfall";
-            format = "qcow2";
-            diskSize = 40960; # MB
-            config = nixosConfig.config;
-          };
-        sunpeak-qcow2 =
-          let
-            system = "x86_64-linux";
-            pkgs = pkgs-linux-x86;
-            lib = pkgs.lib;
-            nixosConfig = nixpkgs.lib.nixosSystem {
-              inherit system;
-              specialArgs = { inherit inputs; };
-              modules = [
-                ./hosts/sunpeak/sunpeak.nix
-                ./hosts/sunpeak/sunpeak-qcow.nix
-              ];
+          {
+            name = imageName;
+            value = mkVMImage {
+              inherit imageName;
+              inherit (def) modules diskSize;
             };
-          in
-          import "${nixpkgs}/nixos/lib/make-disk-image.nix" {
-            inherit pkgs lib;
-            name = "sunpeak";
-            format = "qcow2";
-            diskSize = 40960; # MB
-            config = nixosConfig.config;
-          };
-      };
+          }
+        )
+        vmDefs;
     };
 }
