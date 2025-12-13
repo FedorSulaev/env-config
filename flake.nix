@@ -72,7 +72,16 @@
           diskSize = 40960;
           imageName = "sunpeak-qcow2";
         };
+        thornhollow = {
+          modules = [
+            ./hosts/thornhollow/thornhollow.nix
+            ./hosts/thornhollow/thornhollow-qcow.nix
+          ];
+          diskSize = 8192;
+          imageName = "thornhollow-qcow2";
+        };
       };
+
       mkVMImage = { imageName, modules, diskSize }:
         let
           vmConfig = mkNixos modules;
