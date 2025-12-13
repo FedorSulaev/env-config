@@ -90,6 +90,16 @@
                 };
               };
             }
+            {
+              definition = inputs.NixVirt.lib.volume.writeXML
+                {
+                  name = "thornhollow.qcow2";
+                  capacity = {
+                    count = 40;
+                    unit = "GiB";
+                  };
+                };
+            }
           ];
         }
       ];
@@ -270,6 +280,45 @@
                     managed = false;
                     source.vendor.id = 32903; # 0x8087
                     source.product.id = 50; # 0x0032
+                  }
+                ];
+              };
+            }
+          );
+          active = true;
+        }
+        {
+          definition = inputs.NixVirt.lib.domain.writeXML (
+            let
+              base = inputs.NixVirt.lib.domain.templates.linux {
+                name = "thornhollow";
+                uuid = "37cb5b32-f6d7-433e-bc78-d771b9cd1839";
+                vcpu = { count = 2; };
+                memory = { count = 2; unit = "GiB"; };
+                virtio_video = false;
+                storage_vol = {
+                  pool = "ImagePool";
+                  volume = "thornhollow.qcow2";
+                };
+                bridge_name = "br0";
+                virtio_net = true;
+              };
+            in
+            base // {
+              devices = base.devices or { } // {
+                serial = [
+                  {
+                    type = "pty";
+                    target.port = 0;
+                  }
+                ];
+                console = [
+                  {
+                    type = "pty";
+                    target = {
+                      type = "serial";
+                      port = 0;
+                    };
                   }
                 ];
               };
