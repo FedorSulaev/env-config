@@ -27,6 +27,21 @@
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-bin;
+    profiles.default = {
+      isDefault = true;
+      # --- imported profile
+      id = 0;
+      name = "default";
+      path = "ep7cfvhx.default";
+      # ---
+      settings = {
+        "browser.tabs.verticalTabs" = true;
+        "browser.tabs.verticalTabs.position" = "right";
+        "browser.startup.page" = 3;
+        "browser.sessionstore.resume_session_once" = false;
+        "browser.ctrlTab.sortByRecentlyUsed" = true;
+      };
+    };
   };
 
   home.packages = with pkgs; [
