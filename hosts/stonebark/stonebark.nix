@@ -71,36 +71,25 @@
             target.path = "/var/lib/libvirt/images";
           };
           active = true;
-          volumes = [
-            {
-              definition = inputs.NixVirt.lib.volume.writeXML {
-                name = "riverfall.qcow2";
-                capacity = {
-                  count = 40;
-                  unit = "GiB";
-                };
-              };
-            }
-            {
-              definition = inputs.NixVirt.lib.volume.writeXML {
-                name = "sunpeak.qcow2";
-                capacity = {
-                  count = 512;
-                  unit = "GiB";
-                };
-              };
-            }
-            {
-              definition = inputs.NixVirt.lib.volume.writeXML
-                {
-                  name = "thornhollow.qcow2";
+          volumes =
+            let
+              volumeSpecs = [
+                { name = "riverfall.qcow2"; sizeGiB = 40; }
+                { name = "sunpeak.qcow2"; sizeGiB = 512; }
+                { name = "thornhollow.qcow2"; sizeGiB = 40; }
+              ];
+            in
+            map
+              (volume: {
+                definition = inputs.NixVirt.lib.volume.writeXML {
+                  name = volume.name;
                   capacity = {
-                    count = 40;
+                    count = volume.sizeGiB;
                     unit = "GiB";
                   };
                 };
-            }
-          ];
+              })
+              volumeSpecs;
         }
       ];
       domains = [
