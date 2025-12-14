@@ -64,23 +64,13 @@
     cloud-utils
   ];
 
-  virtualisation.containers.enable = true;
-  virtualisation = {
-    podman = {
-      enable = true;
-      dockerCompat = true;
-      defaultNetwork.settings.dns_enabled = true;
-      autoPrune = {
-        enable = true;
-        dates = "weekly";
-        flags = [
-          "--filter=until=24h"
-          "--filter=label!=important"
-        ];
-      };
-    };
-    oci-containers.backend = "podman";
-    oci-containers.containers = { };
+  services.nginx = {
+    enable = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+    virtualHosts = { };
   };
 
   system.stateVersion = "25.11";
