@@ -20,9 +20,9 @@
     kernelParams = [
       "amd_iommu=on"
       "iommu=pt"
-      "isolcpus=12-23"
-      "nohz_full=12-23"
-      "irqaffinity=0-11"
+      "isolcpus=6-11,18-23"
+      "nohz_full=6-11,18-23"
+      "irqaffinity=0-5,12-17"
       "video=efifb:off"
       "nomodeset"
       # GPU, GPU audio, USB
@@ -165,7 +165,7 @@
                 ];
 
                 emulatorpin = {
-                  cpuset = "0-5,12-17";
+                  cpuset = "0-1,12-13";
                 };
               };
 
