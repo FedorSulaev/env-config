@@ -26,11 +26,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1765326679,
-        "narHash": "sha256-fTLX9kDwLr9Y0rH/nG+h1XG5UU+jBcy0PFYn5eneRX8=",
+        "lastModified": 1765794845,
+        "narHash": "sha256-YD5QWlGnusNbZCqR3pxG8tRxx9yUXayLZfAJRWspq2s=",
         "owner": "nix-community",
         "repo": "disko",
-        "rev": "d64e5cdca35b5fad7c504f615357a7afe6d9c49e",
+        "rev": "7194cfe5b7a3660726b0fe7296070eaef601cae9",
         "type": "github"
       },
       "original": {
@@ -44,11 +44,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1765466292,
-        "narHash": "sha256-xuam+1Ffj3G7MlKEePc3DNyMZizZg9tH76IBUlWycco=",
+        "lastModified": 1765804776,
+        "narHash": "sha256-4PbWm1EanlgFWX0NyTVvszHeqp3ySjhSKL1CbPlhv1o=",
         "ref": "refs/heads/main",
-        "rev": "33fda953b9caa3a08392b9c03d5f07a1647b9500",
-        "revCount": 45,
+        "rev": "71b33387a53cfdbb5304a8f5b1371a68e2209dd8",
+        "revCount": 47,
         "type": "git",
         "url": "ssh://git@github.com-env-secrets/FedorSulaev/env-secrets.git"
       },
@@ -79,11 +79,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1765384171,
-        "narHash": "sha256-FuFtkJrW1Z7u+3lhzPRau69E0CNjADku1mLQQflUORo=",
+        "lastModified": 1765605144,
+        "narHash": "sha256-RM2xs+1HdHxesjOelxoA3eSvXShC8pmBvtyTke4Ango=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "44777152652bc9eacf8876976fa72cc77ca8b9d8",
+        "rev": "90b62096f099b73043a747348c11dbfcfbdea949",
         "type": "github"
       },
       "original": {
@@ -128,11 +128,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1765466609,
-        "narHash": "sha256-SIf3QsL9tieCrgO9khH/VcvZJrEW3Q/snhe7GgSAeSw=",
+        "lastModified": 1765804099,
+        "narHash": "sha256-FvoTSF+TbCcU0ortZxMeHIlf2aOzGneMf36WfmMmxP4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "0994440d7e06c0bbf0c17b7b0aac1eee31f8da3e",
+        "rev": "cbd731c6378e07e393ad1bf16538814579fde674",
         "type": "github"
       },
       "original": {
