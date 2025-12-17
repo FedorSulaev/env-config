@@ -22,7 +22,7 @@
       "iommu=pt"
       "isolcpus=6-11,18-23"
       "nohz_full=6-11,18-23"
-      "irqaffinity=0-5,12-17"
+      "irqaffinity=0,12"
       "video=efifb:off"
       "nomodeset"
       # GPU, GPU audio, USB
@@ -144,6 +144,8 @@
                 };
               };
 
+              iothreads = { count = 1; };
+
               # CPU pinning
               cputune = {
                 vcpupin = [
@@ -165,8 +167,10 @@
                 ];
 
                 emulatorpin = {
-                  cpuset = "0-1,12-13";
+                  cpuset = "1,13";
                 };
+
+                iothreadpin = [{ iothread = 1; cpuset = "1,13"; }];
               };
 
               devices = (base.devices or { }) // {
