@@ -20,8 +20,8 @@
     kernelParams = [
       "amd_iommu=on"
       "iommu=pt"
-      "isolcpus=6-11,18-23"
-      "nohz_full=6-11,18-23"
+      "isolcpus=2-11,14-23"
+      "nohz_full=2-11,14-23"
       "irqaffinity=0,12"
       "video=efifb:off"
       "nomodeset"
@@ -70,7 +70,6 @@
               base = inputs.NixVirt.lib.domain.templates.linux {
                 name = "riverfall";
                 uuid = "185fb457-a102-4a4a-8f4c-f133d1ee962a";
-                vcpu = { count = 2; };
                 memory = { count = 2; unit = "GiB"; };
                 virtio_video = false;
                 storage_vol = {
@@ -83,6 +82,30 @@
             in
             # extend the base definition with serial + console devices
             base // {
+              vcpu = {
+                count = 2;
+                placement = "static";
+              };
+              cpu = (base.cpu or { }) // {
+                mode = "host-passthrough";
+                check = "none";
+                topology = {
+                  sockets = 1;
+                  cores = 1;
+                  threads = 2;
+                };
+              };
+              iothreads = { count = 1; };
+              cputune = {
+                vcpupin = [
+                  { vcpu = 0; cpuset = "2"; }
+                  { vcpu = 1; cpuset = "14"; }
+                ];
+                emulatorpin = {
+                  cpuset = "1,13";
+                };
+                iothreadpin = [{ iothread = 1; cpuset = "1,13"; }];
+              };
               devices = base.devices or { } // {
                 serial = [
                   {
@@ -269,6 +292,30 @@
               };
             in
             base // {
+              vcpu = {
+                count = 2;
+                placement = "static";
+              };
+              cpu = (base.cpu or { }) // {
+                mode = "host-passthrough";
+                check = "none";
+                topology = {
+                  sockets = 1;
+                  cores = 1;
+                  threads = 2;
+                };
+              };
+              iothreads = { count = 1; };
+              cputune = {
+                vcpupin = [
+                  { vcpu = 0; cpuset = "3"; }
+                  { vcpu = 1; cpuset = "15"; }
+                ];
+                emulatorpin = {
+                  cpuset = "1,13";
+                };
+                iothreadpin = [{ iothread = 1; cpuset = "1,13"; }];
+              };
               devices = base.devices or { } // {
                 serial = [
                   {
