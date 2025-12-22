@@ -98,12 +98,16 @@
           # ACTUAL_UPLOAD_FILE_SIZE_LIMIT_MB = "20";
         };
         ports = [ "5006:5006" ];
-        #volumes = [
-        #  "/home/fedors/actual-data:/data"
-        #];
+        volumes = [
+          "/var/lib/actualbudget:/data"
+        ];
       };
     };
   };
+
+  systemd.tmpfiles.rules = [
+    "d /var/lib/actualbudget 0750 1000 1000 -"
+  ];
 
   system.stateVersion = "25.05";
 }
