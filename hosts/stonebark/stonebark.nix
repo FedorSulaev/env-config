@@ -256,7 +256,7 @@
                     driver = { name = "vfio"; };
                     source.address = {
                       domain = 0;
-                      bus = 11; # 0x0b == 11
+                      bus = 13; # 0x0d == 13
                       slot = 0;
                       function = 3;
                     };
