@@ -29,6 +29,7 @@
       powerManagement.enable = true;
       open = false;
     };
+    enableRedistributableFirmware = true;
   };
 
   services = {

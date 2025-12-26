@@ -264,7 +264,7 @@
                   {
                     mode = "subsystem";
                     type = "usb";
-                    managed = false;
+                    managed = true;
                     source.vendor.id = 32903; # 0x8087
                     source.product.id = 50; # 0x0032
                   }
