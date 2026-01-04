@@ -51,12 +51,13 @@
     bitwarden-desktop
     bitwarden-cli
     nerd-fonts.jetbrains-mono
-    wezterm
+    alacritty
     steam
     libreoffice
     evolution
     evolution-ews
   ];
 
-  home.file.".wezterm.lua".source = ./../common/home-manager/modules/wezterm-gnome.lua;
+  home.file.".config/alacritty/alacritty.toml".source =
+    ./../common/home-manager/modules/alacritty-gnome.toml;
 }
