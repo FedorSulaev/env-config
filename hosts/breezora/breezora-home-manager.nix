@@ -7,7 +7,7 @@
 
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
-    wezterm
+    alacritty
     postgresql
     exercism
     nixos-anywhere
@@ -18,7 +18,8 @@
   home.homeDirectory = "/Users/fedorsulaev";
   home.username = "fedorsulaev";
 
-  home.file.".wezterm.lua".source = ./../common/home-manager/modules/wezterm.lua;
+  home.file.".config/alacritty/alacritty.toml".source =
+    ./../common/home-manager/modules/alacritty.toml;
 
   fonts.fontconfig.enable = true;
 }
