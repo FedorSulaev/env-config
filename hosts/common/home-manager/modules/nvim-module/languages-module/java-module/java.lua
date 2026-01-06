@@ -3,6 +3,11 @@ local jdtls = require("jdtls")
 local root_dir = require("jdtls.setup").find_root({ "packageInfo" }, "Config")
 local eclipse_workspace = home .. "/.local/share/eclipse/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
 
+vim.bo.expandtab = true
+vim.bo.shiftwidth = 2
+vim.bo.softtabstop = 2
+vim.bo.tabstop = 2
+
 local ws_folders_jdtls = {}
 if root_dir then
     local file = io.open(root_dir .. "/.bemol/ws_root_folders")
