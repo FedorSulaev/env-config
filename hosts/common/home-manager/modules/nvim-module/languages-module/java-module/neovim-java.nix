@@ -11,7 +11,6 @@
 
   programs.neovim = {
     extraPackages = with pkgs; [
-      jdt-language-server
       lombok
       vscode-extensions.vscjava.vscode-java-debug
       vscode-extensions.vscjava.vscode-java-test
@@ -38,6 +37,7 @@
   home.packages = with pkgs; [
     maven
     google-java-format
+    jdt-language-server
   ];
 
   home.file.".config/nvim/after/ftplugin/java.lua".source = ./java.lua;
