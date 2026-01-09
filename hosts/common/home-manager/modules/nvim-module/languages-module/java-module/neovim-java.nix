@@ -35,12 +35,12 @@
   };
 
   home.packages = with pkgs; [
+    gradle
     maven
     google-java-format
     jdt-language-server
   ];
 
-  home.file.".config/nvim/after/ftplugin/java.lua".source = ./java.lua;
   home.file.".lombok/lombok.jar".source = "${pkgs.lombok}/share/java/lombok.jar";
   home.file.".java-debug/java-debug.jar".source = "${pkgs.vscode-extensions.vscjava.vscode-java-debug}/share/vscode/extensions/vscjava.vscode-java-debug/server/com.microsoft.java.debug.plugin-0.50.0.jar";
   home.file.".java-test/java-test.jar".source = "${pkgs.vscode-extensions.vscjava.vscode-java-test}/share/vscode/extensions/vscjava.vscode-java-test/server/com.microsoft.java.test.plugin-0.40.1.jar";
