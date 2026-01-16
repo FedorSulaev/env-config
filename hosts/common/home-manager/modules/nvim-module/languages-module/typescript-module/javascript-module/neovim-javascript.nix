@@ -2,7 +2,6 @@
 {
   programs.neovim = {
     extraPackages = with pkgs; [
-      nodejs_20
       nodePackages.prettier
     ];
     plugins = with pkgs.vimPlugins; [
@@ -12,5 +11,7 @@
       }
     ];
   };
-  home.sessionPath = [ "${pkgs.nodejs_20}/bin" ];
+  home.packages = with pkgs; [
+    nodejs-slim_20
+  ];
 }
