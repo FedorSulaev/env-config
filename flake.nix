@@ -22,9 +22,13 @@
       url = "https://flakehub.com/f/AshleyYakeley/NixVirt/*.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-darwin, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nix-darwin, sops-nix, ... }@inputs:
     let
       overlays = [
         (final: prev: { })
@@ -74,6 +78,7 @@
         };
         thornhollow = {
           modules = [
+            sops-nix.nixosModules.sops
             ./hosts/thornhollow/thornhollow.nix
             ./hosts/thornhollow/thornhollow-qcow.nix
           ];
