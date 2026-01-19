@@ -9,6 +9,12 @@
     inherit (inputs.env-secrets) networking;
   };
 
+  sops = {
+    defaultSopsFile = "${builtins.toString inputs.env-secrets + "/sops"}/${config.hostSpec.hostName}.enc.yaml";
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    secrets."hello" = { };
+  };
+
   services = {
     openssh = {
       enable = true;
