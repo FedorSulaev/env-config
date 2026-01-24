@@ -12,7 +12,7 @@
   sops = {
     defaultSopsFile = "${builtins.toString inputs.env-secrets + "/sops"}/${config.hostSpec.hostName}.enc.yaml";
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-    secrets."hello" = { };
+    secrets."ddns_env" = { };
   };
 
   services = {
@@ -97,7 +97,7 @@
 
     serviceConfig = {
       Type = "oneshot";
-      EnvironmentFile = config.hostSpec.networking.dns.secretsFile;
+      EnvironmentFile = config.sops.secrets."ddns_env".path;
       StateDirectory = "update-ddns";
       ReadWritePaths = [ "/var/lib/update-ddns" ];
       NoNewPrivileges = true;
