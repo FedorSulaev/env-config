@@ -51,6 +51,7 @@
       vmDefs = {
         riverfall = {
           modules = [
+            sops-nix.nixosModules.sops
             ./hosts/riverfall/riverfall.nix
             ./hosts/riverfall/riverfall-qcow.nix
           ];
