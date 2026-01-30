@@ -9,6 +9,12 @@
     inherit (inputs.env-secrets) networking;
   };
 
+  sops = {
+    defaultSopsFile = "${builtins.toString inputs.env-secrets + "/sops"}/${config.hostSpec.hostName}.enc.yaml";
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    secrets."nextcloud_env" = { };
+  };
+
   services = {
     openssh = {
       enable = true;
@@ -37,6 +43,7 @@
     nameservers = config.hostSpec.networking.hosts.stonebark.nameservers;
     firewall.allowedTCPPorts = [
       5006 # ActualBudget
+      5007 # Nextcloud
     ];
   };
 
@@ -102,11 +109,48 @@
           "/var/lib/actualbudget:/data"
         ];
       };
+
+      nextcloud-db = {
+        image = "docker.io/library/postgres:17-alpine";
+        autoStart = true;
+        environment = {
+          POSTGRES_DB = "nextcloud";
+        };
+        environmentFiles = [ config.sops.secrets."nextcloud_env".path ];
+        volumes = [
+          "/var/lib/nextcloud/postgres:/var/lib/postgresql/data"
+        ];
+      };
+
+      nextcloud-redis = {
+        image = "docker.io/library/redis:7-alpine";
+        autoStart = true;
+        cmd = [ "redis-server" "--save" "" "--appendonly" "no" ];
+      };
+
+      nextcloud = {
+        image = "docker.io/library/nextcloud:31";
+        autoStart = true;
+        dependsOn = [ "nextcloud-db" "nextcloud-redis" ];
+        environment = {
+          POSTGRES_HOST = "nextcloud-db";
+          POSTGRES_DB = "nextcloud";
+          REDIS_HOST = "nextcloud-redis";
+        };
+        environmentFiles = [ config.sops.secrets."nextcloud_env".path ];
+        ports = [ "8080:80" ];
+        volumes = [
+          "/var/lib/nextcloud/html:/var/www/html"
+        ];
+      };
     };
   };
 
   systemd.tmpfiles.rules = [
     "d /var/lib/actualbudget 0750 1000 1000 -"
+    "d /var/lib/nextcloud 0750 root root -"
+    "d /var/lib/nextcloud/html 0750 root root -"
+    "d /var/lib/nextcloud/postgres 0750 root root -"
   ];
 
   system.stateVersion = "25.05";
