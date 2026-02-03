@@ -138,7 +138,7 @@
           REDIS_HOST = "nextcloud-redis";
         };
         environmentFiles = [ config.sops.secrets."nextcloud_env".path ];
-        ports = [ "8080:80" ];
+        ports = [ "5007:80" ];
         volumes = [
           "/var/lib/nextcloud/html:/var/www/html"
         ];
