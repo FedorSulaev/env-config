@@ -28,7 +28,7 @@
       enable = true;
       recommendedGzipSettings = true;
       recommendedOptimisation = true;
-      recommendedProxySettings = true;
+      recommendedProxySettings = false;
       recommendedTlsSettings = true;
       virtualHosts = {
         "_" = {
@@ -41,12 +41,31 @@
           locations."/" = {
             proxyPass = "http://${config.hostSpec.networking.dns.riverfall.actual.target}";
             proxyWebsockets = true;
-
             extraConfig = ''
               proxy_set_header Host $host;
               proxy_set_header X-Real-IP $remote_addr;
               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_set_header X-Forwarded-Proto https;
+            '';
+          };
+        };
+        "${config.hostSpec.networking.dns.riverfall.nextcloud.domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://${config.hostSpec.networking.dns.riverfall.nextcloud.target}";
+            proxyWebsockets = false;
+            extraConfig = ''
+              proxy_http_version 1.1;
+              proxy_set_header Connection "";
+
+              proxy_set_header Host $host;
+              proxy_set_header X-Forwarded-Host $host;
+              proxy_set_header X-Forwarded-Proto https;
+              proxy_set_header X-Forwarded-Port 443;
+
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             '';
           };
         };

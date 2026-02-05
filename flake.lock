@@ -44,11 +44,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1771163350,
-        "narHash": "sha256-H19iGhQykq5eVKZwN4xOcJWQZtBXloDuBJBG22d6UKA=",
+        "lastModified": 1771164373,
+        "narHash": "sha256-VJ4Nkkv1XHj8I+NrsZwXaZUrQ3QtC9ABsuW9FevrLP0=",
         "ref": "refs/heads/main",
-        "rev": "965e248eb97b63d2cf0194edbaa0dc18103d78c2",
-        "revCount": 63,
+        "rev": "7e5e139eacab1a201f5336bc60874387a858da8c",
+        "revCount": 64,
         "type": "git",
         "url": "ssh://git@github.com-env-secrets/FedorSulaev/env-secrets.git"
       },
