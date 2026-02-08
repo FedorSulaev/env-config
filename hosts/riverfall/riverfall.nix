@@ -149,8 +149,8 @@
   systemd.tmpfiles.rules = [
     "d /var/lib/actualbudget 0750 1000 1000 -"
     "d /var/lib/nextcloud 0750 root root -"
-    "d /var/lib/nextcloud/html 0750 root root -"
-    "d /var/lib/nextcloud/postgres 0750 root root -"
+    "d /var/lib/nextcloud/html 0750 33 33 -"
+    "d /var/lib/nextcloud/postgres 0700 70 70 -"
   ];
 
   system.stateVersion = "25.05";
