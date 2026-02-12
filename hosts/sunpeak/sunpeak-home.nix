@@ -56,6 +56,7 @@
     libreoffice
     evolution
     evolution-ews
+    anki-bin
   ];
 
   home.file.".config/alacritty/alacritty.toml".source =
