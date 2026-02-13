@@ -57,6 +57,7 @@
     evolution
     evolution-ews
     anki-bin
+    mpv
   ];
 
   home.file.".config/alacritty/alacritty.toml".source =
