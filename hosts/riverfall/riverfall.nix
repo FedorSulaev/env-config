@@ -92,7 +92,7 @@
     oci-containers.backend = "podman";
     oci-containers.containers = {
       actualBudget = {
-        image = "docker.io/actualbudget/actual-server:26.2.0-alpine";
+        image = "docker.io/actualbudget/actual-server:26.2.1-alpine";
         autoStart = true;
         environment = {
           # Environment variables for the Actual Server
