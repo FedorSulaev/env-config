@@ -40,6 +40,7 @@
         "browser.startup.page" = 3;
         "browser.sessionstore.resume_session_once" = false;
         "browser.ctrlTab.sortByRecentlyUsed" = true;
+        "gfx.wayland.hdr" = true;
       };
     };
   };
