@@ -21,6 +21,17 @@
         plugin = nvim-dap-go;
         config = utility.toLuaFile ./dap-go.lua;
       }
+      # rest-nvim
+      (nvim-treesitter.withPlugins
+        (
+          plugins: with plugins; [
+            tree-sitter-http
+          ]
+        ))
+      {
+        plugin = rest-nvim;
+        config = utility.toLuaFile ./rest-nvim.lua;
+      }
     ];
   };
 }
