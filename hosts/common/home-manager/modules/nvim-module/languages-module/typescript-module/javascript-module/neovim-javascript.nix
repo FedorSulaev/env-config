@@ -12,6 +12,6 @@
     ];
   };
   home.packages = with pkgs; [
-    nodejs-slim_20
+    nodejs_24
   ];
 }
