@@ -34,6 +34,10 @@
       url = "github:vic/import-tree";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    wrapper-modules = {
+      url = "github:BirdeeHub/nix-wrapper-modules";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, nix-darwin, sops-nix, ... }@inputs:
