@@ -75,6 +75,22 @@ let
     };
 in
 {
+  perSystem = { system, ... }: {
+    packages =
+      if system == "x86_64-linux" then
+        inputs.nixpkgs.lib.mapAttrs'
+          (vmName: def: {
+            name = def.imageName or "${vmName}-qcow2";
+            value = mkVMImage {
+              imageName = def.imageName or "${vmName}-qcow2";
+              inherit (def) modules diskSize;
+            };
+          })
+          vmDefs
+      else
+        { };
+  };
+
   flake = {
     homeConfigurations.DevDsk =
       inputs.home-manager.lib.homeManagerConfiguration {
@@ -117,21 +133,5 @@ in
         ];
       }
       // nixpkgs.lib.mapAttrs (_name: def: mkNixos def.modules) vmDefs;
-
-    packages.x86_64-linux =
-      nixpkgs.lib.mapAttrs'
-        (vmName: def:
-          let
-            imageName = def.imageName or "${vmName}-qcow2";
-          in
-          {
-            name = imageName;
-            value = mkVMImage {
-              inherit imageName;
-              inherit (def) modules diskSize;
-            };
-          }
-        )
-        vmDefs;
   };
 }
