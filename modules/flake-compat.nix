@@ -3,7 +3,26 @@ let
   inherit (inputs) nixpkgs sops-nix home-manager nix-darwin;
 
   overlays = [
-    (final: prev: { })
+    (final: prev: {
+      # Fixes Darwin build error
+      python313 = prev.python313.override {
+        packageOverrides = pyFinal: pyPrev: {
+          imageio-ffmpeg = pyPrev.imageio-ffmpeg.overridePythonAttrs (_old: {
+            doCheck = false;
+            doInstallCheck = false;
+          });
+          imageio = pyPrev.imageio.overridePythonAttrs (_old: {
+            doCheck = false;
+            doInstallCheck = false;
+          });
+        };
+      };
+      python313Packages = final.python313.pkgs;
+      ffmpeg = prev.ffmpeg.overrideAttrs (_old: {
+        doCheck = false;
+        doInstallCheck = false;
+      });
+    })
   ];
 
   mkPkgs = system: import nixpkgs {
