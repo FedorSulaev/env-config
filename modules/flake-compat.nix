@@ -1,49 +1,11 @@
 { inputs, ... }:
 let
-  inherit (inputs) nixpkgs sops-nix home-manager nix-darwin;
-
-  overlays = [
-    (final: prev: {
-      # Fixes Darwin build error
-      python313 = prev.python313.override {
-        packageOverrides = pyFinal: pyPrev: {
-          imageio-ffmpeg = pyPrev.imageio-ffmpeg.overridePythonAttrs (_old: {
-            doCheck = false;
-            doInstallCheck = false;
-          });
-          imageio = pyPrev.imageio.overridePythonAttrs (_old: {
-            doCheck = false;
-            doInstallCheck = false;
-          });
-        };
-      };
-      python313Packages = final.python313.pkgs;
-      ffmpeg = prev.ffmpeg.overrideAttrs (_old: {
-        doCheck = false;
-        doInstallCheck = false;
-      });
-    })
-  ];
-
-  mkPkgs = system: import nixpkgs {
-    inherit system overlays;
-    config.allowUnfree = true;
-  };
-
-  pkgs-mac-arm = mkPkgs "aarch64-darwin";
-  pkgs-linux-x86 = mkPkgs "x86_64-linux";
-
-  mkNixos = modules: nixpkgs.lib.nixosSystem {
-    system = "x86_64-linux";
-    pkgs = pkgs-linux-x86;
-    specialArgs = { inherit inputs; };
-    inherit modules;
-  };
+  helpers = import ./shared/lib.nix { inherit inputs; };
 
   vmDefs = {
     riverfall = {
       modules = [
-        sops-nix.nixosModules.sops
+        inputs.sops-nix.nixosModules.sops
         ../hosts/riverfall/riverfall.nix
         ../hosts/riverfall/riverfall-qcow.nix
       ];
@@ -54,7 +16,7 @@ let
       modules = [
         ../hosts/sunpeak/sunpeak.nix
         ../hosts/sunpeak/sunpeak-qcow.nix
-        home-manager.nixosModules.home-manager
+        inputs.home-manager.nixosModules.home-manager
         {
           home-manager = {
             extraSpecialArgs = { inherit inputs; };
@@ -71,7 +33,7 @@ let
     };
     thornhollow = {
       modules = [
-        sops-nix.nixosModules.sops
+        inputs.sops-nix.nixosModules.sops
         ../hosts/thornhollow/thornhollow.nix
         ../hosts/thornhollow/thornhollow-qcow.nix
       ];
@@ -82,11 +44,11 @@ let
 
   mkVMImage = { imageName, modules, diskSize }:
     let
-      vmConfig = mkNixos modules;
+      vmConfig = helpers.mkNixos modules;
     in
-    import "${nixpkgs}/nixos/lib/make-disk-image.nix" {
-      pkgs = pkgs-linux-x86;
-      lib = pkgs-linux-x86.lib;
+    import "${inputs.nixpkgs}/nixos/lib/make-disk-image.nix" {
+      pkgs = helpers.pkgs-linux-x86;
+      lib = helpers.pkgs-linux-x86.lib;
       inherit diskSize;
       name = imageName;
       format = "qcow2";
@@ -113,7 +75,7 @@ in
   flake = {
     homeConfigurations.DevDsk =
       inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs-linux-x86;
+        pkgs = helpers.pkgs-linux-x86;
         modules = [
           ../hosts/dev-dsk/dev-dsk-home-manager.nix
         ];
@@ -121,12 +83,12 @@ in
       };
 
     darwinConfigurations = {
-      breezora = nix-darwin.lib.darwinSystem {
+      breezora = inputs.nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        pkgs = pkgs-mac-arm;
+        pkgs = helpers.pkgs-mac-arm;
         modules = [
           ../hosts/breezora/breezora.nix
-          home-manager.darwinModules.home-manager
+          inputs.home-manager.darwinModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
@@ -143,14 +105,14 @@ in
 
     nixosConfigurations =
       {
-        iso = mkNixos [ ../hosts/iso/iso.nix ];
-        stonebark = mkNixos [
+        iso = helpers.mkNixos [ ../hosts/iso/iso.nix ];
+        stonebark = helpers.mkNixos [
           inputs.disko.nixosModules.disko
           inputs.NixVirt.nixosModules.default
           ../hosts/common/disks/host-disk.nix
           ../hosts/stonebark/stonebark.nix
         ];
       }
-      // nixpkgs.lib.mapAttrs (_name: def: mkNixos def.modules) vmDefs;
+      // inputs.nixpkgs.lib.mapAttrs (_name: def: helpers.mkNixos def.modules) vmDefs;
   };
 }
