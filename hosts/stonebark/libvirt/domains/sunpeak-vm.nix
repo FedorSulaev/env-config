@@ -124,22 +124,25 @@
               };
             }
             {
-              type = "pci";
+              mode = "subsystem";
+              type = "usb";
               managed = true;
-              driver = { name = "vfio"; };
-              source.address = {
-                domain = 0;
-                bus = 13; # 0x0d == 13
-                slot = 0;
-                function = 3;
-              };
+              source.vendor.id = 1133; # 0x046d
+              source.product.id = 50504; # 0xc548 Logi
+            }
+            {
+              mode = "subsystem";
+              type = "usb";
+              managed = true;
+              source.vendor.id = 1578; # 0x062a
+              source.product.id = 33303; # 0x8217 Keyboard
             }
             {
               mode = "subsystem";
               type = "usb";
               managed = true;
               source.vendor.id = 32903; # 0x8087
-              source.product.id = 50; # 0x0032
+              source.product.id = 50; # 0x0032 Bluetooth
             }
           ];
         };
