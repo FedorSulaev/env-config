@@ -49,7 +49,6 @@
     gnome-tweaks
     gnomeExtensions.appindicator
     blanket
-    bitwarden-desktop
     bitwarden-cli
     nerd-fonts.jetbrains-mono
     alacritty
