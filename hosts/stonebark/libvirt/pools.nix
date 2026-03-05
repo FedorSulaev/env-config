@@ -13,7 +13,6 @@
         let
           volumeSpecs = [
             { name = "riverfall.qcow2"; sizeGiB = 40; }
-            { name = "sunpeak.qcow2"; sizeGiB = 512; }
             { name = "thornhollow.qcow2"; sizeGiB = 40; }
           ];
         in

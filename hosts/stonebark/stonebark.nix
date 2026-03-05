@@ -18,21 +18,7 @@
   boot = {
     kernel.sysctl."vm.swappiness" = 10;
     kernelParams = [
-      "amd_iommu=on"
-      "iommu=pt"
-      "isolcpus=2-11,14-23"
-      "nohz_full=2-11,14-23"
-      "irqaffinity=0,12"
-      "video=efifb:off"
-      "nomodeset"
-      # GPU, GPU audio, USB
-      "vfio-pci.ids=10de:2484,10de:228b,1022:149c"
-    ];
-    kernelModules = [
-      "vfio"
-      "vfio_pci"
-      "vfio_iommu_type1"
-      "vfio_virqfd"
+      "nvidia-drm.modeset=1"
     ];
     loader = {
       systemd-boot.enable = true;
@@ -40,9 +26,22 @@
     };
     blacklistedKernelModules = [
       "nouveau"
-      "nvidia"
-      "btusb"
     ];
+    initrd.kernelModules = [ "nvidia" ];
+    kernelModules = [ "nvidia" ];
+  };
+
+  hardware = {
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+    nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = true;
+      open = false;
+    };
+    enableRedistributableFirmware = true;
   };
 
   services = {
@@ -57,6 +56,19 @@
     resolved = {
       llmnr = "false";
     };
+    xserver = {
+      enable = true;
+      videoDrivers = [ "nvidia" ];
+    };
+    displayManager.gdm.enable = true;
+    desktopManager.gnome = {
+      enable = true;
+      extraGSettingsOverridePackages = [ pkgs.mutter ];
+      extraGSettingsOverrides = ''
+        [org.gnome.mutter]
+        experimental-features=['scale-monitor-framebuffer']
+      '';
+    };
   };
 
   virtualisation.libvirt = {
@@ -65,7 +77,6 @@
     connections."qemu:///system" = {
       domains =
         (import ./libvirt/domains/riverfall-vm.nix { inherit inputs; })
-        ++ (import ./libvirt/domains/sunpeak-vm.nix { inherit inputs; })
         ++ (import ./libvirt/domains/thornhollow-vm.nix { inherit inputs; });
     };
   };
@@ -145,11 +156,11 @@
   };
 
   users = {
-    users.fedorsulaev = {
+    users.${config.hostSpec.username} = {
       isNormalUser = true;
       name = config.hostSpec.username;
       home = config.hostSpec.home;
-      extraGroups = [ "wheel" "libvirtd" "kvm" ];
+      extraGroups = [ "wheel" "libvirtd" "kvm" "video" ];
       openssh.authorizedKeys.keys = config.hostSpec.authorizedKeys;
       hashedPassword = config.hostSpec.hashedPassword;
     };
@@ -169,10 +180,20 @@
   environment.systemPackages = with pkgs; [
     git
     vim
+    cloud-utils
     pciutils
     usbutils
     dmidecode
   ];
+
+  programs = {
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
+    zsh.enable = true;
+    dconf.enable = true;
+  };
 
   system.stateVersion = "25.05";
 }

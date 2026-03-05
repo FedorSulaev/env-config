@@ -12,25 +12,6 @@ let
       diskSize = 40960;
       imageName = "riverfall-qcow2";
     };
-    sunpeak = {
-      modules = [
-        ../hosts/sunpeak/sunpeak.nix
-        ../hosts/sunpeak/sunpeak-qcow.nix
-        inputs.home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            extraSpecialArgs = { inherit inputs; };
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            backupFileExtension = "hm-backup";
-            users."${inputs.env-secrets.sunpeak.username}" =
-              ../hosts/sunpeak/sunpeak-home.nix;
-          };
-        }
-      ];
-      diskSize = 40960;
-      imageName = "sunpeak-qcow2";
-    };
     thornhollow = {
       modules = [
         inputs.sops-nix.nixosModules.sops
@@ -111,6 +92,17 @@ in
           inputs.NixVirt.nixosModules.default
           ../hosts/common/disks/host-disk.nix
           ../hosts/stonebark/stonebark.nix
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              extraSpecialArgs = { inherit inputs; };
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "hm-backup";
+              users."${inputs.env-secrets.stonebark.username}" =
+                ../hosts/stonebark/stonebark-home.nix;
+            };
+          }
         ];
       }
       // inputs.nixpkgs.lib.mapAttrs (_name: def: helpers.mkNixos def.modules) vmDefs;

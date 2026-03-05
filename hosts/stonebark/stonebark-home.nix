@@ -7,7 +7,7 @@
   ];
 
   hostSpec = {
-    inherit (inputs.env-secrets.sunpeak) username;
+    inherit (inputs.env-secrets.stonebark) username;
   };
 
   home.username = config.hostSpec.username;
@@ -58,6 +58,7 @@
     evolution-ews
     anki-bin
     mpv
+    discord
   ];
 
   home.file.".config/alacritty/alacritty.toml".source =
