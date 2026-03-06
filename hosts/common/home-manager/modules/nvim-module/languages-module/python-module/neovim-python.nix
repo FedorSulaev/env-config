@@ -13,7 +13,6 @@
       sklearn-compat
       imbalanced-learn
       nltk
-      optuna
       shap
       lime
       umap-learn
