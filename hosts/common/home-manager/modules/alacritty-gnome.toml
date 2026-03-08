@@ -2,7 +2,7 @@
 decorations = "Full"
 
 [font]
-size = 10
+size = 14
 
 [font.normal]
 family = "JetBrainsMono NF"
