@@ -12,15 +12,6 @@ let
       diskSize = 40960;
       imageName = "riverfall-qcow2";
     };
-    thornhollow = {
-      modules = [
-        inputs.sops-nix.nixosModules.sops
-        ../hosts/thornhollow/thornhollow.nix
-        ../hosts/thornhollow/thornhollow-qcow.nix
-      ];
-      diskSize = 8192;
-      imageName = "thornhollow-qcow2";
-    };
   };
 
   mkVMImage = { imageName, modules, diskSize }:
@@ -90,6 +81,7 @@ in
         stonebark = helpers.mkNixos [
           inputs.disko.nixosModules.disko
           inputs.NixVirt.nixosModules.default
+          inputs.sops-nix.nixosModules.sops
           ../hosts/common/disks/host-disk.nix
           ../hosts/stonebark/stonebark.nix
           inputs.home-manager.nixosModules.home-manager
