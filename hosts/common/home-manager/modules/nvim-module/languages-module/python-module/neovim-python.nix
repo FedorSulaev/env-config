@@ -19,6 +19,7 @@
       torch
       xgboost
       statsmodels
+      graphviz
     ]))
   ];
   programs.neovim = {
