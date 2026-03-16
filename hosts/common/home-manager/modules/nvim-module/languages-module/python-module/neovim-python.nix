@@ -20,6 +20,7 @@
       xgboost
       statsmodels
       graphviz
+      flask
     ]))
   ];
   programs.neovim = {
