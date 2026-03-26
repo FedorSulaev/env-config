@@ -375,6 +375,87 @@
     dconf.enable = true;
   };
 
+  virtualisation.containers.enable = true;
+  virtualisation = {
+    podman = {
+      enable = true;
+      # Create a `docker` alias for podman, to use it as a drop-in replacement
+      dockerCompat = true;
+      # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings.dns_enabled = true;
+      autoPrune = {
+        enable = true;
+        dates = "weekly";
+        flags = [
+          "--filter=until=24h"
+          "--filter=label!=important"
+        ];
+      };
+    };
+    oci-containers.backend = "podman";
+    oci-containers.containers = {
+      actualBudget = {
+        image = "docker.io/actualbudget/actual-server:26.4.0-alpine";
+        autoStart = true;
+        environment = {
+          # Environment variables for the Actual Server
+          # ACTUAL_HTTPS_KEY = "/data/selfhost.key";
+          # ACTUAL_HTTPS_CERT = "/data/selfhost.crt";
+          # Uncomment and customize additional options if needed
+          # ACTUAL_PORT = "5006";
+          # ACTUAL_UPLOAD_FILE_SYNC_SIZE_LIMIT_MB = "20";
+          # ACTUAL_UPLOAD_SYNC_ENCRYPTED_FILE_SYNC_SIZE_LIMIT_MB = "50";
+          # ACTUAL_UPLOAD_FILE_SIZE_LIMIT_MB = "20";
+        };
+        ports = [ "5006:5006" ];
+        volumes = [
+          "/var/lib/actualbudget:/data"
+        ];
+      };
+
+      nextcloud-db = {
+        image = "docker.io/library/postgres:17-alpine";
+        autoStart = true;
+        environment = {
+          POSTGRES_DB = "nextcloud";
+        };
+        environmentFiles = [ config.sops.secrets."nextcloud_env".path ];
+        volumes = [
+          "/var/lib/nextcloud/postgres:/var/lib/postgresql/data"
+        ];
+      };
+
+      nextcloud-redis = {
+        image = "docker.io/library/redis:7-alpine";
+        autoStart = true;
+        cmd = [ "redis-server" "--save" "" "--appendonly" "no" ];
+      };
+
+      nextcloud = {
+        image = "docker.io/library/nextcloud:32";
+        autoStart = true;
+        dependsOn = [ "nextcloud-db" "nextcloud-redis" ];
+        environment = {
+          POSTGRES_HOST = "nextcloud-db";
+          POSTGRES_DB = "nextcloud";
+          REDIS_HOST = "nextcloud-redis";
+        };
+        environmentFiles = [ config.sops.secrets."nextcloud_env".path ];
+        ports = [ "5007:80" ];
+        volumes = [
+          "/var/lib/nextcloud/html:/var/www/html"
+        ];
+      };
+    };
+  };
+
+  systemd.tmpfiles.rules = [
+    "d /var/lib/actualbudget 0750 1000 1000 -"
+    "d /var/lib/nextcloud 0750 root root -"
+    "d /var/lib/nextcloud/html 0750 33 33 -"
+    "d /var/lib/nextcloud/postgres 0700 70 70 -"
+  ];
+
   system.stateVersion = "25.05";
 }
 
