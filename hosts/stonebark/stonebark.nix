@@ -139,10 +139,7 @@
   virtualisation.libvirt = {
     enable = true;
     verbose = true;
-    connections."qemu:///system" = {
-      domains =
-        (import ./libvirt/domains/riverfall-vm.nix { inherit inputs; });
-    };
+    connections."qemu:///system" = { };
   };
   virtualisation.libvirtd = {
     enable = true;

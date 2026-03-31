@@ -2,17 +2,7 @@
 let
   helpers = import ./shared/lib.nix { inherit inputs; };
 
-  vmDefs = {
-    riverfall = {
-      modules = [
-        inputs.sops-nix.nixosModules.sops
-        ../hosts/riverfall/riverfall.nix
-        ../hosts/riverfall/riverfall-qcow.nix
-      ];
-      diskSize = 40960;
-      imageName = "riverfall-qcow2";
-    };
-  };
+  vmDefs = { };
 
   mkVMImage = { imageName, modules, diskSize }:
     let
