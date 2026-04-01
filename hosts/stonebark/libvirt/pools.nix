@@ -11,9 +11,7 @@
       active = true;
       volumes =
         let
-          volumeSpecs = [
-            { name = "riverfall.qcow2"; sizeGiB = 40; }
-          ];
+          volumeSpecs = [ ];
         in
         map
           (volume: {
