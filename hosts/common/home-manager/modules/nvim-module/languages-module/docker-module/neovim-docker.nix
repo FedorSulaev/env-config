@@ -2,7 +2,7 @@
 {
   programs.neovim = {
     extraPackages = with pkgs; [
-      nodePackages.dockerfile-language-server-nodejs
+      dockerfile-language-server
       hadolint
     ];
     plugins = with pkgs.vimPlugins; [

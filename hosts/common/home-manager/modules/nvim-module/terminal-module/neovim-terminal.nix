@@ -2,7 +2,7 @@
 {
   programs.neovim =
     {
-      extraLuaConfig = ''
+      initLua = ''
         ${builtins.readFile ./terminal.lua}
       '';
     };

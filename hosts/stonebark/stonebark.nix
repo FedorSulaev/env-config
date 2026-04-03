@@ -60,9 +60,7 @@
         PubkeyAuthentication = true;
       };
     };
-    resolved = {
-      llmnr = "false";
-    };
+    resolved.settings.Resolve.LLMNR = "false";
     xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];

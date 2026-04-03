@@ -7,7 +7,7 @@
       vimAlias = true;
       vimdiffAlias = true;
       defaultEditor = true;
-      extraLuaConfig = ''
+      initLua = ''
         ${builtins.readFile ./globals.lua}
         ${builtins.readFile ./options.lua}
         ${builtins.readFile ./keymaps.lua}

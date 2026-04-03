@@ -5,7 +5,7 @@
   ];
   programs.neovim = {
     extraPackages = with pkgs; [
-      nodePackages.typescript-language-server
+      typescript-language-server
     ];
     plugins = with pkgs.vimPlugins; [
       (nvim-treesitter.withPlugins
@@ -23,7 +23,7 @@
 
   home = {
     packages = with pkgs; [
-      nodePackages.typescript
+      typescript
     ];
     file.".config/nvim/lsp/ts_ls.lua".source = ./lspconfig-typescript.lua;
   };

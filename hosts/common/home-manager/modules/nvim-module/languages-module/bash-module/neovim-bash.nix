@@ -4,7 +4,7 @@
     extraPackages = with pkgs; [
       beautysh
       shellcheck
-      nodePackages.bash-language-server
+      bash-language-server
     ];
     plugins = with pkgs.vimPlugins; [
       (nvim-treesitter.withPlugins
