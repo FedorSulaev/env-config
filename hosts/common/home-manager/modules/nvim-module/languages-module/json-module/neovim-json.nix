@@ -10,6 +10,7 @@
         ))
       {
         plugin = conform-nvim;
+        type = "viml";
         config = utility.toLuaFile ./conform-formatters-json.lua;
       }
     ];

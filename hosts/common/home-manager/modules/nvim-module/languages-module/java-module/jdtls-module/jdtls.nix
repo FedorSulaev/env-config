@@ -7,6 +7,7 @@
     plugins = with pkgs.vimPlugins; [
       {
         plugin = nvim-jdtls;
+        type = "viml";
         config = utility.toLuaFile ./jdtls.lua;
       }
     ];

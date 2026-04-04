@@ -8,6 +8,7 @@
     plugins = with pkgs.vimPlugins; [
       {
         plugin = nvim-surround;
+        type = "viml";
         config = utility.toLuaFile ./nvim-surround.lua;
       }
     ];

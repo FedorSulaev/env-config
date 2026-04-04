@@ -6,6 +6,7 @@
     plugins = with pkgs.vimPlugins; [
       {
         plugin = nvim-lint;
+        type = "viml";
         config = utility.toLuaFile ./lint.lua;
       }
       nvim-treesitter-textobjects
@@ -18,6 +19,7 @@
             tree-sitter-diff
           ]
         ));
+        type = "viml";
         config = utility.toLuaFile ./treesitter.lua;
       }
     ];

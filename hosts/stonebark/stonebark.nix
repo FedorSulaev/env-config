@@ -451,7 +451,7 @@
     "d /var/lib/nextcloud/postgres 0700 70 70 -"
   ];
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "26.05";
 }
 
 

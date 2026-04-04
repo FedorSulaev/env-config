@@ -25,10 +25,12 @@
       )
       {
         plugin = nvim-dap;
+        type = "viml";
         config = utility.toLuaFile ./dap-java.lua;
       }
       {
         plugin = conform-nvim;
+        type = "viml";
         config = utility.toLuaFile ./conform-formatters-java.lua;
       }
     ];

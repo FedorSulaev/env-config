@@ -7,6 +7,7 @@
     plugins = with pkgs.vimPlugins; [
       {
         plugin = oil-nvim;
+        type = "viml";
         config = utility.toLuaFile ./oil.lua;
       }
     ];

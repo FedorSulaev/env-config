@@ -8,6 +8,7 @@
     plugins = with pkgs.vimPlugins; [
       {
         plugin = fidget-nvim;
+        type = "viml";
         config = utility.toLuaFile ./fidget.lua;
       }
     ];

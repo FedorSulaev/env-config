@@ -12,7 +12,7 @@
 
   home.username = config.hostSpec.username;
   home.homeDirectory = "/home/${config.hostSpec.username}";
-  home.stateVersion = "25.05";
+  home.stateVersion = "26.05";
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";
     NIXOS_OZONE_WL = "1";

@@ -8,6 +8,7 @@
       telescope-ui-select-nvim
       {
         plugin = telescope-nvim;
+        type = "viml";
         config = utility.toLuaFile ./telescope.lua;
       }
     ];
