@@ -22,6 +22,9 @@
     "org/gnome/desktop/input-sources" = {
       xkb-options = [ "ctrl:nocaps" ];
     };
+    "org/gnome/shell/extensions/appindicator" = {
+    legacy-tray-enabled = false;
+    };
   };
 
   programs.firefox = {
