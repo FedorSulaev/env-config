@@ -1,6 +1,5 @@
 -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter").setup({
 	-- ensure_installed = { "bash", "c", "html", "lua", "luadoc", "markdown", "vim", "vimdoc" },
 	-- Autoinstall languages that are not installed
 	-- auto_install = true,
