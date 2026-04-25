@@ -331,7 +331,7 @@
       isNormalUser = true;
       name = config.hostSpec.username;
       home = config.hostSpec.home;
-      extraGroups = [ "wheel" "libvirtd" "kvm" "video" ];
+      extraGroups = [ "wheel" "libvirtd" "kvm" "video" "input" ];
       openssh.authorizedKeys.keys = config.hostSpec.authorizedKeys;
       hashedPassword = config.hostSpec.hashedPassword;
     };
