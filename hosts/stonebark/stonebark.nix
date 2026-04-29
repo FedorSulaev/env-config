@@ -427,7 +427,7 @@
       };
 
       nextcloud = {
-        image = "docker.io/library/nextcloud:33";
+        image = "docker.io/library/nextcloud:35";
         autoStart = true;
         dependsOn = [ "nextcloud-db" "nextcloud-redis" ];
         environment = {
