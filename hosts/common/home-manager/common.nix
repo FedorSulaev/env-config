@@ -39,29 +39,42 @@
     just
     curl
     rsync
-    git
   ];
 
-  programs.bottom = {
-    enable = true;
-    settings = {
-      flags = {
-        color = "gruvbox";
-        mem_as_value = true;
+  programs = {
+    git.enable = true;
+
+    bottom = {
+      enable = true;
+      settings = {
+        flags = {
+          color = "gruvbox";
+          mem_as_value = true;
+        };
       };
     };
+
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    fzf.enable = true;
+
+    eza = {
+      enable = true;
+      icons = "auto";
+      git = true;
+    };
+
+    gradle.enable = true;
+
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+      enableZshIntegration = true;
+    };
   };
-  programs.zoxide = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-  programs.fzf.enable = true;
-  programs.eza = {
-    enable = true;
-    icons = "auto";
-    git = true;
-  };
-  programs.gradle.enable = true;
 
   # Let Home Manager install and manage itself
   programs.home-manager.enable = true;

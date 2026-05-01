@@ -13,7 +13,19 @@
     nixos-anywhere
     qemu
     awscli2
+    jq
+    ripgrep
+    fd
   ];
+
+  programs.codex = {
+    enable = true;
+
+    settings = {
+      approval_policy = "on-request";
+      sandbox_mode = "workspace-write";
+    };
+  };
 
   home.homeDirectory = "/Users/fedorsulaev";
   home.username = "fedorsulaev";
