@@ -18,14 +18,7 @@
     fd
   ];
 
-  programs.codex = {
-    enable = true;
-
-    settings = {
-      approval_policy = "on-request";
-      sandbox_mode = "workspace-write";
-    };
-  };
+  programs.codex.enable = true;
 
   home.homeDirectory = "/Users/fedorsulaev";
   home.username = "fedorsulaev";
